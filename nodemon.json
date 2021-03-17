@@ -1,0 +1,5 @@
+{
+    "watch": ["index.ts","src"],
+    "ext": "ts",
+    "exec": "ts-node -r dotenv/config example.ts  dotenv_config_path=.env"
+}
