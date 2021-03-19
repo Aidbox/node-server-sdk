@@ -1,5 +1,5 @@
-import {InitManifest} from "./build/main/types";
-import {prepareConfig, startServer} from "./src";
+import { InitManifest } from './build/main/types';
+import { prepareConfig, startApp } from './src';
 
 const config = prepareConfig(process.env);
 
@@ -12,16 +12,26 @@ const manifest: InitManifest = {
     test: {
       method: 'GET',
       path: ['$test-operation'],
-      handler: async() => {
+      handler: async () => {
         return {
           resource: {
-            test: 'work'
-          }
-        }
-      }
-    }
+            test: 'work',
+          },
+        };
+      },
+    },
   },
-  subscriptions: {},
+  subscriptions: {
+    // Patient_handler
+    Patient: {
+      handler: () => {
+        console.log('qwerty');
+        return true;
+      },
+    },
+  },
 };
 
-startServer(config, manifest).then(() => console.log('ready')).catch(e => console.log('error: ', e));
+startApp(config, manifest)
+  .then(() => console.log('ready'))
+  .catch((e) => console.log('error: ', e));
