@@ -7,7 +7,11 @@
   "module": "build/module/index.js",
   "repository": "https://github.com/Aidbox/node-server-sdk",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "aidbox",
+    "fhir",
+    "node-server"
+  ],
   "scripts": {
     "dev": "nodemon",
     "build": "run-p build:*",
@@ -76,6 +80,7 @@
     "standard-version": "^9.0.0",
     "ts-node": "^9.1.1",
     "typedoc": "^0.20.32",
+    "typedoc-neo-theme": "^1.1.0",
     "typescript": "^4.2.3"
   },
   "files": [
@@ -117,7 +122,6 @@
     "axios": "^0.21.1",
     "axios-retry": "^3.1.9",
     "js-yaml": "4.0.0",
-    "ramda": "^0.27.1",
-    "typedoc-neo-theme": "^1.1.0"
+    "ramda": "^0.27.1"
   }
 }
