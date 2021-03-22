@@ -259,18 +259,18 @@ const dispatch: TDispatchFn = (
         manifest.operations[msg.operation.id]
       ) {
         const { handler } = manifest.operations[msg.operation.id];
-        const {status,headers,resource,body} = await handler(context, msg);
-         if (msg.request.headers.accept === 'text/yaml') {
-                    sendResponse(yaml.dump(resource, { noRefs: true }),status,headers);
-                    return;
-                  } else if (body) {
-                    sendResponse(body,status,headers);
-                    return;
-                  } else {
-                    sendResponse(JSON.stringify(resource),status,headers);
-                    return;
-                  }
-      } 
+        const { status, headers, resource, body } = await handler(context, msg);
+        if (msg.request.headers.accept === 'text/yaml') {
+          sendResponse(yaml.dump(resource, { noRefs: true }), status, headers);
+          return;
+        } else if (body) {
+          sendResponse(body, status, headers);
+          return;
+        } else {
+          sendResponse(JSON.stringify(resource), status, headers);
+          return;
+        }
+      }
     } catch (e) {
       console.log(e);
       sendResponse(JSON.stringify(e));
