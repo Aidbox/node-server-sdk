@@ -1,24 +1,41 @@
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
+
 export type ProcessEnv = {
   readonly [key: string]: string | undefined;
 };
 
-export type IContext = {
-  readonly request: any;
+export type TContext = {
+  readonly request: <T>(
+    config: AxiosRequestConfig,
+    jsonOverride: boolean
+  ) => Promise<AxiosResponse<T>>;
+};
+
+export type TOperationHandler = (
+  ctx: TContext,
+  msq: any
+) => Promise<{
+  readonly status?: number;
+  readonly resource?: any;
+  readonly headers?: Record<string, string>;
+  readonly body?: string;
+}>;
+
+export type TOperation = {
+  readonly method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
+  readonly path: readonly string[];
+  readonly handler: TOperationHandler;
 };
 
 export type TRawManifest = {
   readonly resources?: any;
   readonly entities?: any;
   readonly operations: {
-    readonly [key: string]: {
-      readonly method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
-      readonly path: readonly string[];
-      readonly handler: () => Promise<{ readonly resource: any }>;
-    };
+    readonly [key: string]: TOperation;
   };
   readonly subscriptions: {
     readonly [key: string]: {
-      readonly handler: () => boolean;
+      readonly handler: TSubscriptionHandler;
     };
   };
 };
@@ -35,7 +52,7 @@ export type TSubscriptionHandlers = {
   readonly [key: string]: TSubscriptionHandler;
 };
 
-export type ServerConfig = {
+export type TConfig = {
   readonly APP_DEBUG: string;
   readonly AIDBOX_URL: string;
   readonly AIDBOX_CLIENT_ID: string;

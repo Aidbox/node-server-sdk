@@ -1,10 +1,13 @@
 import { RequestListener } from 'http';
 
+import { AxiosRequestConfig } from 'axios';
+import yaml from 'js-yaml';
 import R from 'ramda';
 
 import {
   ProcessEnv,
-  ServerConfig,
+  TConfig,
+  TContext,
   TPatchedManifest,
   TRawManifest,
   TSubscriptionHandlers,
@@ -12,7 +15,7 @@ import {
 
 import { createAgent, createServer, startServer, TAgent } from './http';
 
-export const prepareConfig = (envs: ProcessEnv): ServerConfig => {
+export const prepareConfig = (envs: ProcessEnv): TConfig => {
   const keys = [
     'APP_DEBUG',
     'AIDBOX_URL',
@@ -27,10 +30,10 @@ export const prepareConfig = (envs: ProcessEnv): ServerConfig => {
     'PGDATABASE',
     'PGPASSWORD',
   ];
-  return R.pick(keys, envs) as ServerConfig;
+  return R.pick(keys, envs) as TConfig;
 };
 
-const validateConfig = (config: ServerConfig): { readonly error?: string } => {
+const validateConfig = (config: TConfig): { readonly error?: string } => {
   type configKey = keyof typeof config;
   const missingParameters = Object.keys(config)
     .map((key) => {
@@ -77,30 +80,6 @@ const patchManifest = (
   readonly subscriptionHandlers: TSubscriptionHandlers;
   readonly patchedManifest: TPatchedManifest;
 } => {
-  /*
-  Raw manifest
-  manifest: {
-    subscriptions: {
-      Patient: {
-        handler: () => any
-      }
-    }
-  }
-
-  Patched manifest
-  manifest: {
-    subscriptions: {
-      Patient: {
-        handler: 'Patient_handler'
-      }
-    }
-  }
-
-  subscriptionHandlers: {
-    Patient_handler: () => any
-  }
-   */
-
   const subscriptionHandlers = Object.keys(manifest.subscriptions).reduce(
     (subscriptionHandlers, key) => {
       return {
@@ -129,8 +108,19 @@ const patchManifest = (
   };
 };
 
+const makeContext = (agent: TAgent): TContext => {
+  const request = (config: AxiosRequestConfig, jsonOverride = true) => {
+    return agent.request({
+      ...config,
+      responseType: jsonOverride ? 'json' : 'text',
+    });
+  };
+
+  return { request };
+};
+
 export const startApp = async (
-  config: ServerConfig,
+  config: TConfig,
   manifest: TRawManifest
 ): Promise<void> => {
   const configValidation = validateConfig(config);
@@ -143,11 +133,29 @@ export const startApp = async (
     return Promise.reject(manifestValidation.error);
   }
 
-  const agent = createAgent();
+  const agent = createAgent(config);
+  const context = makeContext(agent);
+
+  // eslint-disable-next-line functional/no-let
+  let isReady;
+  try {
+    isReady = await context.request(
+      {
+        url: '/__healthcheck',
+      },
+      false
+    );
+  } catch (e) {
+    console.log(e, 'error');
+  }
+  if (!isReady) {
+    console.log('aidbox not ready', 'error');
+    process.exit(0);
+  }
 
   const { subscriptionHandlers, patchedManifest } = patchManifest(manifest);
   const server = createServer(
-    dispatch(config, patchedManifest, subscriptionHandlers)
+    dispatch(config, patchedManifest, context, subscriptionHandlers)
   );
 
   await ensureManifest(agent, config, patchedManifest);
@@ -176,8 +184,9 @@ const resolveContentType = (msg: any) => {
 };
 
 export type TDispatchFn = (
-  config: ServerConfig,
+  config: TConfig,
   manifest: TPatchedManifest,
+  context: TContext,
   subscriptionHandlers: TSubscriptionHandlers
 ) => RequestListener;
 
@@ -193,28 +202,35 @@ const checkAuthHeader = (
   return auth === Buffer.from(`${appId}:${appSecret}`).toString('base64');
 };
 
-const dispatch: TDispatchFn = (config, manifest, subscriptionHandlers) => (
-  req,
-  res
-) => {
+const dispatch: TDispatchFn = (
+  config,
+  manifest,
+  context,
+  subscriptionHandlers
+) => (req, res) => {
   manifest;
-  const sendResponse = (text: string | any, status = 200) => {
-    if (status) {
-      // eslint-disable-next-line functional/immutable-data
-      res.statusCode = status;
-    }
-    res.end(typeof text === 'string' ? text : JSON.stringify(text, null, 2));
+  const sendResponse = (
+    text: string,
+    status = 200,
+    headers: Record<string, string> = {}
+  ) => {
+    // eslint-disable-next-line functional/immutable-data
+    res.statusCode = status;
+    Object.keys(headers).forEach((k: string) => {
+      res.setHeader(k, headers[k]);
+    });
+    res.end(text);
   };
 
   // eslint-disable-next-line functional/no-let
-  let body = '';
+  let reqBody = '';
   req.on('data', (chunk) => {
-    body += chunk.toString();
+    reqBody += chunk.toString();
   });
-  req.on('end', () => {
-    console.log(body);
+  req.on('end', async () => {
+    console.log(reqBody);
     try {
-      const msg = JSON.parse(body);
+      const msg = JSON.parse(reqBody);
       res.setHeader('Content-Type', resolveContentType(msg));
 
       if (
@@ -224,7 +240,7 @@ const dispatch: TDispatchFn = (config, manifest, subscriptionHandlers) => (
           req.headers.authorization
         )
       ) {
-        sendResponse({ message: 'Access Denied' }, 403);
+        sendResponse(JSON.stringify({ message: 'Access Denied' }), 403);
         return;
       }
 
@@ -234,116 +250,55 @@ const dispatch: TDispatchFn = (config, manifest, subscriptionHandlers) => (
         const handlerId = msg.handler;
         if (subscriptionHandlers[handlerId]) {
           subscriptionHandlers[handlerId]({}, msg);
-          sendResponse({ status: 'start subs' });
+          sendResponse(JSON.stringify({ status: 'start subs' }));
         }
         return;
       }
-      //   if (operation === 'operation') {
-      //     const operationId = msg.operation.id;
-      //     if (operationId in this.#manifest.operations) {
-      //       const op = this.#manifest.operations[operationId];
-      //       if (op.handler) {
-      //         const { handler } = op;
-      //         return handler(this.#ctx, msg)
-      //           .then((r) => {
-      //             resp.statusCode = r.status ?? 200;
-      //             if (r?.headers) {
-      //               Object.keys(r.headers).forEach((k) => {
-      //                 resp.setHeader(k, r.headers[k]);
-      //               });
-      //             }
-      //             if (msg.request.headers.accept === 'text/yaml') {
-      //               resp.end(yaml.dump(r.resource, { noRefs: true }));
-      //             } else if (r.body) {
-      //               resp.end(r.body);
-      //             } else {
-      //               resp.end(JSON.stringify(r.resource));
-      //             }
-      //           })
-      //           .catch((error) => {
-      //             console.log(error);
-      //             if (error.response) {
-      //               console.log(
-      //                 `status: ${error.response.status}`,
-      //                 error.response.data
-      //               );
-      //             }
-      //             if (error.body?.id === 'not-found') {
-      //               resp.statusCode = 404;
-      //               resp.end(
-      //                 JSON.stringify({
-      //                   error: {
-      //                     message: error.message
-      //                       ? error.message
-      //                       : error.body.text.div,
-      //                   },
-      //                 })
-      //               );
-      //             }
-      //             resp.statusCode = 500;
-      //             resp.end(
-      //               JSON.stringify({
-      //                 error: {
-      //                   message: error.message
-      //                     ? error.message
-      //                     : error.body.text.div,
-      //                 },
-      //               })
-      //             );
-      //           });
-      //       }
-      //       res.statusCode = 500;
-      //       res.end(
-      //         JSON.stringify({
-      //           error: {
-      //             message: `Operation [${operationId}] handler not found`,
-      //           },
-      //         })
-      //       );
-      //     }
-      //     res.statusCode = 404;
-      //     res.end(
-      //       JSON.stringify({
-      //         error: {
-      //           message: `Operation [${operationId}] not found`,
-      //         },
-      //       })
-      //     );
-      //   }
-      //   res.statusCode = 422;
-      //   res.end(
-      //     JSON.stringify({
-      //       error: {
-      //         message: `Unknown message type [${operation}]`,
-      //       },
-      //     })
-      //   );
+      if (
+        operation === EOperation.OPERATION &&
+        manifest.operations[msg.operation.id]
+      ) {
+        const { handler } = manifest.operations[msg.operation.id];
+        const {status,headers,resource,body} = await handler(context, msg);
+         if (msg.request.headers.accept === 'text/yaml') {
+                    sendResponse(yaml.dump(resource, { noRefs: true }),status,headers);
+                    return;
+                  } else if (body) {
+                    sendResponse(body,status,headers);
+                    return;
+                  } else {
+                    sendResponse(JSON.stringify(resource),status,headers);
+                    return;
+                  }
+      } 
     } catch (e) {
       console.log(e);
-      sendResponse({ message: 'Welcome to Aidbox' });
+      sendResponse(JSON.stringify(e));
     }
   });
 };
 
-const ensureManifest = (agent: TAgent, config: ServerConfig, manifest: any) => {
+const ensureManifest = async (
+  clientInstance: TAgent,
+  config: TConfig,
+  manifest: any
+) => {
   const mergedManifest = {
     resourceType: 'App',
     apiVersion: 1,
     type: 'app',
     id: config.APP_ID,
     endpoint: {
-      url: `${config.APP_URL}aidbox`,
+      url: `${config.APP_URL}/aidbox`,
       type: 'http-rpc',
       secret: config.APP_SECRET,
     },
     ...manifest,
   };
 
-  agent
-    .put(`${config.AIDBOX_URL}App`)
-    .auth(config.AIDBOX_CLIENT_ID, config.AIDBOX_CLIENT_SECRET)
-    .send(mergedManifest)
-    .then((res: any) => {
-      console.log('Updated manifest', res.body);
-    });
+  return await clientInstance.request({
+    url: '/App',
+    method: 'put',
+    data: mergedManifest,
+  });
 };

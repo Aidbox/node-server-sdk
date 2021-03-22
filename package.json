@@ -1,11 +1,11 @@
 {
-  "name": "aidbox-server-sdk",
+  "name": "@aidbox/node-server-sdk",
   "version": "1.0.0",
   "description": "Node JS SDK for extend Aidbox.io",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "https://github.com/octoalex/aidbox-server-sdk",
+  "repository": "https://github.com/Aidbox/node-server-sdk",
   "license": "MIT",
   "keywords": [],
   "scripts": {
@@ -37,6 +37,7 @@
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "version": "standard-version",
     "reset-hard": "git clean -dfx && git reset --hard && npm i",
+    "prepare-release-local": "run-s test cov:check doc:html version doc:publish",
     "prepare-release": "run-s reset-hard test cov:check doc:html version doc:publish"
   },
   "engines": {
@@ -45,9 +46,9 @@
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@types/js-yaml": "^4.0.0",
     "@types/node": "^14.14.35",
     "@types/ramda": "^0.27.39",
-    "@types/superagent": "^4.1.10",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "ava": "^3.12.1",
@@ -107,7 +108,9 @@
     ]
   },
   "dependencies": {
-    "ramda": "^0.27.1",
-    "superagent": "^6.1.0"
+    "axios": "^0.21.1",
+    "axios-retry": "^3.1.9",
+    "js-yaml": "4.0.0",
+    "ramda": "^0.27.1"
   }
 }

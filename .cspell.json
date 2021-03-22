@@ -3,6 +3,12 @@
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/master/cspell.schema.json",
   "language": "en",
   "words": [
+    "AIDBOX",
+    "aidbox",
+    "PGUSER",
+    "PGPASSWORD",
+    "PGHOST",
+    "PGDATABASE",
     "bitjson",
     "bitauth",
     "cimg",
@@ -21,7 +27,8 @@
     "sandboxed",
     "transpiled",
     "typedoc",
-    "untracked"
+    "untracked",
+    "healthcheck"
   ],
   "flagWords": [],
   "ignorePaths": [
