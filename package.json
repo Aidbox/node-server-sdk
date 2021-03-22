@@ -32,8 +32,8 @@
     "cov:send": "run-s cov:lcov && codecov",
     "cov:check": "nyc report && nyc check-coverage --lines 100 --functions 100 --branches 100",
     "doc": "run-s doc:html && open-cli build/docs/index.html",
-    "doc:html": "typedoc src/ --exclude **/*.spec.ts  file --out build/docs",
-    "doc:json": "typedoc src/ --exclude **/*.spec.ts  --json build/docs/typedoc.json",
+    "doc:html": "typedoc src/ --exclude **/*.spec.ts  file --out build/docs --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme",
+    "doc:json": "typedoc src/ --exclude **/*.spec.ts  --json build/docs/typedoc.json --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "version": "standard-version",
     "version-patch": "standard-version --release-as patch",
@@ -57,7 +57,7 @@
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "ava": "^3.12.1",
-    "codecov": "^3.5.0",
+    "codecov": "3.8.1",
     "cspell": "^4.1.0",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^8.2.0",
@@ -117,6 +117,7 @@
     "axios": "^0.21.1",
     "axios-retry": "^3.1.9",
     "js-yaml": "4.0.0",
-    "ramda": "^0.27.1"
+    "ramda": "^0.27.1",
+    "typedoc-neo-theme": "^1.1.0"
   }
 }
