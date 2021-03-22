@@ -35,10 +35,14 @@
     "doc:html": "typedoc src/ --exclude **/*.spec.ts  file --out build/docs",
     "doc:json": "typedoc src/ --exclude **/*.spec.ts  --json build/docs/typedoc.json",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
-    "version": "standard-version",
+    "version-patch": "standard-version --release-as patch",
+    "version-minor": "standard-version --release-as minor",
+    "version-major": "standard-version --release-as major",
     "reset-hard": "git clean -dfx && git reset --hard && npm i",
     "prepare-release-local": "run-s fix test cov:check doc:html version doc:publish",
-    "prepare-release": "run-s reset-hard test cov:check doc:html version doc:publish"
+    "prepare-release-patch": "run-s reset-hard test cov:check doc:html version-patch doc:publish",
+    "prepare-release-minor": "run-s reset-hard test cov:check doc:html version-minor doc:publish",
+    "prepare-release-major": "run-s reset-hard test cov:check doc:html version-major doc:publish"
   },
   "engines": {
     "node": ">=12"
