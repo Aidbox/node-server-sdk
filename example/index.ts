@@ -1,5 +1,6 @@
-import { prepareConfig, startApp } from '../src/lib/aidbox';
+import { startApp } from '../src/lib/app';
 import { TRawManifest } from '../src/types';
+import { prepareConfig } from '../src/lib/config';
 
 const config = prepareConfig(process.env);
 

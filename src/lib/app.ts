@@ -1,112 +1,19 @@
-import { RequestListener } from 'http';
-
 import { AxiosRequestConfig } from 'axios';
 import yaml from 'js-yaml';
-import R from 'ramda';
 
 import {
-  ProcessEnv,
+  EAccept,
+  EOperation,
   TConfig,
   TContext,
-  TPatchedManifest,
+  TDispatchFn,
+  TMessage,
   TRawManifest,
-  TSubscriptionHandlers,
 } from '../types';
 
+import { validateConfig } from './config';
 import { createAgent, createServer, startServer, TAgent } from './http';
-
-export const prepareConfig = (envs: ProcessEnv): TConfig => {
-  const keys = [
-    'APP_DEBUG',
-    'AIDBOX_URL',
-    'AIDBOX_CLIENT_ID',
-    'AIDBOX_CLIENT_SECRET',
-    'APP_ID',
-    'APP_URL',
-    'APP_PORT',
-    'APP_SECRET',
-    'PGUSER',
-    'PGHOST',
-    'PGDATABASE',
-    'PGPASSWORD',
-  ];
-  return R.pick(keys, envs) as TConfig;
-};
-
-const validateConfig = (config: TConfig): { readonly error?: string } => {
-  type configKey = keyof typeof config;
-  const missingParameters = Object.keys(config)
-    .map((key) => {
-      const value = config[key as configKey];
-      if (value === '' || value === undefined) {
-        return key;
-      }
-      return;
-    })
-    .filter((k) => k);
-
-  if (Object.keys(missingParameters).length > 0) {
-    return { error: `Missing variables ${missingParameters.toString()}` };
-  }
-  return {};
-};
-
-const validateManifest = (manifest: any): { readonly error?: string } => {
-  const subs = Object.keys(manifest.subscriptions || {})
-    .map((k) => {
-      if (typeof manifest.subscriptions[k].handler !== 'function') {
-        return `Subscription handler for ${k} is not a function but - ${typeof manifest
-          .subscriptions[k].handler}`;
-      }
-      return undefined;
-    })
-    .filter((k) => k);
-  const ops = Object.keys(manifest.operations || {})
-    .map((k) => {
-      if (typeof manifest.operations[k].handler !== 'function') {
-        return `Operation handler for ${k} is not a function but - ${typeof manifest
-          .operations[k].handler}`;
-      }
-      return undefined;
-    })
-    .filter((k) => k);
-  const ls = [...subs, ...ops];
-  return ls.length ? { error: ls.join('\n') } : {};
-};
-
-const patchManifest = (
-  manifest: TRawManifest
-): {
-  readonly subscriptionHandlers: TSubscriptionHandlers;
-  readonly patchedManifest: TPatchedManifest;
-} => {
-  const subscriptionHandlers = Object.keys(manifest.subscriptions).reduce(
-    (subscriptionHandlers, key) => {
-      return {
-        ...subscriptionHandlers,
-        [`${key}_handler`]: manifest.subscriptions[key].handler,
-      };
-    },
-    {}
-  );
-
-  const manifestSubscriptions = Object.keys(manifest.subscriptions).reduce(
-    (manifestSubscriptions, key) => {
-      return {
-        ...manifestSubscriptions,
-        [key]: { handler: `${key}_handler` },
-      };
-    },
-    {}
-  );
-
-  const patchedManifest = { ...manifest, subscriptions: manifestSubscriptions };
-
-  return {
-    subscriptionHandlers,
-    patchedManifest,
-  };
-};
+import { ensureManifest, patchManifest, validateManifest } from './manifest';
 
 const makeContext = (agent: TAgent): TContext => {
   const request = (config: AxiosRequestConfig, jsonOverride = true) => {
@@ -162,18 +69,7 @@ export const startApp = async (
   await startServer(server);
 };
 
-export enum EAccept {
-  TEXT = 'text/plain',
-  YAML = 'text/yaml',
-  JSON = 'application/json',
-}
-
-export enum EOperation {
-  OPERATION = 'operation',
-  SUBSCRIPTION = 'subscription',
-}
-
-const resolveContentType = (msg: any) => {
+const resolveContentType = (msg: TMessage) => {
   switch (msg.request?.headers?.accept) {
     case EAccept.YAML:
     case EAccept.TEXT:
@@ -182,13 +78,6 @@ const resolveContentType = (msg: any) => {
       return EAccept.JSON;
   }
 };
-
-export type TDispatchFn = (
-  config: TConfig,
-  manifest: TPatchedManifest,
-  context: TContext,
-  subscriptionHandlers: TSubscriptionHandlers
-) => RequestListener;
 
 const checkAuthHeader = (
   appId: string,
@@ -208,7 +97,6 @@ const dispatch: TDispatchFn = (
   context,
   subscriptionHandlers
 ) => (req, res) => {
-  manifest;
   const sendResponse = (
     text: string,
     status = 200,
@@ -230,7 +118,7 @@ const dispatch: TDispatchFn = (
   req.on('end', async () => {
     console.log(reqBody);
     try {
-      const msg = JSON.parse(reqBody);
+      const msg = JSON.parse(reqBody) as TMessage;
       res.setHeader('Content-Type', resolveContentType(msg));
 
       if (
@@ -247,18 +135,21 @@ const dispatch: TDispatchFn = (
       const operation = msg.type;
 
       if (operation === EOperation.SUBSCRIPTION) {
-        const handlerId = msg.handler;
+        const handlerId = msg.handler as string;
         if (subscriptionHandlers[handlerId]) {
           subscriptionHandlers[handlerId]({}, msg);
           sendResponse(JSON.stringify({ status: 'start subs' }));
         }
         return;
       }
+
+      const operationId = msg.operation?.id;
       if (
         operation === EOperation.OPERATION &&
-        manifest.operations[msg.operation.id]
+        operationId &&
+        manifest.operations[operationId]
       ) {
-        const { handler } = manifest.operations[msg.operation.id];
+        const { handler } = manifest.operations[operationId];
         const { status, headers, resource, body } = await handler(context, msg);
         if (msg.request.headers.accept === 'text/yaml') {
           sendResponse(yaml.dump(resource, { noRefs: true }), status, headers);
@@ -275,30 +166,5 @@ const dispatch: TDispatchFn = (
       console.log(e);
       sendResponse(JSON.stringify(e));
     }
-  });
-};
-
-const ensureManifest = async (
-  clientInstance: TAgent,
-  config: TConfig,
-  manifest: any
-) => {
-  const mergedManifest = {
-    resourceType: 'App',
-    apiVersion: 1,
-    type: 'app',
-    id: config.APP_ID,
-    endpoint: {
-      url: `${config.APP_URL}/aidbox`,
-      type: 'http-rpc',
-      secret: config.APP_SECRET,
-    },
-    ...manifest,
-  };
-
-  return await clientInstance.request({
-    url: '/App',
-    method: 'put',
-    data: mergedManifest,
   });
 };

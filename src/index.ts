@@ -1,1 +1,1 @@
-export * from './lib/aidbox';
+export * from './lib/app';

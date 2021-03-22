@@ -1,3 +1,5 @@
+import { RequestListener } from 'http';
+
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export type ProcessEnv = {
@@ -13,7 +15,7 @@ export type TContext = {
 
 export type TOperationHandler = (
   ctx: TContext,
-  msq: any
+  msq: TMessage
 ) => Promise<{
   readonly status?: number;
   readonly resource?: any;
@@ -46,7 +48,10 @@ export type TPatchedManifest = TRawManifest & {
   };
 };
 
-export type TSubscriptionHandler = (a: any, b: any) => any;
+export type TSubscriptionHandler = (
+  context: TContext,
+  message: TMessage
+) => any;
 
 export type TSubscriptionHandlers = {
   readonly [key: string]: TSubscriptionHandler;
@@ -65,4 +70,44 @@ export type TConfig = {
   readonly PGHOST: string;
   readonly PGDATABASE: string;
   readonly PGPASSWORD: string;
+};
+
+export enum EAccept {
+  TEXT = 'text/plain',
+  YAML = 'text/yaml',
+  JSON = 'application/json',
+}
+
+export enum EOperation {
+  OPERATION = 'operation',
+  SUBSCRIPTION = 'subscription',
+}
+
+export type TDispatchFn = (
+  config: TConfig,
+  manifest: TPatchedManifest,
+  context: TContext,
+  subscriptionHandlers: TSubscriptionHandlers
+) => RequestListener;
+
+export type TMessage = {
+  readonly type: EOperation;
+  readonly request: {
+    readonly headers: Record<string, string>;
+    readonly params: Record<string, string>;
+    readonly 'route-params': Record<string, string>;
+    readonly 'oauth/user': Record<string, any>;
+    readonly 'oauth/client': Record<string, any>;
+  };
+  readonly box: Record<string, string>;
+
+  readonly operation?: {
+    readonly app: Record<string, string>;
+    readonly action: string;
+    readonly module: string;
+    readonly request: readonly string[];
+    readonly id: string;
+    readonly w: null;
+  };
+  readonly handler?: string;
 };
