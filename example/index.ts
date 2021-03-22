@@ -1,9 +1,9 @@
-import { InitManifest } from './build/main/types';
-import { prepareConfig, startApp } from './src';
+import { prepareConfig, startApp } from '../src/lib/aidbox';
+import { TRawManifest } from '../src/types';
 
 const config = prepareConfig(process.env);
 
-const manifest: InitManifest = {
+const manifest: TRawManifest = {
   resources: {
     AccessPolicy: {},
   },
