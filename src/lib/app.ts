@@ -137,7 +137,7 @@ const dispatch: TDispatchFn = (
       if (operation === EOperation.SUBSCRIPTION) {
         const handlerId = msg.handler as string;
         if (subscriptionHandlers[handlerId]) {
-          subscriptionHandlers[handlerId]({}, msg);
+          subscriptionHandlers[handlerId](context, msg);
           sendResponse(JSON.stringify({ status: 'start subs' }));
         }
         return;
