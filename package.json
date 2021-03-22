@@ -1,6 +1,6 @@
 {
   "name": "@aidbox/node-server-sdk",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Node JS SDK for extend Aidbox.io",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
