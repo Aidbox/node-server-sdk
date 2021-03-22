@@ -1,3 +1,9 @@
+![build status](https://github.com/aidbox/node-server-sdk/actions/workflows/chore.yaml/badge.svg)
+[![npm version](https://badge.fury.io/js/%40aidbox%2Fnode-server-sdk.svg)](https://badge.fury.io/js/%40aidbox%2Fnode-server-sdk)
+[![codecov](https://codecov.io/gh/Aidbox/node-server-sdk/branch/main/graph/badge.svg?token=1AF9MVTN3L)](https://codecov.io/gh/Aidbox/node-server-sdk)
+
+<!-- [![install size](https://packagephobia.com/badge?p=@aidbox/node-server-sdk)](https://packagephobia.com/result?p=@aidbox/node-server-sdk) -->
+
 # Aidbox NodeJS Server SDK
 
 - [Installation](#installation)

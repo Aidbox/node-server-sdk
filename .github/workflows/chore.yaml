@@ -1,10 +1,9 @@
-name: Test and publish
+name: Build
 
 on:
   push:
     branches:
       - "main"
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,5 +15,3 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run cov:send
-      - run: npm run doc:html
-      - run: npm run doc:publish
