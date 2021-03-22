@@ -1,6 +1,5 @@
 # Aidbox NodeJS Server SDK
 
-Ниже вы можете найти примеры использования 
 - [Installation](#installation)
 - [Requirements](#requirements-for-using)
  
