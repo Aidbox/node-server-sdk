@@ -16,4 +16,10 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run cov:send
-      - run: npm run doc:publish
+      - run: npm run doc
+      - name: Publish docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/docs
+
