@@ -28,7 +28,8 @@
     "transpiled",
     "typedoc",
     "untracked",
-    "healthcheck"
+    "healthcheck",
+    "Fhirbase"
   ],
   "flagWords": [],
   "ignorePaths": [
