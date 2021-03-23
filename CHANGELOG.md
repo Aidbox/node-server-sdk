@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.2](https://github.com/Aidbox/node-server-sdk/compare/v1.3.1...v1.3.2) (2021-03-23)
+
+
+### Features
+
+* **notifications:** Add success/failed notifications to chore ([4cb46ee](https://github.com/Aidbox/node-server-sdk/commit/4cb46ee9933d863f82398dbaa9fec9573bdf6033))
+
+
+### Bug Fixes
+
+* **notifications:** Add sender name ([45721da](https://github.com/Aidbox/node-server-sdk/commit/45721dacfc32a915368e2a752082fc1604a38da5))
+* **notifications:** Fix markup ([e20d523](https://github.com/Aidbox/node-server-sdk/commit/e20d52327cbd072caaec7e25b541328640852afb))
+
 ### [1.3.1](https://github.com/Aidbox/node-server-sdk/compare/v1.3.0...v1.3.1) (2021-03-23)
 
 
