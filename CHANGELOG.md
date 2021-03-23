@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/Aidbox/node-server-sdk/compare/v1.1.0...v1.2.0) (2021-03-23)
+
+
+### Features
+
+* **actions:** Publish docs on release ([378ae78](https://github.com/Aidbox/node-server-sdk/commit/378ae788a45af47c0ef7493d7e203164f2898bd5))
+
 ## [1.1.0](https://github.com/Aidbox/node-server-sdk/compare/v1.0.8...v1.1.0) (2021-03-23)
 
 
