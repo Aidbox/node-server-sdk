@@ -73,10 +73,19 @@
 						<a href="index.html">index</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="lib_agent.html">lib/agent</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="lib_app.html">lib/app</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="lib_config.html">lib/config</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="lib_context.html">lib/context</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="lib_dispatch.html">lib/dispatch</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="lib_http.html">lib/http</a>
@@ -98,8 +107,8 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="lib_manifest.html#ensuremanifest" class="tsd-kind-icon">ensure<wbr>Manifest</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="lib_manifest.html#patchmanifest" class="tsd-kind-icon">patch<wbr>Manifest</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="lib_manifest.html#syncmanifest" class="tsd-kind-icon">sync<wbr>Manifest</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="lib_manifest.html#validatemanifest" class="tsd-kind-icon">validate<wbr>Manifest</a></li>
 							</ul>
 						</section>
@@ -108,35 +117,6 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="ensuremanifest" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> ensure<wbr>Manifest</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">ensure<wbr>Manifest<span class="tsd-signature-symbol">(</span>clientInstance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AxiosInstance</span>, config<span class="tsd-signature-symbol">: </span><a href="types.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="types.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in lib/manifest.ts:69</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>clientInstance: <span class="tsd-signature-type">AxiosInstance</span></h5>
-								</li>
-								<li>
-									<h5>config: <a href="types.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
-								</li>
-								<li>
-									<h5>manifest: <a href="types.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="patchmanifest" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> patch<wbr>Manifest</h3>
@@ -165,6 +145,35 @@
 									<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> subscription<wbr>Handlers<span class="tsd-signature-symbol">: </span><a href="types.html#tsubscriptionhandlers" class="tsd-signature-type">TSubscriptionHandlers</a></h5>
 								</li>
 							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="syncmanifest" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> sync<wbr>Manifest</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">sync<wbr>Manifest<span class="tsd-signature-symbol">(</span>agent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AxiosInstance</span>, config<span class="tsd-signature-symbol">: </span><a href="types.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="types.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in lib/manifest.ts:69</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>agent: <span class="tsd-signature-type">AxiosInstance</span></h5>
+								</li>
+								<li>
+									<h5>config: <a href="types.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
+								</li>
+								<li>
+									<h5>manifest: <a href="types.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -203,10 +212,10 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-module root">
-						<a href="lib_manifest.html#ensuremanifest" class="tsd-kind-icon">ensure<wbr>Manifest</a>
+						<a href="lib_manifest.html#patchmanifest" class="tsd-kind-icon">patch<wbr>Manifest</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module root">
-						<a href="lib_manifest.html#patchmanifest" class="tsd-kind-icon">patch<wbr>Manifest</a>
+						<a href="lib_manifest.html#syncmanifest" class="tsd-kind-icon">sync<wbr>Manifest</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module root">
 						<a href="lib_manifest.html#validatemanifest" class="tsd-kind-icon">validate<wbr>Manifest</a>

@@ -73,10 +73,19 @@
 						<a href="index.html">index</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="lib_agent.html">lib/agent</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="lib_app.html">lib/app</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="lib_config.html">lib/config</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="lib_context.html">lib/context</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="lib_dispatch.html">lib/dispatch</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="lib_http.html">lib/http</a>
@@ -108,7 +117,6 @@
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#processenv" class="tsd-kind-icon">Process<wbr>Env</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#tconfig" class="tsd-kind-icon">TConfig</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#tcontext" class="tsd-kind-icon">TContext</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#tdispatchfn" class="tsd-kind-icon">TDispatch<wbr>Fn</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#tmessage" class="tsd-kind-icon">TMessage</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#toperation" class="tsd-kind-icon">TOperation</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#toperationhandler" class="tsd-kind-icon">TOperation<wbr>Handler</a></li>
@@ -129,7 +137,7 @@
 					<div class="tsd-signature tsd-kind-icon">Process<wbr>Env<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:5</li>
+							<li>Defined in types/index.ts:3</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -147,7 +155,7 @@
 					<div class="tsd-signature tsd-kind-icon">TConfig<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:62</li>
+							<li>Defined in types/index.ts:60</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -198,7 +206,7 @@
 					<div class="tsd-signature tsd-kind-icon">TContext<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:10</li>
+							<li>Defined in types/index.ts:8</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -243,7 +251,7 @@
 									<li class="tsd-description">
 										<aside class="tsd-sources">
 											<ul>
-												<li>Defined in types/index.ts:15</li>
+												<li>Defined in types/index.ts:13</li>
 											</ul>
 										</aside>
 										<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -265,52 +273,12 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="tdispatchfn" class="tsd-anchor"></a>
-					<h3>TDispatch<wbr>Fn</h3>
-					<div class="tsd-signature tsd-kind-icon">TDispatch<wbr>Fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in types/index.ts:88</li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="types.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="types.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a>, context<span class="tsd-signature-symbol">: </span><a href="types.html#tcontext" class="tsd-signature-type">TContext</a>, subscriptionHandlers<span class="tsd-signature-symbol">: </span><a href="types.html#tsubscriptionhandlers" class="tsd-signature-type">TSubscriptionHandlers</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RequestListener</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5>config: <a href="types.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
-											</li>
-											<li>
-												<h5>manifest: <a href="types.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a></h5>
-											</li>
-											<li>
-												<h5>context: <a href="types.html#tcontext" class="tsd-signature-type">TContext</a></h5>
-											</li>
-											<li>
-												<h5>subscriptionHandlers: <a href="types.html#tsubscriptionhandlers" class="tsd-signature-type">TSubscriptionHandlers</a></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RequestListener</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="tmessage" class="tsd-anchor"></a>
 					<h3>TMessage</h3>
 					<div class="tsd-signature tsd-kind-icon">TMessage<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:95</li>
+							<li>Defined in types/index.ts:86</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -377,7 +345,7 @@
 					<div class="tsd-signature tsd-kind-icon">TOperation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:28</li>
+							<li>Defined in types/index.ts:26</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -401,7 +369,7 @@
 					<div class="tsd-signature tsd-kind-icon">TOperation<wbr>Handler<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:18</li>
+							<li>Defined in types/index.ts:16</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -435,7 +403,7 @@
 					<div class="tsd-signature tsd-kind-icon">TPatched<wbr>Manifest<span class="tsd-signature-symbol">:</span> <a href="types.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:47</li>
+							<li>Defined in types/index.ts:45</li>
 						</ul>
 					</aside>
 				</section>
@@ -445,7 +413,7 @@
 					<div class="tsd-signature tsd-kind-icon">TRaw<wbr>Manifest<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:34</li>
+							<li>Defined in types/index.ts:32</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -487,7 +455,7 @@
 					<div class="tsd-signature tsd-kind-icon">TSubscription<wbr>Handler<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:53</li>
+							<li>Defined in types/index.ts:51</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -521,7 +489,7 @@
 					<div class="tsd-signature tsd-kind-icon">TSubscription<wbr>Handlers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:58</li>
+							<li>Defined in types/index.ts:56</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -553,9 +521,6 @@
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
 						<a href="types.html#tcontext" class="tsd-kind-icon">TContext</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="types.html#tdispatchfn" class="tsd-kind-icon">TDispatch<wbr>Fn</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
 						<a href="types.html#tmessage" class="tsd-kind-icon">TMessage</a>

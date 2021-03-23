@@ -73,10 +73,19 @@
 						<a href="index.html">index</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="lib_agent.html">lib/agent</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="lib_app.html">lib/app</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="lib_config.html">lib/config</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="lib_context.html">lib/context</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="lib_dispatch.html">lib/dispatch</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="lib_http.html">lib/http</a>
@@ -96,8 +105,21 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>References</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="index.html#tdispatch" class="tsd-kind-icon">TDispatch</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="index.html#tapp" class="tsd-kind-icon">TApp</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="index.html#createapp" class="tsd-kind-icon">create<wbr>App</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="index.html#startapp" class="tsd-kind-icon">start<wbr>App</a></li>
 							</ul>
 						</section>
@@ -105,18 +127,61 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>References</h2>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="tdispatch" class="tsd-anchor"></a>
+					<h3>TDispatch</h3>
+					<div class="tsd-signature tsd-kind-icon">TDispatch<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in index.ts:2</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="tapp" class="tsd-anchor"></a>
+					<h3>TApp</h3>
+					<div class="tsd-signature tsd-kind-icon">TApp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in lib/app.ts:10</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> agent<span class="tsd-signature-symbol">: </span><a href="lib_agent.html#tagent" class="tsd-signature-type">TAgent</a></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> config<span class="tsd-signature-symbol">: </span><a href="types.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> http<wbr>Server<span class="tsd-signature-symbol">: </span><a href="lib_http.html#tserver" class="tsd-signature-type">TServer</a></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> patched<wbr>Manifest<span class="tsd-signature-symbol">: </span><a href="types.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="startapp" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> start<wbr>App</h3>
+					<a name="createapp" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>App</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">start<wbr>App<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="types.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="types.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>App<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="types.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="types.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="lib_app.html#tapp" class="tsd-signature-type">TApp</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/app.ts:38</li>
+									<li>Defined in lib/app.ts:17</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -126,6 +191,29 @@
 								</li>
 								<li>
 									<h5>manifest: <a href="types.html#trawmanifest" class="tsd-signature-type">TRawManifest</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="lib_app.html#tapp" class="tsd-signature-type">TApp</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="startapp" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> start<wbr>App</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">start<wbr>App<span class="tsd-signature-symbol">(</span>app<span class="tsd-signature-symbol">: </span><a href="lib_app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in lib/app.ts:55</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>app: <a href="lib_app.html#tapp" class="tsd-signature-type">TApp</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -138,6 +226,15 @@
 		<div class="col-2 col-menu secondary-menu">
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-reference tsd-parent-kind-module root">
+						<a href="index.html#tdispatch" class="tsd-kind-icon">TDispatch</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
+						<a href="index.html#tapp" class="tsd-kind-icon">TApp</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module root">
+						<a href="index.html#createapp" class="tsd-kind-icon">create<wbr>App</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module root">
 						<a href="index.html#startapp" class="tsd-kind-icon">start<wbr>App</a>
 					</li>
