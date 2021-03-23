@@ -1,39 +1,18 @@
-import { AxiosRequestConfig } from 'axios';
 import yaml from 'js-yaml';
 
 import {
   EAccept,
   EOperation,
   TConfig,
-  TContext,
   TDispatchFn,
   TMessage,
   TRawManifest,
 } from '../types';
 
 import { validateConfig } from './config';
-import { createAgent, createServer, startServer, TAgent } from './http';
+import { makeContext } from './context';
+import { createAgent, createServer, startServer } from './http';
 import { ensureManifest, patchManifest, validateManifest } from './manifest';
-
-const makeContext = (agent: TAgent): TContext => {
-  const request = (config: AxiosRequestConfig, jsonOverride = true) => {
-    return agent.request({
-      ...config,
-      responseType: jsonOverride ? 'json' : 'text',
-    });
-  };
-
-  const psql = async <T = any>(query: string): Promise<readonly T[]> => {
-    const response = await request({
-      url: '/$psql',
-      method: 'post',
-      data: { query },
-    });
-    return response.data[0].result;
-  };
-
-  return { request, psql };
-};
 
 export const startApp = async (
   config: TConfig,
