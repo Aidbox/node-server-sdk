@@ -2,9 +2,9 @@ import { AxiosRequestConfig } from 'axios';
 
 import { TContext } from '../types';
 
-import { TAgent } from './http';
+import { TAgent } from './agent';
 
-export const makeContext = (agent: TAgent): TContext => {
+export const createContext = (agent: TAgent): TContext => {
   const request = (config: AxiosRequestConfig, jsonOverride = true) => {
     return agent.request({
       ...config,

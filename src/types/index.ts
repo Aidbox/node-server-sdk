@@ -1,5 +1,3 @@
-import { RequestListener } from 'http';
-
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export type ProcessEnv = {
@@ -84,13 +82,6 @@ export enum EOperation {
   OPERATION = 'operation',
   SUBSCRIPTION = 'subscription',
 }
-
-export type TDispatchFn = (
-  config: TConfig,
-  manifest: TPatchedManifest,
-  context: TContext,
-  subscriptionHandlers: TSubscriptionHandlers
-) => RequestListener;
 
 export type TMessage = {
   readonly type: EOperation;

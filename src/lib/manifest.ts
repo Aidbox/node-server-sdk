@@ -5,7 +5,7 @@ import {
   TSubscriptionHandlers,
 } from '../types';
 
-import { TAgent } from './http';
+import { TAgent } from './agent';
 
 export const validateManifest = (
   manifest: TRawManifest
@@ -66,27 +66,25 @@ export const patchManifest = (
   };
 };
 
-export const ensureManifest = async (
-  clientInstance: TAgent,
+export const syncManifest = async (
+  agent: TAgent,
   config: TConfig,
   manifest: TPatchedManifest
 ) => {
-  const mergedManifest = {
-    resourceType: 'App',
-    apiVersion: 1,
-    type: 'app',
-    id: config.APP_ID,
-    endpoint: {
-      url: `${config.APP_URL}/aidbox`,
-      type: 'http-rpc',
-      secret: config.APP_SECRET,
-    },
-    ...manifest,
-  };
-
-  return await clientInstance.request({
+  return await agent.request({
     url: '/App',
     method: 'put',
-    data: mergedManifest,
+    data: {
+      resourceType: 'App',
+      apiVersion: 1,
+      type: 'app',
+      id: config.APP_ID,
+      endpoint: {
+        url: `${config.APP_URL}/aidbox`,
+        type: 'http-rpc',
+        secret: config.APP_SECRET,
+      },
+      ...manifest,
+    },
   });
 };
