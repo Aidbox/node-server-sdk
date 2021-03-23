@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'gh-pages'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,3 +16,4 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run cov:send
+      - run: npm run doc:publish
