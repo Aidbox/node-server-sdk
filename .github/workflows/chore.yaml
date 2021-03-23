@@ -21,8 +21,9 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             🟢 Build succeeded: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
-            By [${{github.event.push.sender.login}}](${{github.event.push.sender.url}})
+            By [${{github.event.sender.login}}](${{github.event.sender.url}})
           disable_web_page_preview: true
+          format: markdown
 
       - name: Send Telegram notifications (failure)
         if: ${{ failure() }}
@@ -32,5 +33,6 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             🔴 Build failed: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
-            By [${{github.event.push.sender.login}}](${{github.event.push.sender.url}})
+            By [${{github.event.sender.login}}](${{github.event.sender.url}})
           disable_web_page_preview: true
+          format: markdown
