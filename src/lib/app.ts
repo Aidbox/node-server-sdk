@@ -4,37 +4,66 @@ import {
   EAccept,
   EOperation,
   TConfig,
+  TContext,
   TDispatchFn,
   TMessage,
+  TPatchedManifest,
   TRawManifest,
 } from '../types';
 
 import { validateConfig } from './config';
 import { makeContext } from './context';
-import { createAgent, createServer, startServer } from './http';
+import {
+  createAgent,
+  createServer,
+  startServer,
+  TAgent,
+  TServer,
+} from './http';
 import { ensureManifest, patchManifest, validateManifest } from './manifest';
 
-export const startApp = async (
-  config: TConfig,
-  manifest: TRawManifest
-): Promise<void> => {
+export type TApp = {
+  readonly httpServer: TServer;
+  readonly context: TContext;
+  readonly agent: TAgent;
+  readonly config: TConfig;
+  readonly patchedManifest: TPatchedManifest;
+};
+
+export const createApp = (config: TConfig, manifest: TRawManifest): TApp => {
   const configValidation = validateConfig(config);
   if (configValidation.error) {
-    return Promise.reject(configValidation.error);
+    // eslint-disable-next-line functional/no-throw-statement
+    throw new Error(configValidation.error);
   }
 
   const manifestValidation = validateManifest(manifest);
   if (manifestValidation.error) {
-    return Promise.reject(manifestValidation.error);
+    // eslint-disable-next-line functional/no-throw-statement
+    throw new Error(manifestValidation.error);
   }
 
   const agent = createAgent(config);
   const context = makeContext(agent);
+  const { subscriptionHandlers, patchedManifest } = patchManifest(manifest);
+  const httpServer = createServer(
+    dispatch(config, patchedManifest, context, subscriptionHandlers)
+  );
 
+  return {
+    httpServer,
+    context,
+    agent,
+    config,
+    patchedManifest,
+  };
+};
+
+export const startApp = async (app: TApp) => {
   // eslint-disable-next-line functional/no-let
   let isReady;
   try {
-    isReady = await context.request(
+    isReady = await app.context.request(
       {
         url: '/__healthcheck',
       },
@@ -48,13 +77,8 @@ export const startApp = async (
     process.exit(0);
   }
 
-  const { subscriptionHandlers, patchedManifest } = patchManifest(manifest);
-  const server = createServer(
-    dispatch(config, patchedManifest, context, subscriptionHandlers)
-  );
-
-  await ensureManifest(agent, config, patchedManifest);
-  await startServer(server);
+  await ensureManifest(app.agent, app.config, app.patchedManifest);
+  await startServer(app.httpServer);
 };
 
 const resolveContentType = (msg: TMessage) => {
