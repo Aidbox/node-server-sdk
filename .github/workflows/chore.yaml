@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'notifications'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,3 +16,23 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run cov:send
+
+      - name: Send Telegram notifications (success)
+        if: ${{ success() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            🟢 Build succeeded: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
+
+      - name: Send Telegram notifications (failure)
+        if: ${{ failure() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            🔴 Build failed: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
+
+
