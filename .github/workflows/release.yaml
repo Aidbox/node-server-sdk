@@ -30,11 +30,6 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-      - name: Send Telegram notifications
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
 
   publish-gpr:
     needs: build
@@ -50,11 +45,6 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Send Telegram notifications
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
 
   docs:
     needs: [publish-npm, publish-gpr]
@@ -71,3 +61,20 @@ jobs:
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: build/docs # The folder the action should deploy.
+
+  notify:
+    needs: [publish-npm, publish-gpr, docs]
+    runs-on: ubuntu-latest
+    steps:
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+      - name: Send Telegram notifications
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Published version ${{ steps.package-version.outputs.current-version }}
+            NPM: https://www.npmjs.com/package/@aidbox/node-server-sdk/v/${{ steps.package-version.outputs.current-version }}
+            Docs: http://aidbox.github.io/node-server-sdk

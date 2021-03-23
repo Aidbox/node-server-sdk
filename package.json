@@ -44,7 +44,7 @@
     "version-minor": "standard-version --release-as minor",
     "version-major": "standard-version --release-as major",
     "reset-hard": "git clean -dfx && git reset --hard && npm i",
-    "prepare-release-local": "run-s fix test cov:check doc:html version doc:publish",
+    "prepare-release-local": "run-s fix test cov:check version",
     "prepare-release-patch": "run-s reset-hard test cov:check doc:html version-patch doc:publish",
     "prepare-release-minor": "run-s reset-hard test cov:check doc:html version-minor doc:publish",
     "prepare-release-major": "run-s reset-hard test cov:check doc:html version-major doc:publish"
