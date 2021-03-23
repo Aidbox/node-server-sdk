@@ -29,7 +29,8 @@
     "typedoc",
     "untracked",
     "healthcheck",
-    "Fhirbase"
+    "Fhirbase",
+    "psql"
   ],
   "flagWords": [],
   "ignorePaths": [

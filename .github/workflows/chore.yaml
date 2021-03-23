@@ -3,7 +3,8 @@ name: Build
 on:
   push:
     branches:
-      - "main"
+      - 'main'
+      - 'notifications'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,3 +16,8 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run cov:send
+      - name: notify-build
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
