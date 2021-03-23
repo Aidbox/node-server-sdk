@@ -1,4 +1,4 @@
-import { startApp } from '../src/lib/app';
+import { createApp, startApp } from '../src';
 import { TRawManifest } from '../src/types';
 import { prepareConfig } from '../src/lib/config';
 
@@ -18,11 +18,6 @@ const manifest: TRawManifest = {
           'SELECT NOW()'
         );
         return { resource: response[0] };
-        // return {
-        //   resource: {
-        //     test: 'work',
-        //   },
-        // };
       },
     },
   },
@@ -37,6 +32,12 @@ const manifest: TRawManifest = {
   },
 };
 
-startApp(config, manifest)
-  .then(() => console.log('ready'))
-  .catch((e) => console.log('error: ', e));
+const main = async () => {
+  const app = createApp(config, manifest);
+  await startApp(app);
+  console.log('App started');
+};
+
+if (require.main === module) {
+  main();
+}
