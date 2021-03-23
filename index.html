@@ -1,0 +1,219 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@aidbox/node-server-sdk</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<ul class="results-priority" style="display:none">
+					</ul>
+					<a href="index.html" class="title">@aidbox/node-server-sdk</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+			</ul>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-3 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/index.html">index</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/lib_app.html">lib/app</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/lib_config.html">lib/config</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/lib_http.html">lib/http</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/lib_manifest.html">lib/manifest</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types.html">types</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="col-7 offset-3 col-content">
+			<h1>@aidbox/node-server-sdk</h1>
+			<div class="tsd-panel tsd-typography">
+				<p><img src="https://github.com/aidbox/node-server-sdk/actions/workflows/chore.yaml/badge.svg" alt="build status">
+					<a href="https://badge.fury.io/js/%40aidbox%2Fnode-server-sdk"><img src="https://badge.fury.io/js/%40aidbox%2Fnode-server-sdk.svg" alt="npm version"></a>
+				<a href="https://codecov.io/gh/Aidbox/node-server-sdk"><img src="https://codecov.io/gh/Aidbox/node-server-sdk/branch/main/graph/badge.svg?token=1AF9MVTN3L" alt="codecov"></a></p>
+				<!-- [![install size](https://packagephobia.com/badge?p=@aidbox/node-server-sdk)](https://packagephobia.com/result?p=@aidbox/node-server-sdk) -->
+				<a href="#aidbox-nodejs-server-sdk" id="aidbox-nodejs-server-sdk" style="color: inherit; text-decoration: none;">
+					<h1>Aidbox NodeJS Server SDK</h1>
+				</a>
+				<ul>
+					<li><a href="#installation">Installation</a></li>
+					<li><a href="#requirements-for-using">Requirements</a></li>
+					<li><a href="#start-application">Start application</a></li>
+				</ul>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<p>We have first-class TypeScript support. But you also can use this library in javascript project</p>
+				<p>if you use npm</p>
+				<pre><code class="language-npm"> npm install @aidbox/node-server-sdk
+</code></pre>
+				<p>or yarn</p>
+				<pre><code class="language-npm"> yarn add @aidbox/node-server-sdk
+</code></pre>
+				<a href="#requirements-for-using" id="requirements-for-using" style="color: inherit; text-decoration: none;">
+					<h2>Requirements for using</h2>
+				</a>
+				<p>Before run you application you should full required ENV-variables</p>
+				<p>Client id for work with aidbox</p>
+				<blockquote>
+					<p>AIDBOX_CLIENT_ID=</p>
+				</blockquote>
+				<p>Client secret for work with aidbox</p>
+				<blockquote>
+					<p>AIDBOX_CLIENT_SECRET=secret</p>
+				</blockquote>
+				<p>URL</p>
+				<blockquote>
+					<p>AIDBOX_URL=<a href="http://0.0.0.0:8085">http://0.0.0.0:8085</a></p>
+				</blockquote>
+				<p>Toggle debug mode</p>
+				<blockquote>
+					<p>APP_DEBUG=false</p>
+				</blockquote>
+				<p>App name for identity application in aidbox</p>
+				<blockquote>
+					<p>APP_ID=you-business-app</p>
+				</blockquote>
+				<p>Secret (aidbox will use )</p>
+				<blockquote>
+					<p>APP_SECRET=secret</p>
+				</blockquote>
+				<p>Backend application url (aidbox will send request on this base url)</p>
+				<blockquote>
+					<p>APP_URL=<a href="http://0.0.0.0:8090">http://0.0.0.0:8090</a></p>
+				</blockquote>
+				<p>Port for your backend application</p>
+				<blockquote>
+					<p>APP_PORT=8090</p>
+				</blockquote>
+				<a href="#start-application" id="start-application" style="color: inherit; text-decoration: none;">
+					<h2>Start application</h2>
+				</a>
+				<p>Firstly you should prepare config object</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">prepareConfig</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../src/lib/config&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = </span><span style="color: #795E26">prepareConfig</span><span style="color: #000000">(</span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">env</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>Next step in define manifest file. For example:</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">TRawManifest</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../src/types&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">manifest</span><span style="color: #000000">: </span><span style="color: #267F99">TRawManifest</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">resources:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">AccessPolicy:</span><span style="color: #000000"> {},</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #001080">entities:</span><span style="color: #000000"> {},</span>
+<span style="color: #000000">  </span><span style="color: #001080">operations:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">test:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">method:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;GET&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">path:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;$test-operation&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000">      </span><span style="color: #795E26">handler</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> {</span>
+<span style="color: #000000">          </span><span style="color: #001080">resource:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #001080">test:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;work&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">          },</span>
+<span style="color: #000000">        };</span>
+<span style="color: #000000">      },</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #001080">subscriptions:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">Patient:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #795E26">handler</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;qwerty&#039;</span><span style="color: #000000">);</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
+<span style="color: #000000">      },</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">};</span>
+</code></pre>
+				<p>After you prepare config and define manifest you can run you backend application</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">startApp</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../src/lib/app&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = </span><span style="color: #795E26">prepareConfig</span><span style="color: #000000">(</span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">env</span><span style="color: #000000">);</span>
+
+<span style="color: #795E26">startApp</span><span style="color: #000000">(</span><span style="color: #001080">config</span><span style="color: #000000">, </span><span style="color: #001080">manifest</span><span style="color: #000000">)</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">then</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;ready&#039;</span><span style="color: #000000">))</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">catch</span><span style="color: #000000">((</span><span style="color: #001080">e</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;error: &#039;</span><span style="color: #000000">, </span><span style="color: #001080">e</span><span style="color: #000000">));</span>
+</code></pre>
+				<p><strong>Powered by <a href="http://www.health-samurai.io">Health Samurai</a> | <a href="http://www.health-samurai.io/aidbox">Aidbox</a> | <a href="http://www.health-samurai.io/fhirbase">Fhirbase</a></strong></p>
+			</div>
+			<!--{&quot;options&quot;:&quot;/home/runner/work/node-server-sdk/node-server-sdk&quot;,&quot;tsconfig&quot;:&quot;/home/runner/work/node-server-sdk/node-server-sdk&quot;,&quot;entryPoints&quot;:[&quot;src/&quot;,&quot;file&quot;],&quot;exclude&quot;:[&quot;**/*.spec.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;build/docs&quot;,&quot;json&quot;:&quot;&quot;,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;&quot;,&quot;includeVersion&quot;:false,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[&quot;typedoc-neo-theme&quot;],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;listInvalidSymbolLinks&quot;:false}-->
+		</div>
+		<div class="col-2 col-menu secondary-menu">
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
