@@ -6,11 +6,13 @@ export type ProcessEnv = {
   readonly [key: string]: string | undefined;
 };
 
+// eslint-disable-next-line functional/no-mixed-type
 export type TContext = {
   readonly request: <T>(
     config: AxiosRequestConfig,
     jsonOverride: boolean
   ) => Promise<AxiosResponse<T>>;
+  psql<T = any>(query: string): Promise<readonly T[]>;
 };
 
 export type TOperationHandler = (

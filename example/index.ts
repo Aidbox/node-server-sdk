@@ -13,12 +13,16 @@ const manifest: TRawManifest = {
     test: {
       method: 'GET',
       path: ['$test-operation'],
-      handler: async () => {
-        return {
-          resource: {
-            test: 'work',
-          },
-        };
+      handler: async (context) => {
+        const response = await context.psql<{ result: string[] }>(
+          'SELECT NOW()'
+        );
+        return { resource: response[0] };
+        // return {
+        //   resource: {
+        //     test: 'work',
+        //   },
+        // };
       },
     },
   },

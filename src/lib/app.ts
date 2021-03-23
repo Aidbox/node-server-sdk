@@ -23,7 +23,16 @@ const makeContext = (agent: TAgent): TContext => {
     });
   };
 
-  return { request };
+  const psql = async <T = any>(query: string): Promise<readonly T[]> => {
+    const response = await request({
+      url: '/$psql',
+      method: 'post',
+      data: { query },
+    });
+    return response.data[0].result;
+  };
+
+  return { request, psql };
 };
 
 export const startApp = async (
