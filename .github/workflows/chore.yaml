@@ -16,8 +16,9 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run cov:send
-      - name: notify-build
+      - name: Send Telegram notifications
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: A test message. Package version is ${{ steps.publish.outputs.version }}
