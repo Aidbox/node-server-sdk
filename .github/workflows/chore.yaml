@@ -18,8 +18,8 @@ jobs:
       - run: npm run cov:send
       - run: npm run doc
       - name: Publish docs
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/docs
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build/docs # The folder the action should deploy.
 
