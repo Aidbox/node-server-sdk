@@ -114,8 +114,9 @@
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#processenv" class="tsd-kind-icon">Process<wbr>Env</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#tconfig" class="tsd-kind-icon">TConfig</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#tconfigkey" class="tsd-kind-icon">TConfig<wbr>Key</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#tconfigkeys" class="tsd-kind-icon">TConfig<wbr>Keys</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="types.html#tcontext" class="tsd-kind-icon">TContext</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="types.html#tmessage" class="tsd-kind-icon">TMessage</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="types.html#toperation" class="tsd-kind-icon">TOperation</a></li>
@@ -132,30 +133,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="processenv" class="tsd-anchor"></a>
-					<h3>Process<wbr>Env</h3>
-					<div class="tsd-signature tsd-kind-icon">Process<wbr>Env<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in types/index.ts:3</li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="tconfig" class="tsd-anchor"></a>
 					<h3>TConfig</h3>
 					<div class="tsd-signature tsd-kind-icon">TConfig<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:59</li>
+							<li>Defined in types/index.ts:55</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -200,13 +183,33 @@
 						</ul>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="tconfigkey" class="tsd-anchor"></a>
+					<h3>TConfig<wbr>Key</h3>
+					<div class="tsd-signature tsd-kind-icon">TConfig<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">keyof TConfig</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in types/index.ts:70</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="tconfigkeys" class="tsd-anchor"></a>
+					<h3>TConfig<wbr>Keys</h3>
+					<div class="tsd-signature tsd-kind-icon">TConfig<wbr>Keys<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">readonly TConfigKey[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in types/index.ts:72</li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="tcontext" class="tsd-anchor"></a>
 					<h3>TContext</h3>
 					<div class="tsd-signature tsd-kind-icon">TContext&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">CH</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:7</li>
+							<li>Defined in types/index.ts:3</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -289,7 +292,7 @@
 					<div class="tsd-signature tsd-kind-icon">TOperation&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:25</li>
+							<li>Defined in types/index.ts:21</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -319,7 +322,7 @@
 					<div class="tsd-signature tsd-kind-icon">TOperation<wbr>Handler&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:15</li>
+							<li>Defined in types/index.ts:11</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -359,7 +362,7 @@
 					<div class="tsd-signature tsd-kind-icon">TPatched<wbr>Manifest&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <a href="types.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:44</li>
+							<li>Defined in types/index.ts:40</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -375,7 +378,7 @@
 					<div class="tsd-signature tsd-kind-icon">TRaw<wbr>Manifest&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:31</li>
+							<li>Defined in types/index.ts:27</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -423,7 +426,7 @@
 					<div class="tsd-signature tsd-kind-icon">TSubscription<wbr>Handler&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:50</li>
+							<li>Defined in types/index.ts:46</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -463,7 +466,7 @@
 					<div class="tsd-signature tsd-kind-icon">TSubscription<wbr>Handlers&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:55</li>
+							<li>Defined in types/index.ts:51</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -494,10 +497,13 @@
 						<a href="../enums/types.eoperation.html" class="tsd-kind-icon">EOperation</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="types.html#processenv" class="tsd-kind-icon">Process<wbr>Env</a>
+						<a href="types.html#tconfig" class="tsd-kind-icon">TConfig</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="types.html#tconfig" class="tsd-kind-icon">TConfig</a>
+						<a href="types.html#tconfigkey" class="tsd-kind-icon">TConfig<wbr>Key</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
+						<a href="types.html#tconfigkeys" class="tsd-kind-icon">TConfig<wbr>Keys</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
 						<a href="types.html#tcontext" class="tsd-kind-icon">TContext</a>
