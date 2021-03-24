@@ -4,7 +4,7 @@
 
 # <img src="media/aidbox-logo.png" width="20px"/> Aidbox NodeJS Server SDK
 
-Information about the types and methods used can be found in the documentation [at the link](https://aidbox.github.io/node-server-sdk/)
+You can find additional technical information on SDK types and methods used [here](https://aidbox.github.io/node-server-sdk/).
 
 - [Installation](#installation)
 - [Requirements](#requirements-for-using)
@@ -13,53 +13,53 @@ Information about the types and methods used can be found in the documentation [
 
 ## Installation
 
-We have first-class TypeScript support. But you also can use this library in javascript project. We provide helpful function for prevent errors in input config variables
+We have first-class TypeScript support, but this library can also be used in a javascript project. We provide a useful function to prevent errors in input config variables.
 
 **npm**
 
-```bash
+```npm
 npm install @aidbox/node-server-sdk
 ```
 
 **yarn**
 
-```bash
+```yarn
 yarn add @aidbox/node-server-sdk
 ```
 
 ## Requirements
 
-For start working with application you should pass required env variables
+To start working with the backend application you should enter the required env variables:
 
-Client id with basic auth grant type for work with aidbox
+Client id with basic auth grant type to work with aidbox:
 
 > AIDBOX_CLIENT_ID=
 
-Client secret
+Client secret:
 
 > AIDBOX_CLIENT_SECRET=secret
 
-Your aidbox url
+Your aidbox url:
 
 > AIDBOX_URL=http://0.0.0.0:8085
 
-Toggle debug mode
+Toggle debug mode:
 
 > APP_DEBUG=false
 
-App name for identity application in aidbox
+App name to identify the application in aidbox:
 
 > APP_ID=you-business-app
 
-Secret for use application(aidbox will use)
+Secret for use application (aidbox will use it):
 
 > APP_SECRET=secret
 
-Backend application url (aidbox will send request on this base url)
+Backend application url (aidbox will send a request to this base url):
 
 > APP_URL=http://0.0.0.0:8090
 
-Port for your backend application
+Port for your backend application:
 
 > APP_PORT=8090
 
@@ -67,7 +67,7 @@ Port for your backend application
 
 ### Typescript usage
 
-Firstly you should create config. By default we use env variables you can optionally pass **process.env** as input parameter
+Firstly, you should create a config object. By default, we use env variables but you can optionally enter **process.env** as an input parameter.
 
 ```typescript
 import { createConfig } from '@aidbox/node-server-sdk/lib/config';
@@ -89,7 +89,7 @@ const contextHelpers: TContextHelpers = {
 };
 ```
 
-Next step it defining manifest object. For example:
+Next step is defining the manifest object. For example:
 
 ```typescript
 import { TRawManifest } from '../src/types';
@@ -121,8 +121,8 @@ const manifest: TRawManifest<TContextHelpers> = {
 };
 ```
 
-After you prepare config and define manifest you can run you backend application.
-Typescript don't allow you miss some required config key but we have additional check input parameters before creating app.
+After you prepare the config object and define the manifest, you can run your backend application.
+Typescript won't let you miss any required config keys. There are additional check input parameters before the app is created:
 
 ```typescript
 import { createApp, startApp } from '@aidbox/node-server-sdk';
@@ -136,12 +136,12 @@ if (!app) {
 await startApp(app);
 ```
 
-Then you can go in your Aidbox and find you created application in Apps menu
-For test correct working you run this request in Aidbox Rest Console
+Then you can go to your Aidbox. There you will find your new application in the Apps menu.
+To test the app, run this request in the Aidbox Rest Console:
 
 **Request**
 
-```
+```http
 GET /$test-operation
 ```
 
@@ -151,6 +151,6 @@ GET /$test-operation
 work: true
 ```
 
-Information about predefined context helpers and example usage you can find in [documentation](https://aidbox.github.io/node-server-sdk/)
+You can find more information about predefined context helpers and example usage [here](https://aidbox.github.io/node-server-sdk/).
 
 Powered by [Health Samurai](http://www.health-samurai.io) | [Aidbox](http://www.health-samurai.io/aidbox) | [Fhirbase](http://www.health-samurai.io/fhirbase)
