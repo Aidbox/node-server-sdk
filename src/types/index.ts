@@ -4,17 +4,16 @@ export type ProcessEnv = {
   readonly [key: string]: string | undefined;
 };
 
-// eslint-disable-next-line functional/no-mixed-type
-export type TContext = {
+export type TContext<CH> = {
   readonly request: <T>(
     config: AxiosRequestConfig,
     jsonOverride: boolean
   ) => Promise<AxiosResponse<T>>;
   psql<T = any>(query: string): Promise<readonly T[]>;
-};
+} & CH;
 
-export type TOperationHandler = (
-  ctx: TContext,
+export type TOperationHandler<CH> = (
+  ctx: TContext<CH>,
   msq: TMessage
 ) => Promise<{
   readonly status?: number;
@@ -23,38 +22,38 @@ export type TOperationHandler = (
   readonly body?: string;
 }>;
 
-export type TOperation = {
+export type TOperation<CH> = {
   readonly method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
   readonly path: readonly string[];
-  readonly handler: TOperationHandler;
+  readonly handler: TOperationHandler<CH>;
 };
 
-export type TRawManifest = {
+export type TRawManifest<CH> = {
   readonly resources?: any;
   readonly entities?: any;
   readonly operations: {
-    readonly [key: string]: TOperation;
+    readonly [key: string]: TOperation<CH>;
   };
   readonly subscriptions: {
     readonly [key: string]: {
-      readonly handler: TSubscriptionHandler;
+      readonly handler: TSubscriptionHandler<CH>;
     };
   };
 };
 
-export type TPatchedManifest = TRawManifest & {
+export type TPatchedManifest<CH> = TRawManifest<CH> & {
   readonly subscriptions: {
     readonly [key: string]: { readonly handler: string };
   };
 };
 
-export type TSubscriptionHandler = (
-  context: TContext,
+export type TSubscriptionHandler<CH> = (
+  context: TContext<CH>,
   message: TMessage
 ) => any;
 
-export type TSubscriptionHandlers = {
-  readonly [key: string]: TSubscriptionHandler;
+export type TSubscriptionHandlers<CH> = {
+  readonly [key: string]: TSubscriptionHandler<CH>;
 };
 
 export type TConfig = {

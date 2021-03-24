@@ -4,7 +4,10 @@ import { TContext } from '../types';
 
 import { TAgent } from './agent';
 
-export const createContext = (agent: TAgent): TContext => {
+export const createContext = <CH>(
+  agent: TAgent,
+  contextHelpers: CH
+): TContext<CH> => {
   const request = (config: AxiosRequestConfig, jsonOverride = true) => {
     return agent.request({
       ...config,
@@ -21,5 +24,5 @@ export const createContext = (agent: TAgent): TContext => {
     return response.data[0].result;
   };
 
-  return { request, psql };
+  return { request, psql, ...contextHelpers };
 };
