@@ -1,3 +1,7 @@
+/**
+ * @module Agent
+ */
+
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import axiosRetry from 'axios-retry';
 
