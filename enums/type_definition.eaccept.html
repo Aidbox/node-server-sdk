@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EOperation | @aidbox/node-server-sdk</title>
+	<title>EAccept | @aidbox/node-server-sdk</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules/types.html">types</a>
+					<a href="../modules/type_definition.html">Type Definition</a>
 				</li>
 				<li>
-					<a href="types.eoperation.html">EOperation</a>
+					<a href="type_definition.eaccept.html">EAccept</a>
 				</li>
 			</ul>
 		</div>
@@ -73,45 +73,46 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/index.html">index</a>
+						<a href="../modules/agent.html">Agent</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/lib_agent.html">lib/agent</a>
+						<a href="../modules/app.html">App</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/lib_app.html">lib/app</a>
+						<a href="../modules/config.html">Config</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/lib_config.html">lib/config</a>
+						<a href="../modules/context.html">Context</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/lib_context.html">lib/context</a>
+						<a href="../modules/dispatch.html">Dispatch</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/lib_dispatch.html">lib/dispatch</a>
+						<a href="../modules/http.html">HTTP</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/lib_http.html">lib/http</a>
+						<a href="../modules/index.html">Index</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/lib_manifest.html">lib/manifest</a>
+						<a href="../modules/manifest.html">Manifest</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/types.html">types</a>
+						<a href="../modules/type_definition.html">Type Definition</a>
 					</li>
 				</ul>
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>Enumeration EOperation</h1>
+			<h1>Enumeration EAccept</h1>
 			<section class="tsd-panel-group tsd-index-group">
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
 							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="types.eoperation.html#operation" class="tsd-kind-icon">OPERATION</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="types.eoperation.html#subscription" class="tsd-kind-icon">SUBSCRIPTION</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="type_definition.eaccept.html#json" class="tsd-kind-icon">JSON</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="type_definition.eaccept.html#text" class="tsd-kind-icon">TEXT</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="type_definition.eaccept.html#yaml" class="tsd-kind-icon">YAML</a></li>
 							</ul>
 						</section>
 					</div>
@@ -120,22 +121,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Enumeration members</h2>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="operation" class="tsd-anchor"></a>
-					<h3>OPERATION</h3>
-					<div class="tsd-signature tsd-kind-icon">OPERATION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;operation&quot;</span></div>
+					<a name="json" class="tsd-anchor"></a>
+					<h3>JSON</h3>
+					<div class="tsd-signature tsd-kind-icon">JSON<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;application/json&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:81</li>
+							<li>Defined in types/index.ts:86</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="subscription" class="tsd-anchor"></a>
-					<h3>SUBSCRIPTION</h3>
-					<div class="tsd-signature tsd-kind-icon">SUBSCRIPTION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;subscription&quot;</span></div>
+					<a name="text" class="tsd-anchor"></a>
+					<h3>TEXT</h3>
+					<div class="tsd-signature tsd-kind-icon">TEXT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;text/plain&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:82</li>
+							<li>Defined in types/index.ts:84</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="yaml" class="tsd-anchor"></a>
+					<h3>YAML</h3>
+					<div class="tsd-signature tsd-kind-icon">YAML<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;text/yaml&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in types/index.ts:85</li>
 						</ul>
 					</aside>
 				</section>
@@ -145,56 +156,59 @@
 		<div class="col-2 col-menu secondary-menu">
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum tsd-parent-kind-module root">
-						<a href="types.eaccept.html" class="tsd-kind-icon">EAccept</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-enum tsd-parent-kind-module root">
-						<a href="types.eoperation.html" class="tsd-kind-icon">EOperation</a>
+						<a href="type_definition.eaccept.html" class="tsd-kind-icon">EAccept</a>
 						<ul>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="types.eoperation.html#operation" class="tsd-kind-icon">OPERATION</a>
+								<a href="type_definition.eaccept.html#json" class="tsd-kind-icon">JSON</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="types.eoperation.html#subscription" class="tsd-kind-icon">SUBSCRIPTION</a>
+								<a href="type_definition.eaccept.html#text" class="tsd-kind-icon">TEXT</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="type_definition.eaccept.html#yaml" class="tsd-kind-icon">YAML</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="../modules/types.html#tconfig" class="tsd-kind-icon">TConfig</a>
+					<li class=" tsd-kind-enum tsd-parent-kind-module root">
+						<a href="type_definition.eoperation.html" class="tsd-kind-icon">EOperation</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="../modules/types.html#tconfigkey" class="tsd-kind-icon">TConfig<wbr>Key</a>
+						<a href="../modules/type_definition.html#tconfig" class="tsd-kind-icon">TConfig</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="../modules/types.html#tconfigkeys" class="tsd-kind-icon">TConfig<wbr>Keys</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#tcontext" class="tsd-kind-icon">TContext</a>
+						<a href="../modules/type_definition.html#tconfigkey" class="tsd-kind-icon">TConfig<wbr>Key</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="../modules/types.html#tmessage" class="tsd-kind-icon">TMessage</a>
+						<a href="../modules/type_definition.html#tconfigkeys" class="tsd-kind-icon">TConfig<wbr>Keys</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#toperation" class="tsd-kind-icon">TOperation</a>
+						<a href="../modules/type_definition.html#tcontext" class="tsd-kind-icon">TContext</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
+						<a href="../modules/type_definition.html#tmessage" class="tsd-kind-icon">TMessage</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#toperationhandler" class="tsd-kind-icon">TOperation<wbr>Handler</a>
+						<a href="../modules/type_definition.html#toperation" class="tsd-kind-icon">TOperation</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#tpatchedmanifest" class="tsd-kind-icon">TPatched<wbr>Manifest</a>
+						<a href="../modules/type_definition.html#toperationhandler" class="tsd-kind-icon">TOperation<wbr>Handler</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#trawmanifest" class="tsd-kind-icon">TRaw<wbr>Manifest</a>
+						<a href="../modules/type_definition.html#tpatchedmanifest" class="tsd-kind-icon">TPatched<wbr>Manifest</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#tsubscriptionhandler" class="tsd-kind-icon">TSubscription<wbr>Handler</a>
+						<a href="../modules/type_definition.html#trawmanifest" class="tsd-kind-icon">TRaw<wbr>Manifest</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#tsubscriptionhandlers" class="tsd-kind-icon">TSubscription<wbr>Handlers</a>
+						<a href="../modules/type_definition.html#tsubscriptionhandler" class="tsd-kind-icon">TSubscription<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
+						<a href="../modules/type_definition.html#tsubscriptionhandlers" class="tsd-kind-icon">TSubscription<wbr>Handlers</a>
 					</li>
 				</ul>
 			</nav>

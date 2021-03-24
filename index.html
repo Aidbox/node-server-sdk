@@ -67,31 +67,31 @@
 						<a href="modules.html">Modules</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/index.html">index</a>
+						<a href="modules/agent.html">Agent</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/lib_agent.html">lib/agent</a>
+						<a href="modules/app.html">App</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/lib_app.html">lib/app</a>
+						<a href="modules/config.html">Config</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/lib_config.html">lib/config</a>
+						<a href="modules/context.html">Context</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/lib_context.html">lib/context</a>
+						<a href="modules/dispatch.html">Dispatch</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/lib_dispatch.html">lib/dispatch</a>
+						<a href="modules/http.html">HTTP</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/lib_http.html">lib/http</a>
+						<a href="modules/index.html">Index</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/lib_manifest.html">lib/manifest</a>
+						<a href="modules/manifest.html">Manifest</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/types.html">types</a>
+						<a href="modules/type_definition.html">Type Definition</a>
 					</li>
 				</ul>
 			</nav>
@@ -101,74 +101,93 @@
 			<div class="tsd-panel tsd-typography">
 				<p><img src="https://github.com/aidbox/node-server-sdk/actions/workflows/chore.yaml/badge.svg" alt="build status">
 					<a href="https://badge.fury.io/js/%40aidbox%2Fnode-server-sdk"><img src="https://badge.fury.io/js/%40aidbox%2Fnode-server-sdk.svg" alt="npm version"></a>
-				<a href="https://codecov.io/gh/Aidbox/node-server-sdk"><img src="https://codecov.io/gh/Aidbox/node-server-sdk/branch/main/graph/badge.svg?token=1AF9MVTN3L" alt="codecov"></a></p>
-				<!-- [![install size](https://packagephobia.com/badge?p=@aidbox/node-server-sdk)](https://packagephobia.com/result?p=@aidbox/node-server-sdk) -->
-				<a href="#aidbox-nodejs-server-sdk" id="aidbox-nodejs-server-sdk" style="color: inherit; text-decoration: none;">
-					<h1>Aidbox NodeJS Server SDK</h1>
+					<a href="https://codecov.io/gh/Aidbox/node-server-sdk"><img src="https://codecov.io/gh/Aidbox/node-server-sdk/branch/main/graph/badge.svg?token=1AF9MVTN3L" alt="codecov"></a>
+					<a href="https://github.com/aidbox/node-server-sdk/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="contributions welcome"></a>
+				<a href="https://hits.dwyl.com/aidbox/node-server-sdk"><img src="https://hits.dwyl.com/aidbox/node-server-sdk.svg" alt="Repo views"></a></p>
+				<!-- [![https://nodei.co/npm/@aidbox/node-server-sdk.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/@aidbox/node-server-sdk.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/@aidbox/node-server-sdk) -->
+				<a href="#-aidbox-nodejs-server-sdk" id="-aidbox-nodejs-server-sdk" style="color: inherit; text-decoration: none;">
+					<h1><img src="media/aidbox-logo.png" width="20px"/> Aidbox NodeJS Server SDK</h1>
 				</a>
+				<p>You can find additional technical information on SDK types and methods used <a href="https://aidbox.github.io/node-server-sdk/">here</a>.</p>
 				<ul>
 					<li><a href="#installation">Installation</a></li>
 					<li><a href="#requirements-for-using">Requirements</a></li>
-					<li><a href="#start-application">Start application</a></li>
+					<li><a href="#app-example">App Example</a></li>
+					<li><a href="#additional">Additional notes</a></li>
 				</ul>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
 				</a>
-				<p>We have first-class TypeScript support. But you also can use this library in javascript project</p>
-				<p>if you use npm</p>
-				<pre><code class="language-npm"> npm install @aidbox/node-server-sdk
+				<p>We have first-class TypeScript support, but this library can also be used in a javascript project. We provide a useful function to prevent errors in input config variables.</p>
+				<p><strong>npm</strong></p>
+				<pre><code class="language-npm">npm install @aidbox/node-server-sdk
 </code></pre>
-				<p>or yarn</p>
-				<pre><code class="language-npm"> yarn add @aidbox/node-server-sdk
+				<p><strong>yarn</strong></p>
+				<pre><code class="language-yarn">yarn add @aidbox/node-server-sdk
 </code></pre>
-				<a href="#requirements-for-using" id="requirements-for-using" style="color: inherit; text-decoration: none;">
-					<h2>Requirements for using</h2>
+				<a href="#requirements" id="requirements" style="color: inherit; text-decoration: none;">
+					<h2>Requirements</h2>
 				</a>
-				<p>Before run you application you should full required ENV-variables</p>
-				<p>Client id for work with aidbox</p>
+				<p>To start working with the backend application you should enter the required env variables:</p>
+				<p>Client id with basic auth grant type to work with aidbox:</p>
 				<blockquote>
 					<p>AIDBOX_CLIENT_ID=</p>
 				</blockquote>
-				<p>Client secret for work with aidbox</p>
+				<p>Client secret:</p>
 				<blockquote>
 					<p>AIDBOX_CLIENT_SECRET=secret</p>
 				</blockquote>
-				<p>URL</p>
+				<p>Your aidbox url:</p>
 				<blockquote>
 					<p>AIDBOX_URL=<a href="http://0.0.0.0:8085">http://0.0.0.0:8085</a></p>
 				</blockquote>
-				<p>Toggle debug mode</p>
+				<p>Toggle debug mode:</p>
 				<blockquote>
 					<p>APP_DEBUG=false</p>
 				</blockquote>
-				<p>App name for identity application in aidbox</p>
+				<p>App name to identify the application in aidbox:</p>
 				<blockquote>
 					<p>APP_ID=you-business-app</p>
 				</blockquote>
-				<p>Secret (aidbox will use )</p>
+				<p>Secret for use application (aidbox will use it):</p>
 				<blockquote>
 					<p>APP_SECRET=secret</p>
 				</blockquote>
-				<p>Backend application url (aidbox will send request on this base url)</p>
+				<p>Backend application url (aidbox will send a request to this base url):</p>
 				<blockquote>
 					<p>APP_URL=<a href="http://0.0.0.0:8090">http://0.0.0.0:8090</a></p>
 				</blockquote>
-				<p>Port for your backend application</p>
+				<p>Port for your backend application:</p>
 				<blockquote>
 					<p>APP_PORT=8090</p>
 				</blockquote>
-				<a href="#start-application" id="start-application" style="color: inherit; text-decoration: none;">
-					<h2>Start application</h2>
+				<a href="#app-example" id="app-example" style="color: inherit; text-decoration: none;">
+					<h2>App example</h2>
 				</a>
-				<p>Firstly you should prepare config object</p>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">prepareConfig</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../src/lib/config&#039;</span><span style="color: #000000">;</span>
+				<a href="#typescript-usage" id="typescript-usage" style="color: inherit; text-decoration: none;">
+					<h3>Typescript usage</h3>
+				</a>
+				<p>Firstly, you should create a config object. By default, we use env variables but you can optionally enter <strong>process.env</strong> as an input parameter.</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">createConfig</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@aidbox/node-server-sdk/lib/config&#039;</span><span style="color: #000000">;</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = </span><span style="color: #795E26">prepareConfig</span><span style="color: #000000">(</span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">env</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = </span><span style="color: #795E26">createConfig</span><span style="color: #000000">();</span>
 </code></pre>
-				<p>Next step in define manifest file. For example:</p>
+				<p>(optional) Add your specific context helpers</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">TContextHelpers</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #795E26">greet</span><span style="color: #000000">(</span><span style="color: #001080">name</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">): </span><span style="color: #267F99">void</span><span style="color: #000000">;</span>
+<span style="color: #000000">};</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">contextHelpers</span><span style="color: #000000">: </span><span style="color: #267F99">TContextHelpers</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #795E26">greet</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">name</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`Hello, </span><span style="color: #0000FF">${</span><span style="color: #001080">name</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">);</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">};</span>
+</code></pre>
+				<p>Next step is defining the manifest object. For example:</p>
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">TRawManifest</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../src/types&#039;</span><span style="color: #000000">;</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">manifest</span><span style="color: #000000">: </span><span style="color: #267F99">TRawManifest</span><span style="color: #000000"> = {</span>
+<span style="color: #008000">// pass type if your define your specific context helpers</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">manifest</span><span style="color: #000000">: </span><span style="color: #267F99">TRawManifest</span><span style="color: #000000">&lt;</span><span style="color: #267F99">TContextHelpers</span><span style="color: #000000">&gt; = {</span>
 <span style="color: #000000">  </span><span style="color: #001080">resources:</span><span style="color: #000000"> {</span>
 <span style="color: #000000">    </span><span style="color: #001080">AccessPolicy:</span><span style="color: #000000"> {},</span>
 <span style="color: #000000">  },</span>
@@ -177,12 +196,9 @@
 <span style="color: #000000">    </span><span style="color: #001080">test:</span><span style="color: #000000"> {</span>
 <span style="color: #000000">      </span><span style="color: #001080">method:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;GET&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">      </span><span style="color: #001080">path:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;$test-operation&#039;</span><span style="color: #000000">],</span>
-<span style="color: #000000">      </span><span style="color: #795E26">handler</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> {</span>
-<span style="color: #000000">          </span><span style="color: #001080">resource:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">            </span><span style="color: #001080">test:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;work&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">          },</span>
-<span style="color: #000000">        };</span>
+<span style="color: #000000">      </span><span style="color: #795E26">handler</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">context</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #795E26">greet</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Alice&#039;</span><span style="color: #000000">); </span><span style="color: #008000">// your specific context helper</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> { </span><span style="color: #001080">resource:</span><span style="color: #000000"> { </span><span style="color: #001080">work:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> } };</span>
 <span style="color: #000000">      },</span>
 <span style="color: #000000">    },</span>
 <span style="color: #000000">  },</span>
@@ -196,16 +212,28 @@
 <span style="color: #000000">  },</span>
 <span style="color: #000000">};</span>
 </code></pre>
-				<p>After you prepare config and define manifest you can run you backend application</p>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">startApp</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../src/lib/app&#039;</span><span style="color: #000000">;</span>
+				<p>After you prepare the config object and define the manifest, you can run your backend application.
+				Typescript won&#39;t let you miss any required config keys. There are additional check input parameters before the app is created:</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">createApp</span><span style="color: #000000">, </span><span style="color: #001080">startApp</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@aidbox/node-server-sdk&#039;</span><span style="color: #000000">;</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = </span><span style="color: #795E26">prepareConfig</span><span style="color: #000000">(</span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">env</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">app</span><span style="color: #000000"> = </span><span style="color: #795E26">createApp</span><span style="color: #000000">&lt;</span><span style="color: #267F99">TContextHelpers</span><span style="color: #000000">&gt;(</span><span style="color: #001080">config</span><span style="color: #000000">, </span><span style="color: #001080">manifest</span><span style="color: #000000">, </span><span style="color: #001080">contextHelpers</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">if</span><span style="color: #000000"> (!</span><span style="color: #001080">app</span><span style="color: #000000">) {</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">`Unable to create app. Check config/manifest errors.`</span><span style="color: #000000">);</span>
+<span style="color: #000000">  </span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #795E26">exit</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">);</span>
+<span style="color: #000000">}</span>
 
-<span style="color: #795E26">startApp</span><span style="color: #000000">(</span><span style="color: #001080">config</span><span style="color: #000000">, </span><span style="color: #001080">manifest</span><span style="color: #000000">)</span>
-<span style="color: #000000">  .</span><span style="color: #795E26">then</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;ready&#039;</span><span style="color: #000000">))</span>
-<span style="color: #000000">  .</span><span style="color: #795E26">catch</span><span style="color: #000000">((</span><span style="color: #001080">e</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;error: &#039;</span><span style="color: #000000">, </span><span style="color: #001080">e</span><span style="color: #000000">));</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">startApp</span><span style="color: #000000">(</span><span style="color: #001080">app</span><span style="color: #000000">);</span>
 </code></pre>
-				<p><strong>Powered by <a href="http://www.health-samurai.io">Health Samurai</a> | <a href="http://www.health-samurai.io/aidbox">Aidbox</a> | <a href="http://www.health-samurai.io/fhirbase">Fhirbase</a></strong></p>
+				<p>Then you can go to your Aidbox. There you will find your new application in the Apps menu.
+				To test the app, run this request in the Aidbox Rest Console:</p>
+				<p><strong>Request</strong></p>
+				<pre><code class="language-http">GET /$test-operation
+</code></pre>
+				<p><strong>Response</strong></p>
+				<pre><code class="language-yaml"><span style="color: #800000">work</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
+</code></pre>
+				<p>You can find more information about predefined context helpers and example usage <a href="https://aidbox.github.io/node-server-sdk/">here</a>.</p>
+				<p>Powered by <a href="http://www.health-samurai.io">Health Samurai</a> | <a href="http://www.health-samurai.io/aidbox">Aidbox</a> | <a href="http://www.health-samurai.io/fhirbase">Fhirbase</a></p>
 			</div>
 			<!--{&quot;options&quot;:&quot;/home/runner/work/node-server-sdk/node-server-sdk&quot;,&quot;tsconfig&quot;:&quot;/home/runner/work/node-server-sdk/node-server-sdk&quot;,&quot;entryPoints&quot;:[&quot;src/&quot;,&quot;file&quot;],&quot;exclude&quot;:[&quot;**/*.spec.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;build/docs&quot;,&quot;json&quot;:&quot;&quot;,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;&quot;,&quot;includeVersion&quot;:false,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[&quot;typedoc-neo-theme&quot;],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;listInvalidSymbolLinks&quot;:false}-->
 		</div>

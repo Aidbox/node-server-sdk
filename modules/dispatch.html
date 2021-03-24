@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>lib/dispatch | @aidbox/node-server-sdk</title>
+	<title>Dispatch | @aidbox/node-server-sdk</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,7 +55,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="lib_dispatch.html">lib/dispatch</a>
+					<a href="dispatch.html">Dispatch</a>
 				</li>
 			</ul>
 		</div>
@@ -70,50 +70,55 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="index.html">index</a>
+						<a href="agent.html">Agent</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="lib_agent.html">lib/agent</a>
+						<a href="app.html">App</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="lib_app.html">lib/app</a>
+						<a href="config.html">Config</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="lib_config.html">lib/config</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="lib_context.html">lib/context</a>
+						<a href="context.html">Context</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="lib_dispatch.html">lib/dispatch</a>
+						<a href="dispatch.html">Dispatch</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="lib_http.html">lib/http</a>
+						<a href="http.html">HTTP</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="lib_manifest.html">lib/manifest</a>
+						<a href="index.html">Index</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="types.html">types</a>
+						<a href="manifest.html">Manifest</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="type_definition.html">Type Definition</a>
 					</li>
 				</ul>
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>Module lib/dispatch</h1>
+			<h1>Module Dispatch</h1>
+			<section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography tsd-comment-shorttext">
+					<div class="lead">
+						<p>Main dispatch function with additional helpers</p>
+					</div>
+			</div></section>
 			<section class="tsd-panel-group tsd-index-group">
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="lib_dispatch.html#tdispatch" class="tsd-kind-icon">TDispatch</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="dispatch.html#tdispatch" class="tsd-kind-icon">TDispatch</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="lib_dispatch.html#createdispatch" class="tsd-kind-icon">create<wbr>Dispatch</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="dispatch.html#createdispatch" class="tsd-kind-icon">create<wbr>Dispatch</a></li>
 							</ul>
 						</section>
 					</div>
@@ -127,7 +132,7 @@
 					<div class="tsd-signature tsd-kind-icon">TDispatch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in lib/dispatch.ts:15</li>
+							<li>Defined in lib/dispatch.ts:21</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -135,7 +140,7 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-has-type-parameter">
-									<li class="tsd-signature tsd-kind-icon">&lt;CH&gt;<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="types.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="types.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>, context<span class="tsd-signature-symbol">: </span><a href="types.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>, subscriptionHandlers<span class="tsd-signature-symbol">: </span><a href="types.html#tsubscriptionhandlers" class="tsd-signature-type">TSubscriptionHandlers</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RequestListener</span></li>
+									<li class="tsd-signature tsd-kind-icon">&lt;CH&gt;<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>, context<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>, subscriptionHandlers<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tsubscriptionhandlers" class="tsd-signature-type">TSubscriptionHandlers</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RequestListener</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
@@ -148,16 +153,16 @@
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>config: <a href="types.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
+												<h5>config: <a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
 											</li>
 											<li>
-												<h5>manifest: <a href="types.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+												<h5>manifest: <a href="type_definition.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
 											</li>
 											<li>
-												<h5>context: <a href="types.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+												<h5>context: <a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
 											</li>
 											<li>
-												<h5>subscriptionHandlers: <a href="types.html#tsubscriptionhandlers" class="tsd-signature-type">TSubscriptionHandlers</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+												<h5>subscriptionHandlers: <a href="type_definition.html#tsubscriptionhandlers" class="tsd-signature-type">TSubscriptionHandlers</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RequestListener</span></h4>
@@ -174,13 +179,13 @@
 					<a name="createdispatch" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Dispatch</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Dispatch&lt;CH&gt;<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="types.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="types.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>, context<span class="tsd-signature-symbol">: </span><a href="types.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>, subscriptionHandlers<span class="tsd-signature-symbol">: </span><a href="types.html#tsubscriptionhandlers" class="tsd-signature-type">TSubscriptionHandlers</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RequestListener</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Dispatch&lt;CH&gt;<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>, context<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>, subscriptionHandlers<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tsubscriptionhandlers" class="tsd-signature-type">TSubscriptionHandlers</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RequestListener</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/dispatch.ts:22</li>
+									<li>Defined in lib/dispatch.ts:28</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -192,16 +197,16 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>config: <a href="types.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
+									<h5>config: <a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
 								</li>
 								<li>
-									<h5>manifest: <a href="types.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>manifest: <a href="type_definition.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>context: <a href="types.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>context: <a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>subscriptionHandlers: <a href="types.html#tsubscriptionhandlers" class="tsd-signature-type">TSubscriptionHandlers</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>subscriptionHandlers: <a href="type_definition.html#tsubscriptionhandlers" class="tsd-signature-type">TSubscriptionHandlers</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RequestListener</span></h4>
@@ -215,10 +220,10 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="lib_dispatch.html#tdispatch" class="tsd-kind-icon">TDispatch</a>
+						<a href="dispatch.html#tdispatch" class="tsd-kind-icon">TDispatch</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="lib_dispatch.html#createdispatch" class="tsd-kind-icon">create<wbr>Dispatch</a>
+						<a href="dispatch.html#createdispatch" class="tsd-kind-icon">create<wbr>Dispatch</a>
 					</li>
 				</ul>
 			</nav>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EAccept | @aidbox/node-server-sdk</title>
+	<title>HTTP | @aidbox/node-server-sdk</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules/types.html">types</a>
-				</li>
-				<li>
-					<a href="types.eaccept.html">EAccept</a>
+					<a href="http.html">HTTP</a>
 				</li>
 			</ul>
 		</div>
@@ -73,82 +70,127 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/index.html">index</a>
+						<a href="agent.html">Agent</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/lib_agent.html">lib/agent</a>
+						<a href="app.html">App</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/lib_app.html">lib/app</a>
+						<a href="config.html">Config</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/lib_config.html">lib/config</a>
+						<a href="context.html">Context</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/lib_context.html">lib/context</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/lib_dispatch.html">lib/dispatch</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/lib_http.html">lib/http</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/lib_manifest.html">lib/manifest</a>
+						<a href="dispatch.html">Dispatch</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/types.html">types</a>
+						<a href="http.html">HTTP</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="index.html">Index</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="manifest.html">Manifest</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="type_definition.html">Type Definition</a>
 					</li>
 				</ul>
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>Enumeration EAccept</h1>
+			<h1>Module HTTP</h1>
+			<section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography tsd-comment-shorttext">
+					<div class="lead">
+						<p>Low-level http helper functions</p>
+					</div>
+			</div></section>
 			<section class="tsd-panel-group tsd-index-group">
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Enumeration members</h3>
+							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="types.eaccept.html#json" class="tsd-kind-icon">JSON</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="types.eaccept.html#text" class="tsd-kind-icon">TEXT</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="types.eaccept.html#yaml" class="tsd-kind-icon">YAML</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="http.html#tserver" class="tsd-kind-icon">TServer</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="http.html#createserver" class="tsd-kind-icon">create<wbr>Server</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="http.html#startserver" class="tsd-kind-icon">start<wbr>Server</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Enumeration members</h2>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="json" class="tsd-anchor"></a>
-					<h3>JSON</h3>
-					<div class="tsd-signature tsd-kind-icon">JSON<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;application/json&quot;</span></div>
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="tserver" class="tsd-anchor"></a>
+					<h3>TServer</h3>
+					<div class="tsd-signature tsd-kind-icon">TServer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Server</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in types/index.ts:77</li>
+							<li>Defined in lib/http.ts:9</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="text" class="tsd-anchor"></a>
-					<h3>TEXT</h3>
-					<div class="tsd-signature tsd-kind-icon">TEXT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;text/plain&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in types/index.ts:75</li>
-						</ul>
-					</aside>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createserver" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Server</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Server<span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RequestListener</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Server</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in lib/http.ts:11</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dispatch: <span class="tsd-signature-type">RequestListener</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Server</span></h4>
+						</li>
+					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="yaml" class="tsd-anchor"></a>
-					<h3>YAML</h3>
-					<div class="tsd-signature tsd-kind-icon">YAML<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;text/yaml&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in types/index.ts:76</li>
-						</ul>
-					</aside>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="startserver" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> start<wbr>Server</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">start<wbr>Server<span class="tsd-signature-symbol">(</span>server<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Server</span>, port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, hostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Server</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in lib/http.ts:20</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>server: <span class="tsd-signature-type">Server</span></h5>
+								</li>
+								<li>
+									<h5>port: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 8090</span></h5>
+								</li>
+								<li>
+									<h5>hostname: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;0.0.0.0&#x27;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Server</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 			<!--{&quot;options&quot;:&quot;/home/runner/work/node-server-sdk/node-server-sdk&quot;,&quot;tsconfig&quot;:&quot;/home/runner/work/node-server-sdk/node-server-sdk&quot;,&quot;entryPoints&quot;:[&quot;src/&quot;,&quot;file&quot;],&quot;exclude&quot;:[&quot;**/*.spec.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;build/docs&quot;,&quot;json&quot;:&quot;&quot;,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;&quot;,&quot;includeVersion&quot;:false,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[&quot;typedoc-neo-theme&quot;],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;listInvalidSymbolLinks&quot;:false}-->
@@ -156,59 +198,14 @@
 		<div class="col-2 col-menu secondary-menu">
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-enum tsd-parent-kind-module root">
-						<a href="types.eaccept.html" class="tsd-kind-icon">EAccept</a>
-						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="types.eaccept.html#json" class="tsd-kind-icon">JSON</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="types.eaccept.html#text" class="tsd-kind-icon">TEXT</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="types.eaccept.html#yaml" class="tsd-kind-icon">YAML</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="after-current">
-					<li class=" tsd-kind-enum tsd-parent-kind-module root">
-						<a href="types.eoperation.html" class="tsd-kind-icon">EOperation</a>
-					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="../modules/types.html#tconfig" class="tsd-kind-icon">TConfig</a>
+						<a href="http.html#tserver" class="tsd-kind-icon">TServer</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="../modules/types.html#tconfigkey" class="tsd-kind-icon">TConfig<wbr>Key</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module root">
+						<a href="http.html#createserver" class="tsd-kind-icon">create<wbr>Server</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="../modules/types.html#tconfigkeys" class="tsd-kind-icon">TConfig<wbr>Keys</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#tcontext" class="tsd-kind-icon">TContext</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="../modules/types.html#tmessage" class="tsd-kind-icon">TMessage</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#toperation" class="tsd-kind-icon">TOperation</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#toperationhandler" class="tsd-kind-icon">TOperation<wbr>Handler</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#tpatchedmanifest" class="tsd-kind-icon">TPatched<wbr>Manifest</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#trawmanifest" class="tsd-kind-icon">TRaw<wbr>Manifest</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#tsubscriptionhandler" class="tsd-kind-icon">TSubscription<wbr>Handler</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter root">
-						<a href="../modules/types.html#tsubscriptionhandlers" class="tsd-kind-icon">TSubscription<wbr>Handlers</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module root">
+						<a href="http.html#startserver" class="tsd-kind-icon">start<wbr>Server</a>
 					</li>
 				</ul>
 			</nav>

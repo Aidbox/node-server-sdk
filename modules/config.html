@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>lib/http | @aidbox/node-server-sdk</title>
+	<title>Config | @aidbox/node-server-sdk</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,7 +55,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="lib_http.html">lib/http</a>
+					<a href="config.html">Config</a>
 				</li>
 			</ul>
 		</div>
@@ -70,120 +70,103 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="index.html">index</a>
+						<a href="agent.html">Agent</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="lib_agent.html">lib/agent</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="lib_app.html">lib/app</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="lib_config.html">lib/config</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="lib_context.html">lib/context</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="lib_dispatch.html">lib/dispatch</a>
+						<a href="app.html">App</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="lib_http.html">lib/http</a>
+						<a href="config.html">Config</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="lib_manifest.html">lib/manifest</a>
+						<a href="context.html">Context</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="types.html">types</a>
+						<a href="dispatch.html">Dispatch</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="http.html">HTTP</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="index.html">Index</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="manifest.html">Manifest</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="type_definition.html">Type Definition</a>
 					</li>
 				</ul>
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>Module lib/http</h1>
+			<h1>Module Config</h1>
+			<section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography tsd-comment-shorttext">
+					<div class="lead">
+						<p>Helpers for work with config object</p>
+					</div>
+			</div></section>
 			<section class="tsd-panel-group tsd-index-group">
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Type aliases</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="lib_http.html#tserver" class="tsd-kind-icon">TServer</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="lib_http.html#createserver" class="tsd-kind-icon">create<wbr>Server</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="lib_http.html#startserver" class="tsd-kind-icon">start<wbr>Server</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="config.html#createconfig" class="tsd-kind-icon">create<wbr>Config</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="config.html#validateconfig" class="tsd-kind-icon">validate<wbr>Config</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="tserver" class="tsd-anchor"></a>
-					<h3>TServer</h3>
-					<div class="tsd-signature tsd-kind-icon">TServer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Server</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in lib/http.ts:3</li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="createserver" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Server</h3>
+					<a name="createconfig" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Config</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Server<span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RequestListener</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Server</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Config<span class="tsd-signature-symbol">(</span>envs<span class="tsd-signature-symbol">?: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/http.ts:5</li>
+									<li>Defined in lib/config.ts:26</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>dispatch: <span class="tsd-signature-type">RequestListener</span></h5>
+									<h5>envs: <a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a><span class="tsd-signature-symbol"> = ...</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Server</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="startserver" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> start<wbr>Server</h3>
+					<a name="validateconfig" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> validate<wbr>Config</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">start<wbr>Server<span class="tsd-signature-symbol">(</span>server<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Server</span>, port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, hostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Server</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">validate<wbr>Config<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Error</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/http.ts:14</li>
+									<li>Defined in lib/config.ts:30</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>server: <span class="tsd-signature-type">Server</span></h5>
-								</li>
-								<li>
-									<h5>port: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 8090</span></h5>
-								</li>
-								<li>
-									<h5>hostname: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;0.0.0.0&#x27;</span></h5>
+									<h5>config: <a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Server</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">Error</span>
+							</h4>
 						</li>
 					</ul>
 				</section>
@@ -193,14 +176,11 @@
 		<div class="col-2 col-menu secondary-menu">
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module root">
-						<a href="lib_http.html#tserver" class="tsd-kind-icon">TServer</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module root">
+						<a href="config.html#createconfig" class="tsd-kind-icon">create<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module root">
-						<a href="lib_http.html#createserver" class="tsd-kind-icon">create<wbr>Server</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module root">
-						<a href="lib_http.html#startserver" class="tsd-kind-icon">start<wbr>Server</a>
+						<a href="config.html#validateconfig" class="tsd-kind-icon">validate<wbr>Config</a>
 					</li>
 				</ul>
 			</nav>
