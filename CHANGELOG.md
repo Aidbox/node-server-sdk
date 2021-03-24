@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/Aidbox/node-server-sdk/compare/v1.3.2...v1.5.0) (2021-03-24)
+
+
+### Features
+
+* **context:** Add context helpers ([0880588](https://github.com/Aidbox/node-server-sdk/commit/0880588e26c3bf193ecbfde92c7a33b6168eb16b))
+* **context:** Make context helpers optional ([12f74b9](https://github.com/Aidbox/node-server-sdk/commit/12f74b92984e7d5809344a63547a65e4a3e94c33))
+
+
+### Bug Fixes
+
+* **chore:** Ignore tags on build ([cde704e](https://github.com/Aidbox/node-server-sdk/commit/cde704e465c47c3ff98f6fc0e4626de7ce2b45cf))
+
 ## [1.4.0](https://github.com/Aidbox/node-server-sdk/compare/v1.3.2...v1.4.0) (2021-03-24)
 
 
