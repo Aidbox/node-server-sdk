@@ -1,3 +1,9 @@
+/**
+ * Low-level http helper functions
+ *
+ * @module HTTP
+ */
+
 import http, { RequestListener, Server } from 'http';
 
 export type TServer = Server;

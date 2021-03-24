@@ -1,6 +1,10 @@
 ![build status](https://github.com/aidbox/node-server-sdk/actions/workflows/chore.yaml/badge.svg)
 [![npm version](https://badge.fury.io/js/%40aidbox%2Fnode-server-sdk.svg)](https://badge.fury.io/js/%40aidbox%2Fnode-server-sdk)
 [![codecov](https://codecov.io/gh/Aidbox/node-server-sdk/branch/main/graph/badge.svg?token=1AF9MVTN3L)](https://codecov.io/gh/Aidbox/node-server-sdk)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/aidbox/node-server-sdk/issues)
+[![Repo views](https://hits.dwyl.com/aidbox/node-server-sdk.svg)](https://hits.dwyl.com/aidbox/node-server-sdk)
+
+<!-- [![https://nodei.co/npm/@aidbox/node-server-sdk.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/@aidbox/node-server-sdk.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/@aidbox/node-server-sdk) -->
 
 # <img src="media/aidbox-logo.png" width="20px"/> Aidbox NodeJS Server SDK
 

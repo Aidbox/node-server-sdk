@@ -1,3 +1,9 @@
+/**
+ * Main dispatch function with additional helpers
+ *
+ * @module Dispatch
+ */
+
 import { RequestListener } from 'http';
 
 import yaml from 'js-yaml';

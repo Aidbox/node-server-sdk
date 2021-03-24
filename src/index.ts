@@ -1,2 +1,6 @@
+/**
+ * By default we export createApp and startApp functions
+ *
+ * @module Index
+ */
 export * from './lib/app';
-export { TDispatch } from './lib/dispatch';

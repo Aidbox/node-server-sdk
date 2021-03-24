@@ -1,3 +1,9 @@
+/**
+ * Helpers for work with config object
+ *
+ * @module Config
+ */
+
 import R from 'ramda';
 
 import { TConfig, TConfigKeys } from '../types';

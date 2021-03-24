@@ -1,11 +1,20 @@
+/**
+ * Common type definitions
+ *
+ * @module Type Definition
+ */
+
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
+/**
+ * Default context type will be extend if you define your specific context helpers by provided type
+ */
 export type TContext<CH> = {
   readonly request: <T>(
     config: AxiosRequestConfig,
     jsonOverride: boolean
   ) => Promise<AxiosResponse<T>>;
-  psql<T = any>(query: string): Promise<readonly T[]>;
+  readonly psql: <T>(query: string) => Promise<readonly T[]>;
 } & CH;
 
 export type TOperationHandler<CH> = (

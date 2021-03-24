@@ -1,3 +1,9 @@
+/**
+ * Helpers for work with context object which will be passed in all operation handlers
+ *
+ * @module Context
+ */
+
 import { AxiosRequestConfig } from 'axios';
 
 import { TContext } from '../types';
@@ -15,7 +21,7 @@ export const createContext = <CH>(
     });
   };
 
-  const psql = async <T = any>(query: string): Promise<readonly T[]> => {
+  const psql = async <T>(query: string): Promise<readonly T[]> => {
     const response = await request({
       url: '/$psql',
       method: 'post',
