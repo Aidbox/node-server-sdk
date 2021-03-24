@@ -19,17 +19,14 @@ export const createApp = <CH = {}>(
   config: TConfig,
   manifest: TRawManifest<CH>,
   contextHelpers?: CH
-): TApp<CH> => {
-  const configValidation = validateConfig(config);
-  if (configValidation.error) {
-    // eslint-disable-next-line functional/no-throw-statement
-    throw new Error(configValidation.error);
-  }
+): TApp<CH> | undefined => {
+  const configError = validateConfig(config);
+  const manifestError = validateManifest(manifest);
 
-  const manifestValidation = validateManifest(manifest);
-  if (manifestValidation.error) {
-    // eslint-disable-next-line functional/no-throw-statement
-    throw new Error(manifestValidation.error);
+  if (configError || manifestError) {
+    configError && console.error('config', configError);
+    manifestError && console.error('manifest', manifestError);
+    return;
   }
 
   const agent = createAgent({

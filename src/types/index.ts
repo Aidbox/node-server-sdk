@@ -1,9 +1,5 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-export type ProcessEnv = {
-  readonly [key: string]: string | undefined;
-};
-
 export type TContext<CH> = {
   readonly request: <T>(
     config: AxiosRequestConfig,
@@ -70,6 +66,10 @@ export type TConfig = {
   readonly PGDATABASE: string;
   readonly PGPASSWORD: string;
 };
+
+export type TConfigKey = keyof TConfig;
+
+export type TConfigKeys = readonly TConfigKey[];
 
 export enum EAccept {
   TEXT = 'text/plain',
