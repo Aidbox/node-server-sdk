@@ -16,6 +16,21 @@ jobs:
       - run: npm ci
       - run: npm test
 
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm run build
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
@@ -47,7 +62,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   docs:
-    needs: [publish-npm, publish-gpr]
+    needs: [release, publish-npm, publish-gpr]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -63,7 +78,7 @@ jobs:
           folder: build/docs # The folder the action should deploy.
 
   notify:
-    needs: [publish-npm, publish-gpr, docs]
+    needs: [release, publish-npm, publish-gpr, docs]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
