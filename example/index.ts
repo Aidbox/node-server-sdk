@@ -4,7 +4,17 @@ import { prepareConfig } from '../src/lib/config';
 
 const config = prepareConfig(process.env);
 
-const manifest: TRawManifest = {
+type TContextHelpers = {
+  greet(name: string): void;
+};
+
+const contextHelpers: TContextHelpers = {
+  greet: (name) => {
+    console.log(`Hello, ${name}`);
+  },
+};
+
+const manifest: TRawManifest<TContextHelpers> = {
   resources: {
     AccessPolicy: {},
   },
@@ -14,6 +24,7 @@ const manifest: TRawManifest = {
       method: 'GET',
       path: ['$test-operation'],
       handler: async (context) => {
+        context.greet('Alice');
         const response = await context.psql<{ result: string[] }>(
           'SELECT NOW()'
         );
@@ -33,7 +44,12 @@ const manifest: TRawManifest = {
 };
 
 const main = async () => {
-  const app = createApp(config, manifest);
+  // Example: Application without context helpers
+  // const appWithoutHelpers = createApp(config, manifest);
+  // await startApp(appWithoutHelpers);
+
+  // Example: Application with context helpers
+  const app = createApp<TContextHelpers>(config, manifest, contextHelpers);
   await startApp(app);
   console.log('App started');
 };

@@ -7,8 +7,8 @@ import {
 
 import { TAgent } from './agent';
 
-export const validateManifest = (
-  manifest: TRawManifest
+export const validateManifest = <CH>(
+  manifest: TRawManifest<CH>
 ): { readonly error?: string } => {
   const subs = Object.keys(manifest.subscriptions || {})
     .map((k) => {
@@ -32,11 +32,11 @@ export const validateManifest = (
   return ls.length ? { error: ls.join('\n') } : {};
 };
 
-export const patchManifest = (
-  manifest: TRawManifest
+export const patchManifest = <CH>(
+  manifest: TRawManifest<CH>
 ): {
-  readonly subscriptionHandlers: TSubscriptionHandlers;
-  readonly patchedManifest: TPatchedManifest;
+  readonly subscriptionHandlers: TSubscriptionHandlers<CH>;
+  readonly patchedManifest: TPatchedManifest<CH>;
 } => {
   const subscriptionHandlers = Object.keys(manifest.subscriptions).reduce(
     (subscriptionHandlers, key) => {
@@ -66,10 +66,10 @@ export const patchManifest = (
   };
 };
 
-export const syncManifest = async (
+export const syncManifest = async <CH>(
   agent: TAgent,
   config: TConfig,
-  manifest: TPatchedManifest
+  manifest: TPatchedManifest<CH>
 ) => {
   return await agent.request({
     url: '/App',

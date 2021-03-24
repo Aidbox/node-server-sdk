@@ -12,11 +12,11 @@ import {
   TSubscriptionHandlers,
 } from '../types';
 
-export type TDispatch = (
+export type TDispatch = <CH>(
   config: TConfig,
-  manifest: TPatchedManifest,
-  context: TContext,
-  subscriptionHandlers: TSubscriptionHandlers
+  manifest: TPatchedManifest<CH>,
+  context: TContext<CH>,
+  subscriptionHandlers: TSubscriptionHandlers<CH>
 ) => RequestListener;
 
 export const createDispatch: TDispatch = (

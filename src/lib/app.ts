@@ -7,14 +7,19 @@ import { createDispatch } from './dispatch';
 import { createServer, startServer, TServer } from './http';
 import { patchManifest, syncManifest, validateManifest } from './manifest';
 
-export type TApp = {
+export type TApp<CH> = {
   readonly httpServer: TServer;
   readonly agent: TAgent;
   readonly config: TConfig;
-  readonly patchedManifest: TPatchedManifest;
+  readonly patchedManifest: TPatchedManifest<CH>;
 };
 
-export const createApp = (config: TConfig, manifest: TRawManifest): TApp => {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const createApp = <CH = {}>(
+  config: TConfig,
+  manifest: TRawManifest<CH>,
+  contextHelpers?: CH
+): TApp<CH> => {
   const configValidation = validateConfig(config);
   if (configValidation.error) {
     // eslint-disable-next-line functional/no-throw-statement
@@ -35,7 +40,7 @@ export const createApp = (config: TConfig, manifest: TRawManifest): TApp => {
     },
   });
   const { subscriptionHandlers, patchedManifest } = patchManifest(manifest);
-  const context = createContext(agent);
+  const context = createContext(agent, contextHelpers);
   const dispatch = createDispatch(
     config,
     patchedManifest,
@@ -52,7 +57,7 @@ export const createApp = (config: TConfig, manifest: TRawManifest): TApp => {
   };
 };
 
-export const startApp = async (app: TApp) => {
+export const startApp = async <CH>(app: TApp<CH>) => {
   const { agent, config, patchedManifest, httpServer } = app;
   try {
     await waitForAidboxServer(agent);
