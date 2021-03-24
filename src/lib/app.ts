@@ -14,10 +14,11 @@ export type TApp<CH> = {
   readonly patchedManifest: TPatchedManifest<CH>;
 };
 
-export const createApp = <CH>(
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const createApp = <CH = {}>(
   config: TConfig,
   manifest: TRawManifest<CH>,
-  contextHelpers: CH
+  contextHelpers?: CH
 ): TApp<CH> => {
   const configValidation = validateConfig(config);
   if (configValidation.error) {

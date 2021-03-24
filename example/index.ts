@@ -44,6 +44,11 @@ const manifest: TRawManifest<TContextHelpers> = {
 };
 
 const main = async () => {
+  // Example: Application without context helpers
+  // const appWithoutHelpers = createApp(config, manifest);
+  // await startApp(appWithoutHelpers);
+
+  // Example: Application with context helpers
   const app = createApp<TContextHelpers>(config, manifest, contextHelpers);
   await startApp(app);
   console.log('App started');
