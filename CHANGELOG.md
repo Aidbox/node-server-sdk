@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.3](https://github.com/Aidbox/node-server-sdk/compare/v1.5.2...v1.5.3) (2021-03-24)
+
+
+### Features
+
+* **validation:** Display validation messages for config/manifest ([8c44d6a](https://github.com/Aidbox/node-server-sdk/commit/8c44d6a9820c8d44d7bd84d73914a72cecb77c96))
+
 ### [1.5.2](https://github.com/Aidbox/node-server-sdk/compare/v1.5.1...v1.5.2) (2021-03-24)
 
 
