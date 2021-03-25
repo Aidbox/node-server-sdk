@@ -1,0 +1,16 @@
+{
+"AIDBOX_CLIENT_ID":"root",
+"AIDBOX_CLIENT_SECRET":"secret",
+"AIDBOX_URL":"http://192.168.0.107:8085",
+"AIDBOX_PORT":"8085",
+"APP_DEBUG":"false",
+"APP_ID":"homeapp",
+"APP_SECRET":"secret",
+"APP_URL":"http://192.168.0.107:8090",
+"APP_PORT":"8090",
+"PGPORT":"5432",
+"PGHOST":"192.168.0.107",
+"PGUSER":"postgres",
+"PGPASSWORD":"postgres",
+"PGDATABASE":"devbox"
+

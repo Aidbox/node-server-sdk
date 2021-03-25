@@ -4,6 +4,8 @@
  * @module Config
  */
 
+import fs from 'fs';
+
 import R from 'ramda';
 
 import { TConfig, TConfigKeys } from '../types';
@@ -23,7 +25,22 @@ const configKeys: TConfigKeys = [
   'PGPASSWORD',
 ];
 
-export const createConfig = (envs = process.env as TConfig): TConfig => {
+const readConfigFile = (path: string) => {
+  try {
+    const file = fs.readFileSync(path);
+    const config = JSON.parse(file.toString()) as TConfig;
+    return config;
+  } catch (e) {
+    console.error('Error while read config file: ', e.message);
+    return {} as TConfig;
+  }
+};
+
+export const createConfig = (envs = process.env as TConfig | string) => {
+  if (typeof envs === 'string') {
+    const config = readConfigFile(envs);
+    return R.pick(configKeys, config || {});
+  }
   return R.pick(configKeys, envs);
 };
 

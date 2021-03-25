@@ -33,39 +33,43 @@ yarn add @aidbox/node-server-sdk
 
 ## Requirements
 
-To start working with the backend application you should enter the required env variables:
+You have 2 options:
+- ```bash
+  cp .env.example .env
+  ```
+- Pass absolute path to config.json file which should include keys defined below
 
-Client id with basic auth grant type to work with aidbox:
 
-> AIDBOX_CLIENT_ID=
+### Example
 
-Client secret:
+```bash
+AIDBOX_CLIENT_ID='' Client id with basic auth grant type to work with aidbox
 
-> AIDBOX_CLIENT_SECRET=secret
+AIDBOX_CLIENT_SECRET='' Client secret:
 
-Your aidbox url:
+AIDBOX_URL=http://0.0.0.0:8085  Your aidbox url:
 
-> AIDBOX_URL=http://0.0.0.0:8085
+APP_DEBUG=false  Toggle debug mode
 
-Toggle debug mode:
+APP_ID=you-business-app  App name to identify the application in aidbox
 
-> APP_DEBUG=false
+APP_SECRET=secret  Secret for use application (aidbox will use it):
 
-App name to identify the application in aidbox:
+APP_URL=http://0.0.0.0:8090  Backend application url (aidbox will send a request to this base url):
 
-> APP_ID=you-business-app
+APP_PORT=8090   Port for your backend application:
 
-Secret for use application (aidbox will use it):
+PGPORT=5432
 
-> APP_SECRET=secret
+PGHOST= localhost
 
-Backend application url (aidbox will send a request to this base url):
+PGUSER=postgres
 
-> APP_URL=http://0.0.0.0:8090
+PGPASSWORD=postgres
 
-Port for your backend application:
+PGDATABASE=devbox
+```
 
-> APP_PORT=8090
 
 ## App example
 
