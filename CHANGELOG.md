@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/Aidbox/node-server-sdk/compare/v1.5.4...v1.6.0) (2021-03-25)
+
+
+### Features
+
+* 🎸 automaticly get envs or wait path to confgi file ([16fc3bb](https://github.com/Aidbox/node-server-sdk/commit/16fc3bb3546cf8dfe4c6a47fa119d7a31e020906))
+* **tests:** Add initial tests ([833eab4](https://github.com/Aidbox/node-server-sdk/commit/833eab4ac881dc364bd9788f351b3f69b2180699))
+
 ### [1.5.4](https://github.com/Aidbox/node-server-sdk/compare/v1.5.3...v1.5.4) (2021-03-24)
 
 ### [1.5.3](https://github.com/Aidbox/node-server-sdk/compare/v1.5.2...v1.5.3) (2021-03-24)
