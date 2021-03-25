@@ -128,39 +128,42 @@
 				<a href="#requirements" id="requirements" style="color: inherit; text-decoration: none;">
 					<h2>Requirements</h2>
 				</a>
-				<p>To start working with the backend application you should enter the required env variables:</p>
-				<p>Client id with basic auth grant type to work with aidbox:</p>
-				<blockquote>
-					<p>AIDBOX_CLIENT_ID=</p>
-				</blockquote>
-				<p>Client secret:</p>
-				<blockquote>
-					<p>AIDBOX_CLIENT_SECRET=secret</p>
-				</blockquote>
-				<p>Your aidbox url:</p>
-				<blockquote>
-					<p>AIDBOX_URL=<a href="http://0.0.0.0:8085">http://0.0.0.0:8085</a></p>
-				</blockquote>
-				<p>Toggle debug mode:</p>
-				<blockquote>
-					<p>APP_DEBUG=false</p>
-				</blockquote>
-				<p>App name to identify the application in aidbox:</p>
-				<blockquote>
-					<p>APP_ID=you-business-app</p>
-				</blockquote>
-				<p>Secret for use application (aidbox will use it):</p>
-				<blockquote>
-					<p>APP_SECRET=secret</p>
-				</blockquote>
-				<p>Backend application url (aidbox will send a request to this base url):</p>
-				<blockquote>
-					<p>APP_URL=<a href="http://0.0.0.0:8090">http://0.0.0.0:8090</a></p>
-				</blockquote>
-				<p>Port for your backend application:</p>
-				<blockquote>
-					<p>APP_PORT=8090</p>
-				</blockquote>
+				<p>You have 2 options:</p>
+				<ul>
+					<li><pre><code class="language-bash"><span style="color: #000000">cp .env.example .env</span>
+</code></pre>
+					</li>
+					<li>Pass absolute path to config.json file which should include keys defined below</li>
+				</ul>
+				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+					<h3>Example</h3>
+				</a>
+				<pre><code class="language-bash"><span style="color: #000000">AIDBOX_CLIENT_ID=</span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000"> Client id with basic auth grant </span><span style="color: #795E26">type</span><span style="color: #000000"> to work with aidbox</span>
+
+<span style="color: #000000">AIDBOX_CLIENT_SECRET=</span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000"> Client secret:</span>
+
+<span style="color: #000000">AIDBOX_URL=http://0.0.0.0:8085  Your aidbox url:</span>
+
+<span style="color: #000000">APP_DEBUG=false  Toggle debug mode</span>
+
+<span style="color: #000000">APP_ID=you-business-app  App name to identify the application </span><span style="color: #AF00DB">in</span><span style="color: #000000"> aidbox</span>
+
+<span style="color: #000000">APP_SECRET=secret  Secret </span><span style="color: #AF00DB">for</span><span style="color: #000000"> use application (aidbox will use it):</span>
+
+<span style="color: #000000">APP_URL=http://0.0.0.0:8090  Backend application url (aidbox will send a request to this base url):</span>
+
+<span style="color: #000000">APP_PORT=8090   Port </span><span style="color: #AF00DB">for</span><span style="color: #000000"> your backend application:</span>
+
+<span style="color: #000000">PGPORT=5432</span>
+
+<span style="color: #000000">PGHOST= localhost</span>
+
+<span style="color: #000000">PGUSER=postgres</span>
+
+<span style="color: #000000">PGPASSWORD=postgres</span>
+
+<span style="color: #000000">PGDATABASE=devbox</span>
+</code></pre>
 				<a href="#app-example" id="app-example" style="color: inherit; text-decoration: none;">
 					<h2>App example</h2>
 				</a>
