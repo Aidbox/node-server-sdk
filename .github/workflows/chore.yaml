@@ -30,8 +30,9 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            🟢 Build succeeded in branch [${{ steps.extract_branch.outputs.branch }}](https://github.com/${{github.repository}}/tree/${{ steps.extract_branch.outputs.branch }}): https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
-            By [${{github.event.sender.login}}](${{github.event.sender.url}})
+            🟢 Build succeeded in branch [${{ steps.extract_branch.outputs.branch }}](https://github.com/${{github.repository}}/tree/${{ steps.extract_branch.outputs.branch }})
+            By: [${{github.event.sender.login}}](${{github.event.sender.url}})
+            Run: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
           disable_web_page_preview: true
           format: markdown
 
@@ -42,7 +43,8 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            🔴 Build failed in branch [${{ steps.extract_branch.outputs.branch }}](https://github.com/${{github.repository}}/tree/${{ steps.extract_branch.outputs.branch }}): https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
-            By [${{github.event.sender.login}}](${{github.event.sender.url}})
+            🔴 Build failed in branch [${{ steps.extract_branch.outputs.branch }}](https://github.com/${{github.repository}}/tree/${{ steps.extract_branch.outputs.branch }})
+            By: [${{github.event.sender.login}}](${{github.event.sender.url}})
+            Run: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
           disable_web_page_preview: true
           format: markdown
