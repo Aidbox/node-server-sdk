@@ -1,3 +1,9 @@
+/**
+ * Helpers for work with manifest object
+
+ * @module Manifest
+ */
+
 import {
   TConfig,
   TPatchedManifest,
@@ -52,9 +58,9 @@ export const patchManifest = <CH>(
   readonly patchedManifest: TPatchedManifest<CH>;
 } => {
   const subscriptionHandlers = Object.keys(manifest.subscriptions).reduce(
-    (subscriptionHandlers, key) => {
+    (handlers, key) => {
       return {
-        ...subscriptionHandlers,
+        ...handlers,
         [`${key}_handler`]: manifest.subscriptions[key].handler,
       };
     },
@@ -62,9 +68,9 @@ export const patchManifest = <CH>(
   );
 
   const manifestSubscriptions = Object.keys(manifest.subscriptions).reduce(
-    (manifestSubscriptions, key) => {
+    (subscriptions, key) => {
       return {
-        ...manifestSubscriptions,
+        ...subscriptions,
         [key]: { handler: `${key}_handler` },
       };
     },

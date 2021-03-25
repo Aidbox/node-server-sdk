@@ -1,3 +1,9 @@
+/**
+ * Main function for create and start application
+ *
+ * @module App
+ */
+
 import { TConfig, TPatchedManifest, TRawManifest } from '../types';
 
 import { createAgent, TAgent } from './agent';
