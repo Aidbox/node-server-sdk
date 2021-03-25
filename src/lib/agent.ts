@@ -6,8 +6,13 @@ export type TAgentConfig = Pick<AxiosRequestConfig, 'baseURL' | 'auth'>;
 export type TAgent = AxiosInstance;
 
 export const createAgent = (config: TAgentConfig): TAgent => {
-  const clientInstance = axios.create(config);
-  axiosRetry(clientInstance, {
+  const agent = axios.create(config);
+  applyRetry(agent);
+  return agent;
+};
+
+export const applyRetry = (agent: TAgent) => {
+  axiosRetry(agent, {
     retries: 10,
     retryDelay: (retryCount) => {
       return retryCount * 1000;
@@ -17,5 +22,6 @@ export const createAgent = (config: TAgentConfig): TAgent => {
       return true;
     },
   });
-  return clientInstance;
 };
+
+export { axiosRetry };
