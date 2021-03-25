@@ -18,6 +18,11 @@ jobs:
       - run: npm test
       - run: npm run cov:send
 
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
       - name: Send Telegram notifications (success)
         if: ${{ success() }}
         uses: appleboy/telegram-action@master
@@ -25,7 +30,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            🟢 Build succeeded: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
+            🟢 Build succeeded in branch [${{ steps.extract_branch.outputs.branch }}](https://github.com/${{github.repository}}/tree/${{ steps.extract_branch.outputs.branch }}): https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
             By [${{github.event.sender.login}}](${{github.event.sender.url}})
           disable_web_page_preview: true
           format: markdown
@@ -37,7 +42,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            🔴 Build failed: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
+            🔴 Build failed in branch [${{ steps.extract_branch.outputs.branch }}](https://github.com/${{github.repository}}/tree/${{ steps.extract_branch.outputs.branch }}): https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
             By [${{github.event.sender.login}}](${{github.event.sender.url}})
           disable_web_page_preview: true
           format: markdown
