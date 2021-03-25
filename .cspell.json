@@ -3,6 +3,9 @@
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/master/cspell.schema.json",
   "language": "en",
   "words": [
+    "PGPORT",
+    "postgres",
+    "devbox",
     "AIDBOX",
     "aidbox",
     "PGUSER",
