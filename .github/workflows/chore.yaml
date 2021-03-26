@@ -33,8 +33,9 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             🟢 Build succeeded in branch [${{ steps.extract_branch.outputs.branch }}](https://github.com/${{github.repository}}/tree/${{ steps.extract_branch.outputs.branch }})
+            Test message #1: ${{github.event.head_commit.message}}
+            Test message #2: ${{github.event.commits[0].message}}
             By: [${{github.event.sender.login}}](${{github.event.sender.url}})
-            Run: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
           disable_web_page_preview: true
           format: markdown
 
@@ -46,6 +47,8 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             🔴 Build failed in branch [${{ steps.extract_branch.outputs.branch }}](https://github.com/${{github.repository}}/tree/${{ steps.extract_branch.outputs.branch }})
+            Test message #1: ${{github.event.head_commit.message}}
+            Test message #2: ${{github.event.commits[0].message}}
             By: [${{github.event.sender.login}}](${{github.event.sender.url}})
             Run: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
           disable_web_page_preview: true
