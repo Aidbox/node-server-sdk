@@ -6,7 +6,7 @@
 
 import { TConfig, TPatchedManifest, TRawManifest } from '../types';
 
-import { createAgent, TAgent } from './agent';
+import { awaitAidbox, createAgent, TAgent } from './agent';
 import { validateConfig } from './config';
 import { createContext } from './context';
 import { createDispatch } from './dispatch';
@@ -63,7 +63,7 @@ export const createApp = <CH = {}>(
 export const startApp = async <CH>(app: TApp<CH>) => {
   const { agent, config, patchedManifest, httpServer } = app;
   try {
-    await waitForAidboxServer(agent);
+    await awaitAidbox(agent);
   } catch (err) {
     console.error(`Aidbox server is unreachable.`);
     process.exit(1);
@@ -71,11 +71,4 @@ export const startApp = async <CH>(app: TApp<CH>) => {
   }
   await syncManifest(agent, config, patchedManifest);
   await startServer(httpServer);
-};
-
-const waitForAidboxServer = async (agent: TAgent) => {
-  await agent.request({
-    url: '/__healthcheck',
-    responseType: 'text',
-  });
 };

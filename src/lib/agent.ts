@@ -36,3 +36,10 @@ export const applyRetry = (agent: TAgent) => {
 };
 
 export { axiosRetry };
+
+export const awaitAidbox = async (agent: TAgent) => {
+  await agent.request({
+    url: '/__healthcheck',
+    responseType: 'text',
+  });
+};

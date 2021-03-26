@@ -1,3 +1,5 @@
+import assert from 'assert';
+
 import test from 'ava';
 import sinon from 'sinon';
 
@@ -5,7 +7,7 @@ import { TConfig, TContext, TPatchedManifest, TRawManifest } from '../types';
 
 import * as Agent from './agent';
 import { TAgent } from './agent';
-import { createApp } from './app';
+import { createApp, startApp } from './app';
 import * as Context from './context';
 import * as Dispatch from './dispatch';
 import * as Server from './http';
@@ -15,7 +17,7 @@ test.afterEach.always(() => {
   sinon.restore();
 });
 
-test.serial('createApp() fails on invalid config', (t) => {
+test('createApp() fails on invalid config', (t) => {
   const config = {} as TConfig;
   const manifest = {} as TRawManifest<any>;
 
@@ -38,14 +40,14 @@ test.serial('createApp() fails on invalid config', (t) => {
   sinon.assert.notCalled(createServerStub);
 });
 
-test.serial.skip('createApp() fails on invalid manifest', () => {
+test.skip('createApp() fails on invalid manifest', () => {
   // const app = createApp(config, manifest);
   // sinon.assert.calledOnce(errorStub);
   // sinon.assert.calledWith(errorStub, 'manifest');
   // t.is(app, undefined);
 });
 
-test.serial('createApp() succeeds on valid config/manifest', (t) => {
+test('createApp() succeeds on valid config/manifest', (t) => {
   const config = validConfig;
   const manifest = { subscriptions: {} } as TRawManifest<any>;
   const subscriptionHandlers = {};
@@ -90,6 +92,39 @@ test.serial('createApp() succeeds on valid config/manifest', (t) => {
   sinon.assert.calledWith(createServerStub, dispatch);
 });
 
+test.only('startApp() starts an app', async (t) => {
+  const config = validConfig;
+  const manifest = validManifest;
+  const app = createApp(config, manifest);
+  assert.ok(app);
+
+  const agentRequestStub = sinon.stub(app.agent, 'request');
+  const serverListenStub = sinon.stub(app.httpServer, 'listen').callsArg(2);
+
+  await startApp(app);
+
+  sinon.assert.calledWith(
+    agentRequestStub.firstCall,
+    sinon.match({
+      url: '/__healthcheck',
+      responseType: 'text',
+    })
+  );
+
+  sinon.assert.calledWith(
+    agentRequestStub.secondCall,
+    sinon.match({
+      url: '/App',
+      data: {
+        id: config.APP_ID,
+      },
+    })
+  );
+
+  sinon.assert.calledWith(serverListenStub, 8090, '0.0.0.0' as any);
+
+  t.pass();
+});
 //
 
 const validConfig = {
@@ -106,3 +141,8 @@ const validConfig = {
   PGDATABASE: 'PGDATABASE',
   PGPASSWORD: 'PGPASSWORD',
 } as TConfig;
+
+const validManifest = {
+  operations: {},
+  subscriptions: {},
+};
