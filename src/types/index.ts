@@ -6,6 +6,13 @@
 
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
+export type TLogData = {
+  readonly message: Record<string, any>;
+  readonly type?: string;
+  readonly v?: string;
+  readonly fx?: string;
+};
+
 /**
  * Default context type will be extend if you define your specific context helpers by provided type
  */
@@ -15,6 +22,7 @@ export type TContext<CH> = {
     jsonOverride: boolean
   ) => Promise<AxiosResponse<T>>;
   readonly psql: <T>(query: string) => Promise<readonly T[]>;
+  readonly log: (data: TLogData) => Promise<any>;
 } & CH;
 
 export type TOperationHandler<CH> = (

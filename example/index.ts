@@ -23,10 +23,8 @@ const manifest: TRawManifest<TContextHelpers> = {
       path: ['$test-operation'],
       handler: async (context) => {
         context.greet('Alice');
-        const response = await context.psql<{ result: string[] }>(
-          'SELECT NOW()'
-        );
-        return { resource: response[0] };
+        context.log({message: {test: true}, v: '2020.02', fx: "testOperation", type: "backend-test"})
+        return { resource: {test:true} };
       },
     },
   },

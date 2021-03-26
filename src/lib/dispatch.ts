@@ -50,7 +50,6 @@ export const createDispatch: TDispatch = (
     reqBody += chunk.toString();
   });
   req.on('end', async () => {
-    console.log(reqBody);
     try {
       const msg = JSON.parse(reqBody) as TMessage;
       res.setHeader('Content-Type', resolveContentType(msg));

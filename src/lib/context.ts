@@ -4,9 +4,11 @@
  * @module Context
  */
 
+import { inspect } from 'util';
+
 import { AxiosRequestConfig } from 'axios';
 
-import { TContext } from '../types';
+import { TContext, TLogData } from '../types';
 
 import { TAgent } from './agent';
 
@@ -20,7 +22,14 @@ export const createContext = <CH>(
       responseType: jsonOverride ? 'json' : 'text',
     });
   };
-
+  const log = (data: TLogData) => {
+    console.log(inspect(data, false, null, true));
+    return agent.request({
+      url: '/$loggy',
+      method: 'post',
+      data,
+    });
+  };
   const psql = async <T>(query: string): Promise<readonly T[]> => {
     const response = await request({
       url: '/$psql',
@@ -30,5 +39,5 @@ export const createContext = <CH>(
     return response.data[0].result;
   };
 
-  return { request, psql, ...contextHelpers };
+  return { request, psql, log, ...contextHelpers };
 };
