@@ -58,3 +58,23 @@ test('log() handles cyclic objects', async (t) => {
 
   t.pass();
 });
+test('psql()', async (t) => {
+  const requestSpy = sinon.stub().resolves({ data: [{ result: 'foo' }] });
+  const agent = ({ request: requestSpy } as unknown) as TAgent;
+  const query = 'SELECT NOW()';
+
+  const context = createContext(agent, {});
+
+  await context.psql(query);
+
+  sinon.assert.calledWith(
+    requestSpy,
+    sinon.match({
+      url: '/$psql',
+      method: 'post',
+      data: { query },
+    })
+  );
+
+  t.pass();
+});
