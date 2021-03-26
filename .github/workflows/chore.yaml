@@ -15,13 +15,15 @@ jobs:
         with:
           node-version: 14
       - run: npm ci
-      - run: npm test
-      - run: npm run cov:send
 
+      # Extract branch name before running tests, so it will be accessible on fail
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
+
+      - run: npm test
+      - run: npm run cov:send
 
       - name: Send Telegram notifications (success)
         if: ${{ success() }}
