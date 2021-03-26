@@ -24,11 +24,16 @@ export const createContext = <CH>(
   };
   const log = (data: TLogData) => {
     console.log(inspect(data, false, null, true));
-    return agent.request({
-      url: '/$loggy',
-      method: 'post',
-      data,
-    });
+    try {
+      return agent.request({
+        url: '/$loggy',
+        method: 'post',
+        data,
+      });
+    } catch (err) {
+      console.error('Logging error', err);
+      return Promise.resolve();
+    }
   };
   const psql = async <T>(query: string): Promise<readonly T[]> => {
     const response = await request({
