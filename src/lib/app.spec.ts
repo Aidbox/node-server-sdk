@@ -15,10 +15,6 @@ test.afterEach.always(() => {
   sinon.restore();
 });
 
-test.serial('Test error notification', (t) => {
-  t.fail('Just as planned');
-});
-
 test.serial('createApp() fails on invalid config', (t) => {
   const config = {} as TConfig;
   const manifest = {} as TRawManifest<any>;
