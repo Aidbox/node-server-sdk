@@ -19,7 +19,7 @@ export type TLogData = {
 export type TContext<CH> = {
   readonly request: <T>(
     config: AxiosRequestConfig,
-    jsonOverride: boolean
+    jsonOverride?: boolean
   ) => Promise<AxiosResponse<T>>;
   readonly psql: <T>(query: string) => Promise<readonly T[]>;
   readonly log: (data: TLogData) => Promise<any>;
