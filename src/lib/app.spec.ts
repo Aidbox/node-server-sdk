@@ -92,7 +92,7 @@ test('createApp() succeeds on valid config/manifest', (t) => {
   sinon.assert.calledWith(createServerStub, dispatch);
 });
 
-test.only('startApp() starts an app', async (t) => {
+test('startApp() starts an app', async (t) => {
   const config = validConfig;
   const manifest = validManifest;
   const app = createApp(config, manifest);
