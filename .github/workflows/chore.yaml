@@ -22,6 +22,10 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
 
+      - name: Extract short SHA
+        uses: benjlevesque/short-sha@v1.2
+        id: short-sha
+
       - run: npm test
       - run: npm run cov:send
 
@@ -33,7 +37,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             🟢 Build succeeded in branch [${{ steps.extract_branch.outputs.branch }}](https://github.com/${{github.repository}}/tree/${{ steps.extract_branch.outputs.branch }})
-            [${{github.event.head_commit.id}}](${{github.event.head_commit.url}}): ${{github.event.head_commit.message}}
+            [${{steps.short_sha.outputs.sha}}](${{github.event.head_commit.url}}): ${{github.event.head_commit.message}}
             By: [${{github.event.sender.login}}](${{github.event.sender.url}})
           disable_web_page_preview: true
           format: markdown
@@ -46,7 +50,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             🔴 Build failed in branch [${{ steps.extract_branch.outputs.branch }}](https://github.com/${{github.repository}}/tree/${{ steps.extract_branch.outputs.branch }})
-            [${{github.event.head_commit.id}}](${{github.event.head_commit.url}}): ${{github.event.head_commit.message}}
+            [${{steps.short_sha.outputs.sha}}](${{github.event.head_commit.url}}): ${{github.event.head_commit.message}}
             By: [${{github.event.sender.login}}](${{github.event.sender.url}})
             Run: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
           disable_web_page_preview: true
