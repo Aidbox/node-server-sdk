@@ -17,11 +17,7 @@ export const createServer = (dispatch: RequestListener): TServer =>
     res.end(`Ready`);
   });
 
-export const startServer = (
-  server: TServer,
-  port = 8090,
-  hostname = '0.0.0.0'
-): Promise<TServer> => {
+export const startServer = (server: TServer, port = 8090, hostname = '0.0.0.0'): Promise<TServer> => {
   return new Promise((resolve, reject) => {
     server
       // wrap

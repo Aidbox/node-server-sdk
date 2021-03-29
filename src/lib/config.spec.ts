@@ -19,7 +19,7 @@ test('createConfig() creates config from object', (t) => {
 
   const config = createConfig(input);
 
-  t.is(config.APP_ID, input.APP_ID);
+  t.is(config?.APP_ID, input.APP_ID);
   t.is((config as any).foo, undefined);
 });
 
@@ -31,6 +31,6 @@ test('createConfig() creates config from path', (t) => {
 
   const config = createConfig(input);
 
-  t.is(config.APP_ID, json.APP_ID);
+  t.is(config?.APP_ID, json.APP_ID);
   t.is((config as any).foo, undefined);
 });

@@ -12,10 +12,7 @@ import { TContext, TLogData } from '../types';
 
 import { TAgent } from './agent';
 
-export const createContext = <CH>(
-  agent: TAgent,
-  contextHelpers: CH
-): TContext<CH> => {
+export const createContext = <CH>(agent: TAgent, contextHelpers: CH): TContext<CH> => {
   const request = (config: AxiosRequestConfig, jsonOverride = true) => {
     return agent.request({
       ...config,

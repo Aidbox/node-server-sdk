@@ -20,12 +20,14 @@ export type TApp<CH> = {
   readonly patchedManifest: TPatchedManifest<CH>;
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export const createApp = <CH = {}>(
-  config: TConfig,
+export const createApp = <CH = Record<string, never>>(
+  config: TConfig | undefined,
   manifest: TRawManifest<CH>,
   contextHelpers?: CH
 ): TApp<CH> | undefined => {
+  if (!config) {
+    return;
+  }
   const configError = validateConfig(config);
   const manifestError = validateManifest(manifest);
 
@@ -44,12 +46,7 @@ export const createApp = <CH = {}>(
   });
   const { subscriptionHandlers, patchedManifest } = patchManifest(manifest);
   const context = createContext(agent, contextHelpers);
-  const dispatch = createDispatch(
-    config,
-    patchedManifest,
-    context,
-    subscriptionHandlers
-  );
+  const dispatch = createDispatch(config, patchedManifest, context, subscriptionHandlers);
   const httpServer = createServer(dispatch);
 
   return {

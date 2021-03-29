@@ -17,10 +17,7 @@ export type TLogData = {
  * Default context type will be extend if you define your specific context helpers by provided type
  */
 export type TContext<CH> = {
-  readonly request: <T>(
-    config: AxiosRequestConfig,
-    jsonOverride?: boolean
-  ) => Promise<AxiosResponse<T>>;
+  readonly request: <T>(config: AxiosRequestConfig, jsonOverride?: boolean) => Promise<AxiosResponse<T>>;
   readonly psql: <T>(query: string) => Promise<readonly T[]>;
   readonly log: (data: TLogData) => Promise<any>;
 } & CH;
@@ -60,10 +57,7 @@ export type TPatchedManifest<CH> = TRawManifest<CH> & {
   };
 };
 
-export type TSubscriptionHandler<CH> = (
-  context: TContext<CH>,
-  message: TMessage
-) => any;
+export type TSubscriptionHandler<CH> = (context: TContext<CH>, message: TMessage) => any;
 
 export type TSubscriptionHandlers<CH> = {
   readonly [key: string]: TSubscriptionHandler<CH>;

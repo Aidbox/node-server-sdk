@@ -58,15 +58,9 @@ test('createApp() succeeds on valid config/manifest', (t) => {
 
   const errorStub = sinon.stub(console, 'error');
   const createAgentStub = sinon.stub(Agent, 'createAgent').returns(agent);
-  const patchManifestStub = sinon
-    .stub(Manifest, 'patchManifest')
-    .returns({ subscriptionHandlers, patchedManifest });
-  const createContextStub = sinon
-    .stub(Context, 'createContext')
-    .returns(context);
-  const createDispatchStub = sinon
-    .stub(Dispatch, 'createDispatch')
-    .returns(dispatch);
+  const patchManifestStub = sinon.stub(Manifest, 'patchManifest').returns({ subscriptionHandlers, patchedManifest });
+  const createContextStub = sinon.stub(Context, 'createContext').returns(context);
+  const createDispatchStub = sinon.stub(Dispatch, 'createDispatch').returns(dispatch);
   const createServerStub = sinon.stub(Server, 'createServer');
 
   const app = createApp(config, manifest);
@@ -82,13 +76,7 @@ test('createApp() succeeds on valid config/manifest', (t) => {
   });
   sinon.assert.calledWith(patchManifestStub, manifest);
   sinon.assert.calledWith(createContextStub, agent, undefined);
-  sinon.assert.calledWith(
-    createDispatchStub,
-    config,
-    patchedManifest,
-    context,
-    subscriptionHandlers
-  );
+  sinon.assert.calledWith(createDispatchStub, config, patchedManifest, context, subscriptionHandlers);
   sinon.assert.calledWith(createServerStub, dispatch);
 });
 

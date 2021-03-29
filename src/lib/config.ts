@@ -6,6 +6,7 @@
 
 import fs from 'fs';
 
+import dotenv from 'dotenv';
 import R from 'ramda';
 
 import { TConfig, TConfigKeys } from '../types';
@@ -32,14 +33,24 @@ const readConfigFile = (path: string) => {
     return config;
   } catch (e) {
     console.error('Error while read config file: ', e.message);
-    return {} as TConfig;
+    return undefined;
   }
 };
 
-export const createConfig = (envs = process.env as TConfig | string) => {
+export const createConfig = (envs = process.env as TConfig | string): TConfig | undefined => {
   if (typeof envs === 'string') {
-    const config = readConfigFile(envs);
-    return R.pick(configKeys, config || {});
+    if (envs.includes('.env')) {
+      dotenv.config({ path: envs });
+      return R.pick(configKeys, process.env as TConfig);
+    }
+    if (envs.endsWith('.json')) {
+      const config = readConfigFile(envs);
+      if (!config) {
+        return undefined;
+      }
+      return R.pick(configKeys, config);
+    }
+    return undefined;
   }
   return R.pick(configKeys, envs);
 };
@@ -55,7 +66,5 @@ export const validateConfig = (config: TConfig): Error | undefined => {
     return acc;
   }, []);
 
-  return errors.length
-    ? new Error(`Invalid config.\n${errors.join('\n')}`)
-    : undefined;
+  return errors.length ? new Error(`Invalid config.\n${errors.join('\n')}`) : undefined;
 };

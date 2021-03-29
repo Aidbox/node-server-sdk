@@ -8,15 +8,7 @@ import { RequestListener } from 'http';
 
 import yaml from 'js-yaml';
 
-import {
-  EAccept,
-  EOperation,
-  TConfig,
-  TContext,
-  TMessage,
-  TPatchedManifest,
-  TSubscriptionHandlers,
-} from '../types';
+import { EAccept, EOperation, TConfig, TContext, TMessage, TPatchedManifest, TSubscriptionHandlers } from '../types';
 
 export type TDispatch = <CH>(
   config: TConfig,
@@ -25,17 +17,8 @@ export type TDispatch = <CH>(
   subscriptionHandlers: TSubscriptionHandlers<CH>
 ) => RequestListener;
 
-export const createDispatch: TDispatch = (
-  config,
-  manifest,
-  context,
-  subscriptionHandlers
-) => (req, res) => {
-  const sendResponse = (
-    text: string,
-    status = 200,
-    headers: Record<string, string> = {}
-  ) => {
+export const createDispatch: TDispatch = (config, manifest, context, subscriptionHandlers) => (req, res) => {
+  const sendResponse = (text: string, status = 200, headers: Record<string, string> = {}) => {
     // eslint-disable-next-line functional/immutable-data
     res.statusCode = status;
     Object.keys(headers).forEach((k: string) => {
@@ -54,13 +37,7 @@ export const createDispatch: TDispatch = (
       const msg = JSON.parse(reqBody) as TMessage;
       res.setHeader('Content-Type', resolveContentType(msg));
 
-      if (
-        !checkAuthHeader(
-          config.APP_ID,
-          config.APP_SECRET,
-          req.headers.authorization
-        )
-      ) {
+      if (!checkAuthHeader(config.APP_ID, config.APP_SECRET, req.headers.authorization)) {
         sendResponse(JSON.stringify({ message: 'Access Denied' }), 403);
         return;
       }
@@ -77,11 +54,7 @@ export const createDispatch: TDispatch = (
       }
 
       const operationId = msg.operation?.id;
-      if (
-        operation === EOperation.OPERATION &&
-        operationId &&
-        manifest.operations[operationId]
-      ) {
+      if (operation === EOperation.OPERATION && operationId && manifest.operations[operationId]) {
         const { handler } = manifest.operations[operationId];
         const { status, headers, resource, body } = await handler(context, msg);
         if (msg.request.headers.accept === 'text/yaml') {
@@ -112,11 +85,7 @@ const resolveContentType = (msg: TMessage) => {
   }
 };
 
-const checkAuthHeader = (
-  appId: string,
-  appSecret: string,
-  authHeader?: string
-) => {
+const checkAuthHeader = (appId: string, appSecret: string, authHeader?: string) => {
   if (!authHeader) {
     return false;
   }
