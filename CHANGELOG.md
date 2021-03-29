@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/Aidbox/node-server-sdk/compare/v1.6.2...v1.7.0) (2021-03-29)
+
+
+### Features
+
+* **tests:** Add app/agent tests ([dc1dcca](https://github.com/Aidbox/node-server-sdk/commit/dc1dccaf773b403b805ca70e6be9aab9c44c301f))
+* **tests:** Add config tests ([af3d895](https://github.com/Aidbox/node-server-sdk/commit/af3d8950d240b2479c0931b6bd45f697322caab6))
+* **tests:** Add context tests ([8e39137](https://github.com/Aidbox/node-server-sdk/commit/8e391375190dd5d709185d8551f2428b45b583b7))
+* **tests:** Add context tests ([4f3173d](https://github.com/Aidbox/node-server-sdk/commit/4f3173d5c9f70def93c6be2fc2df02a4553d5fb2))
+
+
+### Bug Fixes
+
+* **context:** Gracefully handle logging errors ([6c31b42](https://github.com/Aidbox/node-server-sdk/commit/6c31b4296bf76f701f333369689738691ccac79a))
+* **docs:** Fix example JSON config ([f7a8db7](https://github.com/Aidbox/node-server-sdk/commit/f7a8db7c6771e585a8db0ba2d4000abe15250962))
+
 ### [1.6.2](https://github.com/Aidbox/node-server-sdk/compare/v1.6.1...v1.6.2) (2021-03-25)
 
 

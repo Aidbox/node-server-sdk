@@ -1,6 +1,6 @@
 {
   "name": "@aidbox/node-server-sdk",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "Node JS SDK for extend Aidbox.io",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -114,7 +114,8 @@
     }
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "printWidth": 120
   },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript",
