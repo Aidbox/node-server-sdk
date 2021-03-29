@@ -17,6 +17,8 @@ You can find additional technical information on SDK types and methods used [her
 
 ## Installation
 
+Before all actions you should have aidbox [here](https://docs.aidbox.app/installation)
+
 We have first-class TypeScript support, but this library can also be used in a javascript project. We provide a useful function to prevent errors in input config variables.
 
 **npm**
@@ -34,11 +36,11 @@ yarn add @aidbox/node-server-sdk
 ## Requirements
 
 You have 2 options:
+
 - ```bash
   cp .env.example .env
   ```
 - Pass absolute path to config.json file which should include keys defined below
-
 
 ### Example
 
@@ -69,7 +71,6 @@ PGPASSWORD=postgres
 
 PGDATABASE=devbox
 ```
-
 
 ## App example
 
