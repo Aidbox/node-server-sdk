@@ -1,6 +1,6 @@
-import { createApp, startApp } from '../src';
+import path from 'path';
+import { createApp, startApp, createConfig  } from '../src';
 import { TRawManifest } from '../src/types';
-import { createConfig } from '../src/lib/config';
 
 type TContextHelpers = {
   greet(name: string): void;
@@ -40,9 +40,9 @@ const manifest: TRawManifest<TContextHelpers> = {
 };
 
 const main = async () => {
-  const config = createConfig();
+  const config = createConfig(path.resolve('../.env'));
 
-  const app = createApp<TContextHelpers>(config, manifest, contextHelpers);
+  const app = createApp(config, manifest, contextHelpers);
   if (!app) {
     console.error(`Unable to create app. Check config/manifest errors.`);
     process.exit(1);
