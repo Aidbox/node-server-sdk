@@ -20,11 +20,11 @@ export type TApp<CH> = {
   readonly patchedManifest: TPatchedManifest<CH>;
 };
 
-export const createApp = <CH = Record<string, never>>(
+export const createApp = <T>(
   config: TConfig | undefined,
-  manifest: TRawManifest<CH>,
-  contextHelpers?: CH
-): TApp<CH> | undefined => {
+  manifest: TRawManifest<T>,
+  contextHelpers?: T
+): TApp<T> | undefined => {
   if (!config) {
     return;
   }

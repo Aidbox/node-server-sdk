@@ -16,14 +16,14 @@ export type TLogData = {
 /**
  * Default context type will be extend if you define your specific context helpers by provided type
  */
-export type TContext<CH> = {
+export type TContext<T = Record<string, never>> = {
   readonly request: <T>(config: AxiosRequestConfig, jsonOverride?: boolean) => Promise<AxiosResponse<T>>;
   readonly psql: <T>(query: string) => Promise<readonly T[]>;
   readonly log: (data: TLogData) => Promise<any>;
-} & CH;
+} & T;
 
-export type TOperationHandler<CH> = (
-  ctx: TContext<CH>,
+export type TOperationHandler<T = Record<string, never>> = (
+  ctx: TContext<T>,
   msq: TMessage
 ) => Promise<{
   readonly status?: number;
@@ -32,32 +32,32 @@ export type TOperationHandler<CH> = (
   readonly body?: string;
 }>;
 
-export type TOperation<CH> = {
+export type TOperation<T = Record<string, never>> = {
   readonly method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
   readonly path: readonly string[];
-  readonly handler: TOperationHandler<CH>;
+  readonly handler: TOperationHandler<T>;
 };
 
-export type TRawManifest<CH = Record<string, never>> = {
+export type TRawManifest<T = Record<string, never>> = {
   readonly resources?: any;
   readonly entities?: any;
-  readonly operations?: Record<string, TOperation<CH>>;
-  readonly subscriptions?: Record<string, TSubscription<CH>>;
+  readonly operations?: Record<string, TOperation<T>>;
+  readonly subscriptions?: Record<string, TSubscription<T>>;
 };
 
-export type TPatchedManifest<CH> = TRawManifest<CH> & {
+export type TPatchedManifest<T = Record<string, never>> = TRawManifest<T> & {
   readonly subscriptions: {
     readonly [key: string]: { readonly handler: string };
   };
 };
 
-export type TSubscription<CH> = {
-  readonly handler: TSubscriptionHandler<CH>;
+export type TSubscription<T = Record<string, never>> = {
+  readonly handler: TSubscriptionHandler<T>;
 };
-export type TSubscriptionHandler<CH> = (context: TContext<CH>, message: TMessage) => any;
+export type TSubscriptionHandler<T = Record<string, never>> = (context: TContext<T>, message: TMessage) => any;
 
-export type TSubscriptionHandlers<CH> = {
-  readonly [key: string]: TSubscriptionHandler<CH>;
+export type TSubscriptionHandlers<T = Record<string, never>> = {
+  readonly [key: string]: TSubscriptionHandler<T>;
 };
 
 export type TConfig = {
