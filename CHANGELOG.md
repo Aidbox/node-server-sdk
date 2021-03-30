@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.5](https://github.com/Aidbox/node-server-sdk/compare/v1.7.4...v1.7.5) (2021-03-30)
+
+
+### Bug Fixes
+
+* **types:** fix manifest extended type ([0a3235d](https://github.com/Aidbox/node-server-sdk/commit/0a3235d1551fcfc6b1d7e43d24452a3f3ffb68e6))
+
 ### [1.7.4](https://github.com/Aidbox/node-server-sdk/compare/v1.7.3...v1.7.4) (2021-03-30)
 
 
