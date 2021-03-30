@@ -7,7 +7,7 @@ export type TContextHelper = {
   greet:() =>any
 }
 
-const manifest: TRawManifest = {
+const manifest: TRawManifest<TContextHelper> = {
   resources: {
     AccessPolicy: {},
   },
@@ -41,7 +41,7 @@ const manifest: TRawManifest = {
   },
 };
 
-const tt:TRawManifest = {
+const tt:TRawManifest<TContextHelper> = {
   operations:{
     test:{
       path: ['$tt'],
@@ -56,7 +56,7 @@ const tt:TRawManifest = {
 const main = async () => {
   const config = createConfigFromEnv(path.resolve('../.env'));
 
-  const mergedManifest = mergeModuleManifest(manifest,{entities:{Test:{attrs:{test:{type: "string"}}}}},
+  const mergedManifest = mergeModuleManifest<TContextHelper>(manifest,{entities:{Test:{attrs:{test:{type: "string"}}}}},
     {entities:{Baz:{attrs:{test:{type: "string"}}}}}, tt)
   const app = createApp(config, mergedManifest);
   if (!app) {

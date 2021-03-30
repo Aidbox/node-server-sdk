@@ -82,7 +82,7 @@ Firstly, you should create a config object. By default, we use env variables but
 import path from 'path';
 import { createConfigFromEnv } from '@aidbox/node-server-sdk';
 
-const config = createConfig();
+const config = createConfigFromEnv(path.resolve('../.env));
 ```
 
 (optional) Add your specific context helpers

@@ -86,8 +86,8 @@ export const syncManifest = async <T>(agent: TAgent, config: TConfig, manifest: 
 };
 
 // eslint-disable-next-line functional/functional-parameters
-export const mergeModuleManifest = (...objects: readonly TRawManifest[]) => {
+export const mergeModuleManifest = <T>(...objects: readonly TRawManifest<T>[]) => {
   return objects.reduce((prev, next) => {
-    return R.mergeDeepLeft(prev, next) as TRawManifest;
-  }, {} as TRawManifest);
+    return R.mergeDeepLeft(prev, next) as TRawManifest<T>;
+  }, {} as TRawManifest<T>);
 };
