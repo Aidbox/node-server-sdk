@@ -54,7 +54,7 @@ export const createDispatch: TDispatch = (config, manifest, context, subscriptio
       }
 
       const operationId = msg.operation?.id;
-      if (operation === EOperation.OPERATION && operationId && manifest.operations[operationId]) {
+      if (operation === EOperation.OPERATION && operationId && manifest.operations?.[operationId]) {
         const { handler } = manifest.operations[operationId];
         const { status, headers, resource, body } = await handler(context, msg);
         if (msg.request.headers.accept === 'text/yaml') {

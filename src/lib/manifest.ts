@@ -4,6 +4,8 @@
  * @module Manifest
  */
 
+import R from 'ramda';
+
 import { TConfig, TPatchedManifest, TRawManifest, TSubscriptionHandlers } from '../types';
 
 import { TAgent } from './agent';
@@ -42,14 +44,14 @@ export const patchManifest = <CH>(
   readonly subscriptionHandlers: TSubscriptionHandlers<CH>;
   readonly patchedManifest: TPatchedManifest<CH>;
 } => {
-  const subscriptionHandlers = Object.keys(manifest.subscriptions).reduce((handlers, key) => {
+  const subscriptionHandlers = Object.keys(manifest.subscriptions || {}).reduce((handlers, key) => {
     return {
       ...handlers,
-      [`${key}_handler`]: manifest.subscriptions[key].handler,
+      [`${key}_handler`]: manifest.subscriptions?.[key].handler,
     };
   }, {});
 
-  const manifestSubscriptions = Object.keys(manifest.subscriptions).reduce((subscriptions, key) => {
+  const manifestSubscriptions = Object.keys(manifest.subscriptions || {}).reduce((subscriptions, key) => {
     return {
       ...subscriptions,
       [key]: { handler: `${key}_handler` },
@@ -81,4 +83,11 @@ export const syncManifest = async <CH>(agent: TAgent, config: TConfig, manifest:
       ...manifest,
     },
   });
+};
+
+// eslint-disable-next-line functional/functional-parameters
+export const mergeModuleManifest = (...objects: any) => {
+  return objects.reduce((prev: any, next: any) => {
+    return R.mergeDeepLeft(prev, next);
+  }, {});
 };

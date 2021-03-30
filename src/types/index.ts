@@ -41,10 +41,10 @@ export type TOperation<CH> = {
 export type TRawManifest<CH> = {
   readonly resources?: any;
   readonly entities?: any;
-  readonly operations: {
+  readonly operations?: {
     readonly [key: string]: TOperation<CH>;
   };
-  readonly subscriptions: {
+  readonly subscriptions?: {
     readonly [key: string]: {
       readonly handler: TSubscriptionHandler<CH>;
     };

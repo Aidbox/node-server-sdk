@@ -1,3 +1,4 @@
+import { mergeModuleManifest } from './../src/lib/manifest';
 import path from 'path';
 import { createApp, startApp, createConfig  } from '../src';
 import { TRawManifest } from '../src/types';
@@ -16,7 +17,15 @@ const manifest: TRawManifest<TContextHelpers> = {
   resources: {
     AccessPolicy: {},
   },
-  entities: {},
+  entities: {
+    Foo:{
+      attrs:{
+        tt:{
+          type:"string"
+        }
+      }
+    }
+  },
   operations: {
     test: {
       method: 'GET',
@@ -41,6 +50,11 @@ const manifest: TRawManifest<TContextHelpers> = {
 
 const main = async () => {
   const config = createConfig(path.resolve('../.env'));
+
+  const mergedManifest = mergeModuleManifest(manifest,{entities:{Test:{attrs:{test:{type: "string"}}}}},
+    {entities:{Baz:{attrs:{test:{type: "string"}}}}})
+
+  console.log("manifest",mergedManifest);
 
   const app = createApp(config, manifest, contextHelpers);
   if (!app) {
