@@ -172,7 +172,8 @@
 					<h3>Typescript usage</h3>
 				</a>
 				<p>Firstly, you should create a config object. By default, we use env variables but you can optionally enter <strong>process.env</strong> as an input parameter.</p>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">createConfig</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@aidbox/node-server-sdk&#039;</span><span style="color: #000000">;</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">path</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;path&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">createConfigFromEnv</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@aidbox/node-server-sdk&#039;</span><span style="color: #000000">;</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = </span><span style="color: #795E26">createConfig</span><span style="color: #000000">();</span>
 </code></pre>
@@ -188,7 +189,7 @@
 <span style="color: #000000">};</span>
 </code></pre>
 				<p>Next step is defining the manifest object. For example:</p>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">TRawManifest</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../src/types&#039;</span><span style="color: #000000">;</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">TRawManifest</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@aidbox/node-server-sdk&#039;</span><span style="color: #000000">;</span>
 
 <span style="color: #008000">// pass type if your define your specific context helpers</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">manifest</span><span style="color: #000000">: </span><span style="color: #267F99">TRawManifest</span><span style="color: #000000">&lt;</span><span style="color: #267F99">TContextHelpers</span><span style="color: #000000">&gt; = {</span>

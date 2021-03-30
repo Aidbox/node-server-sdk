@@ -141,7 +141,8 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="index.html#createapp" class="tsd-kind-icon">create<wbr>App</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="index.html#createconfig" class="tsd-kind-icon">create<wbr>Config</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="index.html#createconfigfromenv" class="tsd-kind-icon">create<wbr>Config<wbr>From<wbr>Env</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="index.html#createconfigfromjson" class="tsd-kind-icon">create<wbr>Config<wbr>From<wbr>Json</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="index.html#startapp" class="tsd-kind-icon">start<wbr>App</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="index.html#validateconfig" class="tsd-kind-icon">validate<wbr>Config</a></li>
 							</ul>
@@ -177,7 +178,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="tapp" class="tsd-anchor"></a>
 					<h3>TApp</h3>
-					<div class="tsd-signature tsd-kind-icon">TApp&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<div class="tsd-signature tsd-kind-icon">TApp&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in src/lib/app.ts:16</li>
@@ -186,7 +187,7 @@
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>CH</h4>
+							<h4>T</h4>
 						</li>
 					</ul>
 					<div class="tsd-type-declaration">
@@ -202,7 +203,7 @@
 								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> http<wbr>Server<span class="tsd-signature-symbol">: </span><a href="http.html#tserver" class="tsd-signature-type">TServer</a></h5>
 							</li>
 							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> patched<wbr>Manifest<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> patched<wbr>Manifest<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tpatchedmanifest" class="tsd-signature-type">TPatchedManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 					</div>
@@ -281,7 +282,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="tcontext" class="tsd-anchor"></a>
 					<h3>TContext</h3>
-					<div class="tsd-signature tsd-kind-icon">TContext&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">CH</span></div>
+					<div class="tsd-signature tsd-kind-icon">TContext&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">T</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in src/types/index.ts:19</li>
@@ -295,7 +296,7 @@
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>CH</h4>
+							<h4>T</h4>
 						</li>
 					</ul>
 				</section>
@@ -396,7 +397,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="toperation" class="tsd-anchor"></a>
 					<h3>TOperation</h3>
-					<div class="tsd-signature tsd-kind-icon">TOperation&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<div class="tsd-signature tsd-kind-icon">TOperation&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in src/types/index.ts:35</li>
@@ -405,14 +406,14 @@
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>CH</h4>
+							<h4>T</h4>
 						</li>
 					</ul>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> handler<span class="tsd-signature-symbol">: </span><a href="type_definition.html#toperationhandler" class="tsd-signature-type">TOperationHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> handler<span class="tsd-signature-symbol">: </span><a href="type_definition.html#toperationhandler" class="tsd-signature-type">TOperationHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li class="tsd-parameter">
 								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"GET"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"POST"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"PATCH"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"PUT"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"DELETE"</span></h5>
@@ -426,7 +427,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="toperationhandler" class="tsd-anchor"></a>
 					<h3>TOperation<wbr>Handler</h3>
-					<div class="tsd-signature tsd-kind-icon">TOperation<wbr>Handler&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<div class="tsd-signature tsd-kind-icon">TOperation<wbr>Handler&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in src/types/index.ts:25</li>
@@ -435,7 +436,7 @@
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>CH</h4>
+							<h4>T</h4>
 						</li>
 					</ul>
 					<div class="tsd-type-declaration">
@@ -443,14 +444,14 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>, msq<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tmessage" class="tsd-signature-type">TMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, msq<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tmessage" class="tsd-signature-type">TMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>ctx: <a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+												<h5>ctx: <a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 											</li>
 											<li>
 												<h5>msq: <a href="type_definition.html#tmessage" class="tsd-signature-type">TMessage</a></h5>
@@ -466,7 +467,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="tpatchedmanifest" class="tsd-anchor"></a>
 					<h3>TPatched<wbr>Manifest</h3>
-					<div class="tsd-signature tsd-kind-icon">TPatched<wbr>Manifest&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <a href="type_definition.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span></div>
+					<div class="tsd-signature tsd-kind-icon">TPatched<wbr>Manifest&lt;T&gt;<span class="tsd-signature-symbol">:</span> <a href="type_definition.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in src/types/index.ts:48</li>
@@ -475,14 +476,14 @@
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>CH</h4>
+							<h4>T</h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="trawmanifest" class="tsd-anchor"></a>
 					<h3>TRaw<wbr>Manifest</h3>
-					<div class="tsd-signature tsd-kind-icon">TRaw<wbr>Manifest&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<div class="tsd-signature tsd-kind-icon">TRaw<wbr>Manifest&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in src/types/index.ts:41</li>
@@ -491,7 +492,7 @@
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>CH</h4>
+							<h4>T</h4>
 						</li>
 					</ul>
 					<div class="tsd-type-declaration">
@@ -501,13 +502,13 @@
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> entities<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span></h5>
 							</li>
 							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> operations<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="type_definition.html#toperation" class="tsd-signature-type">TOperation</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> operations<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="type_definition.html#toperation" class="tsd-signature-type">TOperation</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li class="tsd-parameter">
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> resources<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span></h5>
 							</li>
 							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> subscriptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="type_definition.html#tsubscription" class="tsd-signature-type">TSubscription</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> subscriptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="type_definition.html#tsubscription" class="tsd-signature-type">TSubscription</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 					</div>
@@ -515,7 +516,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="tsubscription" class="tsd-anchor"></a>
 					<h3>TSubscription</h3>
-					<div class="tsd-signature tsd-kind-icon">TSubscription&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<div class="tsd-signature tsd-kind-icon">TSubscription&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in src/types/index.ts:54</li>
@@ -524,14 +525,14 @@
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>CH</h4>
+							<h4>T</h4>
 						</li>
 					</ul>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> handler<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tsubscriptionhandler" class="tsd-signature-type">TSubscriptionHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> handler<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tsubscriptionhandler" class="tsd-signature-type">TSubscriptionHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 					</div>
@@ -539,7 +540,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="tsubscriptionhandler" class="tsd-anchor"></a>
 					<h3>TSubscription<wbr>Handler</h3>
-					<div class="tsd-signature tsd-kind-icon">TSubscription<wbr>Handler&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<div class="tsd-signature tsd-kind-icon">TSubscription<wbr>Handler&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in src/types/index.ts:57</li>
@@ -548,7 +549,7 @@
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>CH</h4>
+							<h4>T</h4>
 						</li>
 					</ul>
 					<div class="tsd-type-declaration">
@@ -556,14 +557,14 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>, message<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tmessage" class="tsd-signature-type">TMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, message<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tmessage" class="tsd-signature-type">TMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>context: <a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+												<h5>context: <a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 											</li>
 											<li>
 												<h5>message: <a href="type_definition.html#tmessage" class="tsd-signature-type">TMessage</a></h5>
@@ -579,7 +580,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="tsubscriptionhandlers" class="tsd-anchor"></a>
 					<h3>TSubscription<wbr>Handlers</h3>
-					<div class="tsd-signature tsd-kind-icon">TSubscription<wbr>Handlers&lt;CH&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<div class="tsd-signature tsd-kind-icon">TSubscription<wbr>Handlers&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in src/types/index.ts:59</li>
@@ -588,14 +589,14 @@
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>CH</h4>
+							<h4>T</h4>
 						</li>
 					</ul>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="type_definition.html#tsubscriptionhandler" class="tsd-signature-type">TSubscriptionHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="type_definition.html#tsubscriptionhandler" class="tsd-signature-type">TSubscriptionHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 					</div>
@@ -607,7 +608,7 @@
 					<a name="createapp" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>App</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>App&lt;CH&gt;<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="type_definition.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>, contextHelpers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>App&lt;T&gt;<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="type_definition.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, contextHelpers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -619,33 +620,33 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>CH</h4>
+									<h4>T</h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>config: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
+									<h5>config: <a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
 								</li>
 								<li>
-									<h5>manifest: <a href="type_definition.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>manifest: <a href="type_definition.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> contextHelpers: <span class="tsd-signature-type">CH</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> contextHelpers: <span class="tsd-signature-type">T</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
 								<span class="tsd-signature-symbol"> | </span>
-								<a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span>
+								<a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>
 							</h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="createconfig" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Config</h3>
+					<a name="createconfigfromenv" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Config<wbr>From<wbr>Env</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Config<span class="tsd-signature-symbol">(</span>envs<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Config<wbr>From<wbr>Env<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -657,13 +658,33 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>envs: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a><span class="tsd-signature-symbol"> = ...</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> path: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a>
-							</h4>
+							<h4 class="tsd-returns-title">Returns <a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createconfigfromjson" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Config<wbr>From<wbr>Json</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Config<wbr>From<wbr>Json<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/lib/config.ts:29</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>path: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -671,25 +692,25 @@
 					<a name="startapp" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> start<wbr>App</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">start<wbr>App&lt;CH&gt;<span class="tsd-signature-symbol">(</span>app<span class="tsd-signature-symbol">: </span><a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">start<wbr>App&lt;T&gt;<span class="tsd-signature-symbol">(</span>app<span class="tsd-signature-symbol">: </span><a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/lib/app.ts:60</li>
+									<li>Defined in src/lib/app.ts:53</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>CH</h4>
+									<h4>T</h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>app: <a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CH</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>app: <a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -706,7 +727,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/lib/config.ts:58</li>
+									<li>Defined in src/lib/config.ts:47</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -786,7 +807,10 @@
 						<a href="index.html#createapp" class="tsd-kind-icon">create<wbr>App</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module root">
-						<a href="index.html#createconfig" class="tsd-kind-icon">create<wbr>Config</a>
+						<a href="index.html#createconfigfromenv" class="tsd-kind-icon">create<wbr>Config<wbr>From<wbr>Env</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module root">
+						<a href="index.html#createconfigfromjson" class="tsd-kind-icon">create<wbr>Config<wbr>From<wbr>Json</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter root">
 						<a href="index.html#startapp" class="tsd-kind-icon">start<wbr>App</a>
