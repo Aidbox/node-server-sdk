@@ -41,14 +41,8 @@ export type TOperation<CH> = {
 export type TRawManifest<CH = Record<string, never>> = {
   readonly resources?: any;
   readonly entities?: any;
-  readonly operations?: {
-    readonly [key: string]: TOperation<CH>;
-  };
-  readonly subscriptions?: {
-    readonly [key: string]: {
-      readonly handler: TSubscriptionHandler<CH>;
-    };
-  };
+  readonly operations?: Record<string, TOperation<CH>>;
+  readonly subscriptions?: Record<string, TSubscription<CH>>;
 };
 
 export type TPatchedManifest<CH> = TRawManifest<CH> & {
@@ -57,6 +51,9 @@ export type TPatchedManifest<CH> = TRawManifest<CH> & {
   };
 };
 
+export type TSubscription<CH> = {
+  readonly handler: TSubscriptionHandler<CH>;
+};
 export type TSubscriptionHandler<CH> = (context: TContext<CH>, message: TMessage) => any;
 
 export type TSubscriptionHandlers<CH> = {
