@@ -79,7 +79,8 @@ PGDATABASE=devbox
 Firstly, you should create a config object. By default, we use env variables but you can optionally enter **process.env** as an input parameter.
 
 ```typescript
-import { createConfig } from '@aidbox/node-server-sdk';
+import path from 'path';
+import { createConfigFromEnv } from '@aidbox/node-server-sdk';
 
 const config = createConfig();
 ```
@@ -101,7 +102,7 @@ const contextHelpers: TContextHelpers = {
 Next step is defining the manifest object. For example:
 
 ```typescript
-import { TRawManifest } from '../src/types';
+import { TRawManifest } from '@aidbox/node-server-sdk';
 
 // pass type if your define your specific context helpers
 const manifest: TRawManifest<TContextHelpers> = {

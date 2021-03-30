@@ -1,6 +1,6 @@
 import { mergeModuleManifest } from './../src/lib/manifest';
 import path from 'path';
-import { createApp, startApp, createConfig  } from '../src';
+import { createApp, startApp, createConfigFromEnv } from '../src';
 import { TRawManifest } from '../src/types';
 
 export type TContextHelper = {
@@ -41,12 +41,12 @@ const manifest: TRawManifest = {
   },
 };
 
-const tt = {
+const tt:TRawManifest = {
   operations:{
     test:{
       path: ['$tt'],
       method:"GET",
-      handler:() =>{
+      handler:async() =>{
         return {resource:{test:true}}
       }
     }
@@ -54,7 +54,7 @@ const tt = {
 }
 
 const main = async () => {
-  const config = createConfig(path.resolve('../.env'));
+  const config = createConfigFromEnv(path.resolve('../.env'));
 
   const mergedManifest = mergeModuleManifest(manifest,{entities:{Test:{attrs:{test:{type: "string"}}}}},
     {entities:{Baz:{attrs:{test:{type: "string"}}}}}, tt)

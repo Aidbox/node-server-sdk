@@ -1,4 +1,5 @@
 {
+  "eslint.workingDirectories": ["./example", "./src"],
   "cSpell.userWords": [], // only use words from .cspell.json
   "cSpell.enabled": true,
   "editor.formatOnSave": true,

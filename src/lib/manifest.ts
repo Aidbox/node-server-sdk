@@ -10,7 +10,7 @@ import { TConfig, TPatchedManifest, TRawManifest, TSubscriptionHandlers } from '
 
 import { TAgent } from './agent';
 
-export const validateManifest = <CH>(manifest: TRawManifest<CH>): Error | undefined => {
+export const validateManifest = <T>(manifest: TRawManifest<T>): Error | undefined => {
   const { subscriptions = {}, operations = {} } = manifest;
 
   const subscriptionKeys = Object.keys(subscriptions);
@@ -38,11 +38,11 @@ export const validateManifest = <CH>(manifest: TRawManifest<CH>): Error | undefi
   return errors.length ? new Error(`Invalid manifest\n${errors.join('\n')}`) : undefined;
 };
 
-export const patchManifest = <CH>(
-  manifest: TRawManifest<CH>
+export const patchManifest = <T>(
+  manifest: TRawManifest<T>
 ): {
-  readonly subscriptionHandlers: TSubscriptionHandlers<CH>;
-  readonly patchedManifest: TPatchedManifest<CH>;
+  readonly subscriptionHandlers: TSubscriptionHandlers<T>;
+  readonly patchedManifest: TPatchedManifest<T>;
 } => {
   const subscriptionHandlers = Object.keys(manifest.subscriptions || {}).reduce((handlers, key) => {
     return {
@@ -66,7 +66,7 @@ export const patchManifest = <CH>(
   };
 };
 
-export const syncManifest = async <CH>(agent: TAgent, config: TConfig, manifest: TPatchedManifest<CH>) => {
+export const syncManifest = async <T>(agent: TAgent, config: TConfig, manifest: TPatchedManifest<T>) => {
   return await agent.request({
     url: '/App',
     method: 'put',
@@ -88,6 +88,6 @@ export const syncManifest = async <CH>(agent: TAgent, config: TConfig, manifest:
 // eslint-disable-next-line functional/functional-parameters
 export const mergeModuleManifest = (...objects: readonly TRawManifest[]) => {
   return objects.reduce((prev, next) => {
-    return R.mergeDeepLeft(prev, next);
-  }, {} as TRawManifest) as TRawManifest;
+    return R.mergeDeepLeft(prev, next) as TRawManifest;
+  }, {} as TRawManifest);
 };

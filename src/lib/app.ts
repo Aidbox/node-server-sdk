@@ -13,21 +13,14 @@ import { createDispatch } from './dispatch';
 import { createServer, startServer, TServer } from './http';
 import { patchManifest, syncManifest, validateManifest } from './manifest';
 
-export type TApp<CH> = {
+export type TApp<T> = {
   readonly httpServer: TServer;
   readonly agent: TAgent;
   readonly config: TConfig;
-  readonly patchedManifest: TPatchedManifest<CH>;
+  readonly patchedManifest: TPatchedManifest<T>;
 };
 
-export const createApp = <T>(
-  config: TConfig | undefined,
-  manifest: TRawManifest<T>,
-  contextHelpers?: T
-): TApp<T> | undefined => {
-  if (!config) {
-    return;
-  }
+export const createApp = <T>(config: TConfig, manifest: TRawManifest<T>, contextHelpers?: T): TApp<T> | undefined => {
   const configError = validateConfig(config);
   const manifestError = validateManifest(manifest);
 
@@ -57,7 +50,7 @@ export const createApp = <T>(
   };
 };
 
-export const startApp = async <CH>(app: TApp<CH>) => {
+export const startApp = async <T>(app: TApp<T>) => {
   const { agent, config, patchedManifest, httpServer } = app;
   try {
     await awaitAidbox(agent);

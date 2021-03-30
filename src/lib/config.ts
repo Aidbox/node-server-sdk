@@ -26,33 +26,22 @@ const configKeys: TConfigKeys = [
   'PGPASSWORD',
 ];
 
-const readConfigFile = (path: string) => {
+export const createConfigFromJson = (path: string): TConfig => {
   try {
     const file = fs.readFileSync(path);
     const config = JSON.parse(file.toString()) as TConfig;
-    return config;
+    return R.pick(configKeys, config);
   } catch (e) {
     console.error('Error while read config file: ', e.message);
-    return undefined;
+    return {} as TConfig;
   }
 };
 
-export const createConfig = (envs = process.env as TConfig | string): TConfig | undefined => {
-  if (typeof envs === 'string') {
-    if (envs.includes('.env')) {
-      dotenv.config({ path: envs });
-      return R.pick(configKeys, process.env as TConfig);
-    }
-    if (envs.endsWith('.json')) {
-      const config = readConfigFile(envs);
-      if (!config) {
-        return undefined;
-      }
-      return R.pick(configKeys, config);
-    }
-    return undefined;
+export const createConfigFromEnv = (path?: string): TConfig => {
+  if (path) {
+    dotenv.config({ path: path });
   }
-  return R.pick(configKeys, envs);
+  return R.pick(configKeys, process.env as TConfig);
 };
 
 export const validateConfig = (config: TConfig): Error | undefined => {

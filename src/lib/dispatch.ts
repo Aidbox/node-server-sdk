@@ -10,11 +10,11 @@ import yaml from 'js-yaml';
 
 import { EAccept, EOperation, TConfig, TContext, TMessage, TPatchedManifest, TSubscriptionHandlers } from '../types';
 
-export type TDispatch = <CH>(
+export type TDispatch = <T>(
   config: TConfig,
-  manifest: TPatchedManifest<CH>,
-  context: TContext<CH>,
-  subscriptionHandlers: TSubscriptionHandlers<CH>
+  manifest: TPatchedManifest<T>,
+  context: TContext<T>,
+  subscriptionHandlers: TSubscriptionHandlers<T>
 ) => RequestListener;
 
 export const createDispatch: TDispatch = (config, manifest, context, subscriptionHandlers) => (req, res) => {
