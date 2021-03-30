@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.4](https://github.com/Aidbox/node-server-sdk/compare/v1.7.3...v1.7.4) (2021-03-30)
+
+
+### Features
+
+* **manifest:** add merge manifest helper ([de2559b](https://github.com/Aidbox/node-server-sdk/commit/de2559bb3e13683364cc57168eb2f1001a9ead09))
+
 ### [1.7.3](https://github.com/Aidbox/node-server-sdk/compare/v1.7.2...v1.7.3) (2021-03-29)
 
 
