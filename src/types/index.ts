@@ -38,7 +38,7 @@ export type TOperation<CH> = {
   readonly handler: TOperationHandler<CH>;
 };
 
-export type TRawManifest<CH> = {
+export type TRawManifest<CH = Record<string, never>> = {
   readonly resources?: any;
   readonly entities?: any;
   readonly operations?: {

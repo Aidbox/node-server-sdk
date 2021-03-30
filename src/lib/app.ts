@@ -64,7 +64,6 @@ export const startApp = async <CH>(app: TApp<CH>) => {
   } catch (err) {
     console.error(`Aidbox server is unreachable.`);
     process.exit(1);
-    return;
   }
   await syncManifest(agent, config, patchedManifest);
   await startServer(httpServer);
