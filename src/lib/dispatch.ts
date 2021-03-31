@@ -70,7 +70,7 @@ export const createDispatch: TDispatch = (config, manifest, context, subscriptio
       }
     } catch (e) {
       console.log(e);
-      sendResponse(JSON.stringify(e));
+      sendResponse(JSON.stringify(e?.isAxiosError ? e.response.data : e), e.response.status);
     }
   });
 };

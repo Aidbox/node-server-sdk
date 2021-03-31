@@ -29,6 +29,22 @@ const manifest: TRawManifest<TContextHelper> = {
         return { resource: {test:true} };
       },
     },
+      test2: {
+        method: 'GET',
+        path: ['$t'],
+        handler: async (context) => {
+          await context.request({url:'/', method:'post', data:{
+            type: 'transaction',
+            entry:[
+              {request:{
+                method: 'POST',
+                url:'/sf'
+              },resource:{}}
+            ]
+          }})
+          return { resource: {test:true} };
+        },
+    },
   },
   subscriptions: {
     // Patient_handler
