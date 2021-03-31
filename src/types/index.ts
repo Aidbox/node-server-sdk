@@ -93,6 +93,7 @@ export enum EOperation {
 export type TMessage = {
   readonly type: EOperation;
   readonly request: {
+    readonly resource: any;
     readonly headers: Record<string, string>;
     readonly params: Record<string, string>;
     readonly 'route-params': Record<string, string>;
