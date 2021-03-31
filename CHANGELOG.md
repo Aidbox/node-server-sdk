@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.10](https://github.com/Aidbox/node-server-sdk/compare/v1.7.9...v1.7.10) (2021-03-31)
+
+
+### Bug Fixes
+
+* **types:** add missing property to TMessag ([58f3219](https://github.com/Aidbox/node-server-sdk/commit/58f3219f9095048da2c76fa843afa71a5c5b3e01))
+
 ### [1.7.9](https://github.com/Aidbox/node-server-sdk/compare/v1.7.8...v1.7.9) (2021-03-30)
 
 
