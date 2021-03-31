@@ -29,7 +29,7 @@ export const applyRetry = (agent: TAgent) => {
       return retryCount * 1000;
     },
     retryCondition: (error) => {
-      if(error.config.url === '/__healthcheck'){
+      if (error.config.url === '/__healthcheck') {
         console.log('Awaiting aidbox server...');
         return true;
       }
