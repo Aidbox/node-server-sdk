@@ -54,10 +54,12 @@ export const startApp = async <T>(app: TApp<T>) => {
   const { agent, config, patchedManifest, httpServer } = app;
   try {
     await awaitAidbox(agent);
+    await syncManifest(agent, config, patchedManifest);
   } catch (err) {
-    console.error(`Aidbox server is unreachable.`);
+    if(err.config.url === '/__healthcheck')
+      console.error(`Aidbox server is unreachable.`);
+    console.error(err.response.data)
     process.exit(1);
   }
-  await syncManifest(agent, config, patchedManifest);
   await startServer(httpServer);
 };

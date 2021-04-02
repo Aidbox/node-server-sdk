@@ -23,7 +23,7 @@ export const startServer = (server: TServer, port = 8090, hostname = '0.0.0.0'):
       // wrap
       .on('error', reject)
       .listen(port, hostname, () => {
-        console.log(`server started on http://0.0.0.0:8090`);
+        console.log(`your server started on http://0.0.0.0:8090`);
         resolve(server);
       });
   });

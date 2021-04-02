@@ -34,7 +34,7 @@ export type TOperationHandler<T = Record<string, never>> = (
 
 export type TOperation<T = Record<string, never>> = {
   readonly method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
-  readonly path: readonly string[];
+  readonly path: Array<string | { name: string }>;
   readonly handler: TOperationHandler<T>;
 };
 

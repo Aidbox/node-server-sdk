@@ -47,7 +47,6 @@ const manifest: TRawManifest<TContextHelper> = {
     },
   },
   subscriptions: {
-    // Patient_handler
     Patient: {
       handler: () => {
         console.log('qwerty');
