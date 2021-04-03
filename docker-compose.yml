@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   devbox-db:
-    image: 'aidbox/db:11.8.6'
+    image: 'healthsamurai/aidboxdb:13.2'
     ports:
       - '5432:5432'
     volumes:

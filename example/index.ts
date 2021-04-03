@@ -78,6 +78,8 @@ const main = async () => {
     console.error(`Unable to create app. Check config/manifest errors.`);
     process.exit(1);
   }
+  const test = await app.context.query("select * from patient");
+  console.log(test);
   await startApp(app);
 };
 
