@@ -14,7 +14,7 @@ test.afterEach.always(() => {
     sinon.restore();
 });
 
-test('createApp() fails on invalid config', (t) => {
+test('createApp() fails on invalid config', async (t) => {
     const config = {} as TConfig;
     const manifest = {} as TRawManifest<any>;
 
@@ -25,7 +25,7 @@ test('createApp() fails on invalid config', (t) => {
     const createDispatchStub = sinon.stub(Dispatch, 'createDispatch');
     const createServerStub = sinon.stub(Server, 'createServer');
 
-    const app = createApp(config, config, manifest);
+    const app = await createApp(config, config, manifest);
 
     t.is(app, undefined);
     sinon.assert.calledOnce(errorStub);
@@ -44,7 +44,7 @@ test.skip('createApp() fails on invalid manifest', () => {
     // t.is(app, undefined);
 });
 
-test('createApp() succeeds on valid config/manifest', (t) => {
+test('createApp() succeeds on valid config/manifest', async (t) => {
     const config = validConfig;
     const manifest = { subscriptions: {} } as TRawManifest<any>;
     const subscriptionHandlers = {};
@@ -60,7 +60,7 @@ test('createApp() succeeds on valid config/manifest', (t) => {
     const createDispatchStub = sinon.stub(Dispatch, 'createDispatch').returns(dispatch);
     const createServerStub = sinon.stub(Server, 'createServer');
 
-    const app = createApp(config, config, manifest);
+    const app = await createApp(config, config, manifest);
 
     t.not(app, undefined);
     sinon.assert.notCalled(errorStub);
@@ -80,7 +80,7 @@ test('createApp() succeeds on valid config/manifest', (t) => {
 test('startApp() starts an app', async (t) => {
     const config = validConfig;
     const manifest = validManifest;
-    const app = createApp(config, config, manifest);
+    const app = await createApp(config, config, manifest);
     assert.ok(app);
 
     const agentRequestStub = sinon.stub(app.agent, 'request');

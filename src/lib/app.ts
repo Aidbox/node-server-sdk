@@ -20,12 +20,12 @@ export type TApp<T> = {
     readonly patchedManifest: TPatchedManifest<T>;
 };
 
-export const createApp = <T>(
+export const createApp = async <T>(
     initConfig: TConfig,
     config: TConfig,
     manifest: TRawManifest<T>,
     contextHelpers?: T
-): TApp<T> | undefined => {
+): Promise<TApp<T> | undefined> => {
     const configError = validateConfig(config);
     const manifestError = validateManifest(manifest);
 
@@ -43,7 +43,7 @@ export const createApp = <T>(
         },
     });
     const { subscriptionHandlers, patchedManifest } = patchManifest(manifest);
-    const context = createContext(agent, initConfig, contextHelpers);
+    const context = await createContext(agent, initConfig, contextHelpers);
     const dispatch = createDispatch(config, patchedManifest, context, subscriptionHandlers);
     const httpServer = createServer(dispatch);
 

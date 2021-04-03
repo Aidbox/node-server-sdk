@@ -84,12 +84,12 @@ const main = async () => {
         { entities: { Baz: { attrs: { test: { type: 'string' } } } } },
         tt
     );
-    const app = createApp(initConfig, config, mergedManifest);
+    const app = await createApp(initConfig, config, mergedManifest);
     if (!app) {
         console.error(`Unable to create app. Check config/manifest errors.`);
         process.exit(1);
     }
-    const test = await app.context.query(`select * from "user"`);
+    const test = await app.context.query(`select * from "user" where id = $1`,['admin']);
     console.log(test);
     await startApp(app);
 };

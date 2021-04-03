@@ -1,206 +1,207 @@
 {
-  "name": "@aidbox/node-server-sdk",
-  "version": "1.7.13",
-  "description": "Node JS SDK for extend Aidbox.io",
-  "main": "build/main/index.js",
-  "typings": "build/main/index.d.ts",
-  "module": "build/module/index.js",
-  "repository": "https://github.com/Aidbox/node-server-sdk",
-  "license": "MIT",
-  "keywords": [
-    "aidbox",
-    "fhir",
-    "node-server"
-  ],
-  "scripts": {
-    "dev": "nodemon",
-    "build": "run-p build:*",
-    "build:main": "tsc -p tsconfig.json",
-    "build:module": "tsc -p tsconfig.module.json",
-    "fix": "run-s fix:*",
-    "fix:prettier": "prettier \"src/**/*.ts\" --write",
-    "fix:lint": "eslint src --ext .ts --fix",
-    "test": "run-s build test:*",
-    "test:lint": "eslint src --ext .ts",
-    "test:prettier": "prettier \"src/**/*.ts\" --list-different",
-    "test:spelling": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
-    "test:unit": "nyc --silent ava --serial",
-    "check-cli": "run-s test diff-integration-tests check-integration-tests",
-    "check-integration-tests": "run-s check-integration-test:*",
-    "diff-integration-tests": "mkdir -p diff && rm -rf diff/test && cp -r test diff/test && rm -rf diff/test/test-*/.git && cd diff && git init --quiet && git add -A && git commit --quiet --no-verify --allow-empty -m 'WIP' && echo '\\n\\nCommitted most recent integration test output in the \"diff\" directory. Review the changes with \"cd diff && git diff HEAD\" or your preferred git diff viewer.'",
-    "watch:build": "tsc -p tsconfig.json -w",
-    "watch:test": "nyc --silent ava --watch --serial",
-    "cov": "run-s build test:unit cov:html cov:lcov && open-cli coverage/index.html",
-    "cov:html": "nyc report --reporter=html",
-    "cov:lcov": "nyc report --reporter=lcov",
-    "cov:send": "run-s cov:lcov && codecov",
-    "cov:check": "nyc report && nyc check-coverage --lines 100 --functions 100 --branches 100",
-    "doc": "run-s doc:html && open-cli build/docs/index.html",
-    "doc:watch": "run-s doc:htmlw && open-cli build/docs/index.html",
-    "doc:htmlw": "typedoc src/ --exclude **/*.spec.ts --watch file --out build/docs --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme",
-    "doc:html": "typedoc src/ --exclude **/*.spec.ts  file --out build/docs --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme",
-    "doc:json": "typedoc src/ --exclude **/*.spec.ts  --json build/docs/typedoc.json --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme",
-    "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
-    "version": "standard-version",
-    "version-patch": "standard-version --release-as patch",
-    "version-minor": "standard-version --release-as minor",
-    "version-major": "standard-version --release-as major",
-    "reset-hard": "git clean -dfx && git reset --hard && npm i",
-    "prepare-release-local": "run-s fix test cov:check version",
-    "prepare-release-patch": "run-s reset-hard test cov:check doc:html version-patch doc:publish",
-    "prepare-release-minor": "run-s reset-hard test cov:check doc:html version-minor doc:publish",
-    "prepare-release-major": "run-s reset-hard test cov:check doc:html version-major doc:publish",
-    "prepare": "husky install"
-  },
-  "engines": {
-    "node": ">=12",
-    "npm": ">7.0.0"
-  },
-  "devDependencies": {
-    "@ava/typescript": "^1.1.1",
-    "@istanbuljs/nyc-config-typescript": "^1.0.1",
-    "@types/js-yaml": "^4.0.0",
-    "@types/node": "^14.14.35",
-    "@types/pg": "^7.14.11",
-    "@types/ramda": "^0.27.39",
-    "@types/sinon": "^9.0.11",
-    "@typescript-eslint/eslint-plugin": "^4.0.1",
-    "@typescript-eslint/parser": "^4.0.1",
-    "ava": "^3.12.1",
-    "codecov": "3.8.1",
-    "cspell": "^4.1.0",
-    "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^7.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-functional": "^3.0.2",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "gh-pages": "^3.1.0",
-    "husky": "^6.0.0",
-    "nodemon": "^2.0.7",
-    "npm-run-all": "^4.1.5",
-    "nyc": "^15.1.0",
-    "open-cli": "^6.0.1",
-    "prettier": "^2.1.1",
-    "sinon": "^10.0.0",
-    "standard-version": "^9.0.0",
-    "ts-node": "^9.1.1",
-    "typedoc": "^0.20.32",
-    "typedoc-neo-theme": "^1.1.0",
-    "typescript": "^4.2.3"
-  },
-  "dependencies": {
-    "axios": "^0.21.1",
-    "axios-retry": "^3.1.9",
-    "dotenv": "^8.2.0",
-    "js-yaml": "4.0.0",
-    "pg": "^8.5.1",
-    "ramda": "^0.27.1"
-  },
-  "files": [
-    "build/main",
-    "build/module",
-    "!**/*.spec.*",
-    "!**/*.json",
-    "CHANGELOG.md",
-    "LICENSE",
-    "README.md"
-  ],
-  "ava": {
-    "failFast": true,
-    "timeout": "60s",
-    "typescript": {
-      "rewritePaths": {
-        "src/": "build/main/"
-      }
+    "name": "@aidbox/node-server-sdk",
+    "version": "1.7.13",
+    "description": "Node JS SDK for extend Aidbox.io",
+    "main": "build/main/index.js",
+    "typings": "build/main/index.d.ts",
+    "module": "build/module/index.js",
+    "repository": "https://github.com/Aidbox/node-server-sdk",
+    "license": "MIT",
+    "keywords": [
+        "aidbox",
+        "fhir",
+        "node-server"
+    ],
+    "scripts": {
+        "dev": "nodemon",
+        "build": "run-p build:*",
+        "build:main": "tsc -p tsconfig.json",
+        "build:module": "tsc -p tsconfig.module.json",
+        "fix": "run-s fix:*",
+        "fix:prettier": "prettier \"src/**/*.ts\" --write",
+        "fix:lint": "eslint src --ext .ts --fix",
+        "precommit": "run-s build test:lint test:prettier test:spelling",
+        "test": "run-s build test:*",
+        "test:lint": "eslint src --ext .ts",
+        "test:prettier": "prettier \"src/**/*.ts\" --list-different",
+        "test:spelling": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
+        "test:unit": "nyc --silent ava --serial",
+        "check-cli": "run-s test diff-integration-tests check-integration-tests",
+        "check-integration-tests": "run-s check-integration-test:*",
+        "diff-integration-tests": "mkdir -p diff && rm -rf diff/test && cp -r test diff/test && rm -rf diff/test/test-*/.git && cd diff && git init --quiet && git add -A && git commit --quiet --no-verify --allow-empty -m 'WIP' && echo '\\n\\nCommitted most recent integration test output in the \"diff\" directory. Review the changes with \"cd diff && git diff HEAD\" or your preferred git diff viewer.'",
+        "watch:build": "tsc -p tsconfig.json -w",
+        "watch:test": "nyc --silent ava --watch --serial",
+        "cov": "run-s build test:unit cov:html cov:lcov && open-cli coverage/index.html",
+        "cov:html": "nyc report --reporter=html",
+        "cov:lcov": "nyc report --reporter=lcov",
+        "cov:send": "run-s cov:lcov && codecov",
+        "cov:check": "nyc report && nyc check-coverage --lines 100 --functions 100 --branches 100",
+        "doc": "run-s doc:html && open-cli build/docs/index.html",
+        "doc:watch": "run-s doc:htmlw && open-cli build/docs/index.html",
+        "doc:htmlw": "typedoc src/ --exclude **/*.spec.ts --watch file --out build/docs --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme",
+        "doc:html": "typedoc src/ --exclude **/*.spec.ts  file --out build/docs --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme",
+        "doc:json": "typedoc src/ --exclude **/*.spec.ts  --json build/docs/typedoc.json --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme",
+        "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
+        "version": "standard-version",
+        "version-patch": "standard-version --release-as patch",
+        "version-minor": "standard-version --release-as minor",
+        "version-major": "standard-version --release-as major",
+        "reset-hard": "git clean -dfx && git reset --hard && npm i",
+        "prepare-release-local": "run-s fix test cov:check version",
+        "prepare-release-patch": "run-s reset-hard test cov:check doc:html version-patch doc:publish",
+        "prepare-release-minor": "run-s reset-hard test cov:check doc:html version-minor doc:publish",
+        "prepare-release-major": "run-s reset-hard test cov:check doc:html version-major doc:publish",
+        "prepare": "husky install"
+    },
+    "engines": {
+        "node": ">=12",
+        "npm": ">7.0.0"
+    },
+    "devDependencies": {
+        "@ava/typescript": "^1.1.1",
+        "@istanbuljs/nyc-config-typescript": "^1.0.1",
+        "@types/js-yaml": "^4.0.0",
+        "@types/node": "^14.14.35",
+        "@types/pg": "^7.14.11",
+        "@types/ramda": "^0.27.39",
+        "@types/sinon": "^9.0.11",
+        "@typescript-eslint/eslint-plugin": "^4.0.1",
+        "@typescript-eslint/parser": "^4.0.1",
+        "ava": "^3.12.1",
+        "codecov": "3.8.1",
+        "cspell": "^4.1.0",
+        "cz-conventional-changelog": "^3.3.0",
+        "eslint": "^7.8.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-eslint-comments": "^3.2.0",
+        "eslint-plugin-functional": "^3.0.2",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-prettier": "^3.3.1",
+        "gh-pages": "^3.1.0",
+        "husky": "^6.0.0",
+        "nodemon": "^2.0.7",
+        "npm-run-all": "^4.1.5",
+        "nyc": "^15.1.0",
+        "open-cli": "^6.0.1",
+        "prettier": "^2.1.1",
+        "sinon": "^10.0.0",
+        "standard-version": "^9.0.0",
+        "ts-node": "^9.1.1",
+        "typedoc": "^0.20.32",
+        "typedoc-neo-theme": "^1.1.0",
+        "typescript": "^4.2.3"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "axios-retry": "^3.1.9",
+        "dotenv": "^8.2.0",
+        "js-yaml": "4.0.0",
+        "pg": "^8.5.1",
+        "ramda": "^0.27.1"
     },
     "files": [
-      "!build/module/**"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
+        "build/main",
+        "build/module",
+        "!**/*.spec.*",
+        "!**/*.json",
+        "CHANGELOG.md",
+        "LICENSE",
+        "README.md"
+    ],
+    "ava": {
+        "failFast": true,
+        "timeout": "60s",
+        "typescript": {
+            "rewritePaths": {
+                "src/": "build/main/"
+            }
+        },
+        "files": [
+            "!build/module/**"
+        ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "cz-conventional-changelog"
+        }
+    },
+    "prettier": {
+        "singleQuote": true,
+        "printWidth": 120
+    },
+    "nyc": {
+        "extends": "@istanbuljs/nyc-config-typescript",
+        "exclude": [
+            "**/*.spec.js"
+        ]
+    },
+    "nodemonConfig": {
+        "watch": [
+            "index.ts",
+            "src",
+            "example/index.ts"
+        ],
+        "ext": "ts",
+        "exec": "ts-node example/index.ts"
+    },
+    "eslintConfig": {
+        "root": true,
+        "parser": "@typescript-eslint/parser",
+        "parserOptions": {
+            "project": "./tsconfig.json"
+        },
+        "env": {
+            "es6": true
+        },
+        "ignorePatterns": [
+            "node_modules",
+            "build",
+            "coverage"
+        ],
+        "plugins": [
+            "import",
+            "eslint-comments",
+            "prettier"
+        ],
+        "extends": [
+            "eslint:recommended",
+            "plugin:eslint-comments/recommended",
+            "plugin:@typescript-eslint/recommended",
+            "plugin:import/typescript",
+            "prettier",
+            "prettier/@typescript-eslint"
+        ],
+        "globals": {
+            "BigInt": true,
+            "console": true,
+            "WebAssembly": true
+        },
+        "rules": {
+            "prettier/prettier": "warn",
+            "@typescript-eslint/explicit-module-boundary-types": "off",
+            "eslint-comments/disable-enable-pair": [
+                "error",
+                {
+                    "allowWholeFile": true
+                }
+            ],
+            "eslint-comments/no-unused-disable": "error",
+            "import/order": [
+                "error",
+                {
+                    "newlines-between": "never",
+                    "alphabetize": {
+                        "order": "asc"
+                    }
+                }
+            ],
+            "sort-imports": [
+                "error",
+                {
+                    "ignoreDeclarationSort": true,
+                    "ignoreCase": true
+                }
+            ]
+        }
     }
-  },
-  "prettier": {
-    "singleQuote": true,
-    "printWidth": 120
-  },
-  "nyc": {
-    "extends": "@istanbuljs/nyc-config-typescript",
-    "exclude": [
-      "**/*.spec.js"
-    ]
-  },
-  "nodemonConfig": {
-    "watch": [
-      "index.ts",
-      "src",
-      "example/index.ts"
-    ],
-    "ext": "ts",
-    "exec": "ts-node example/index.ts"
-  },
-  "eslintConfig": {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },
-    "env": {
-      "es6": true
-    },
-    "ignorePatterns": [
-      "node_modules",
-      "build",
-      "coverage"
-    ],
-    "plugins": [
-      "import",
-      "eslint-comments",
-      "prettier"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:eslint-comments/recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:import/typescript",
-      "prettier",
-      "prettier/@typescript-eslint"
-    ],
-    "globals": {
-      "BigInt": true,
-      "console": true,
-      "WebAssembly": true
-    },
-    "rules": {
-      "prettier/prettier": "warn",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "eslint-comments/disable-enable-pair": [
-        "error",
-        {
-          "allowWholeFile": true
-        }
-      ],
-      "eslint-comments/no-unused-disable": "error",
-      "import/order": [
-        "error",
-        {
-          "newlines-between": "never",
-          "alphabetize": {
-            "order": "asc"
-          }
-        }
-      ],
-      "sort-imports": [
-        "error",
-        {
-          "ignoreDeclarationSort": true,
-          "ignoreCase": true
-        }
-      ]
-    }
-  }
 }

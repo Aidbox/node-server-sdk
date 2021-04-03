@@ -6,13 +6,12 @@
 
 import { inspect } from 'util';
 import { AxiosRequestConfig } from 'axios';
+import { Pool } from 'pg';
 import { TConfig, TContext, TLogData } from '../types';
 import { TAgent } from './agent';
-// import { Pool } from 'pg';
+import { getDbConfig } from './config';
 
-const pgKeys: string[] = ['PGUSER', 'PGHOST', 'PGDATABASE', 'PGPASSWORD', 'PGPORT'];
-
-export const createContext = <T>(agent: TAgent, config: TConfig, contextHelpers: T): TContext<T> => {
+export const createContext = async <T>(agent: TAgent, config: TConfig, contextHelpers: T): Promise<TContext<T>> => {
     const context: Record<string, any> = {};
 
     context.request = (config: AxiosRequestConfig, jsonOverride = true) => {
@@ -34,29 +33,46 @@ export const createContext = <T>(agent: TAgent, config: TConfig, contextHelpers:
             return Promise.resolve();
         }
     };
-    const dbConfig = validateDbConfig();
-    if (dbConfig) {
+    const dbConfig = getDbConfig(config);
+    if (dbConfig instanceof Error) {
+        if (config.APP_DEBUG === 'true') {
+            console.log('Will be using aidbox sql endpoint. You miss params for use pg client.', dbConfig.message);
+        }
         context.query = async (query: string, params?: any[]) => {
-            console.log(params);
-            const response = await context.request({
-                url: '/$psql',
-                method: 'post',
-                data: { query },
-            });
-            console.log(response.data);
-            return { ready: query };
+            try {
+                const response = await context.request({
+                    url: '/$sql',
+                    method: 'post',
+                    data: [query, ...(params || [])],
+                });
+                return { query, params, rows: response.data, rowsCount: response.data?.length || 0 };
+            } catch (e) {
+                return { query, params, rows: [], error: e.response.data?.text?.div || 'Unknown error', rowsCount: 0 };
+            }
         };
-    } else if (config.APP_DEBUG === 'true') {
-        console.log('Will be using aidbox sql endpoint. You miss params for use pg client', dbConfig);
-        context.query = async (query: string, params?: any[]) => {
-            const response = await context.request({
-                url: '/$sql',
-                method: 'post',
-                data: [query, ...(params || [])],
+    } else {
+        try {
+            const pool = new Pool({
+                host: dbConfig.PGHOST,
+                user: dbConfig.PGUSER,
+                password: dbConfig.PGPASSWORD,
+                port: Number(dbConfig.PGPORT),
+                database: dbConfig.PGDATABASE,
             });
-            console.log(response.data);
-            return { test: query };
-        };
+            const client = await pool.connect();
+            context.query = async (query: string, params?: any[]) => {
+                try {
+                    const response = await client.query(query, params);
+                    client.release();
+                    return { query, params, rows: response.rows, rowsCount: response.rowCount };
+                } catch (e) {
+                    return { query, params, rows: [], error: e.message || 'Unknown error', rowsCount: 0 };
+                }
+            };
+        } catch (e) {
+            console.log('err', e);
+            process.exit(1);
+        }
     }
 
     context.psql = async <T>(query: string): Promise<readonly T[]> => {
@@ -69,19 +85,4 @@ export const createContext = <T>(agent: TAgent, config: TConfig, contextHelpers:
     };
 
     return { ...context, ...contextHelpers } as TContext<T>;
-};
-
-const validateDbConfig = (): Error | undefined => {
-    const config = process.env;
-    const errors = pgKeys.reduce<readonly string[]>((acc, key) => {
-        if (typeof config[key] === 'undefined') {
-            return acc.concat(`Missing key: ${key}`);
-        }
-        if (!config[key]) {
-            return acc.concat(`Missing value for key "${key}"`);
-        }
-        return acc;
-    }, []);
-
-    return errors.length ? new Error(`Invalid config.\n${errors.join('\n')}`) : undefined;
 };

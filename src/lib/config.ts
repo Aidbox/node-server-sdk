@@ -20,6 +20,8 @@ const configKeys: TConfigKeys = [
     'APP_SECRET',
 ];
 
+const pgKeys: TConfigKeys = ['PGUSER', 'PGHOST', 'PGDATABASE', 'PGPASSWORD', 'PGPORT'];
+
 export const createConfigFromJson = (path: string): [TConfig, TConfig] => {
     try {
         const file = fs.readFileSync(path);
@@ -50,4 +52,18 @@ export const validateConfig = (config: TConfig): Error | undefined => {
     }, []);
 
     return errors.length ? new Error(`Invalid config.\n${errors.join('\n')}`) : undefined;
+};
+
+export const getDbConfig = (config: TConfig): Error | TConfig => {
+    const errors = pgKeys.reduce<readonly string[]>((acc, key) => {
+        if (typeof config[key] === 'undefined') {
+            return acc.concat(`Missing key: ${key}`);
+        }
+        if (!config[key]) {
+            return acc.concat(`Missing value for key "${key}"`);
+        }
+        return acc;
+    }, []);
+
+    return errors.length ? new Error(`Invalid config.\n${errors.join('\n')}`) : R.pick(pgKeys, config);
 };

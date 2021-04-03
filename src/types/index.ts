@@ -13,6 +13,14 @@ export type TLogData = {
     readonly fx?: string;
 };
 
+export type TQueryResponse<T> = {
+    error?: string;
+    query: string;
+    params: any[];
+    rows: T[];
+    rowsCount: number;
+};
+
 /**
  * Default context type will be extend if you define your specific context helpers by provided type
  */
@@ -20,7 +28,7 @@ export type TContext<T = Record<string, never>> = {
     readonly request: <T>(config: AxiosRequestConfig, jsonOverride?: boolean) => Promise<AxiosResponse<T>>;
     readonly psql: <T>(query: string) => Promise<readonly T[]>;
     readonly log: (data: TLogData) => Promise<any>;
-    readonly query: (query: string) => Promise<any>;
+    readonly query: <T = any>(query: string, params?: any[]) => Promise<TQueryResponse<T>>;
 } & T;
 
 export type TOperationHandler<T = Record<string, never>> = (
@@ -70,11 +78,11 @@ export type TConfig = {
     readonly APP_URL: string;
     readonly APP_PORT: string;
     readonly APP_SECRET: string;
-    readonly PGUSER: string;
-    readonly PGPORT: string;
-    readonly PGHOST: string;
-    readonly PGDATABASE: string;
-    readonly PGPASSWORD: string;
+    readonly PGUSER?: string;
+    readonly PGPORT?: string;
+    readonly PGHOST?: string;
+    readonly PGDATABASE?: string;
+    readonly PGPASSWORD?: string;
 };
 
 export type TConfigKey = keyof TConfig;
