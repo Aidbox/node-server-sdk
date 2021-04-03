@@ -18,28 +18,24 @@ const configKeys: TConfigKeys = [
     'APP_URL',
     'APP_PORT',
     'APP_SECRET',
-    'PGUSER',
-    'PGHOST',
-    'PGDATABASE',
-    'PGPASSWORD',
 ];
 
-export const createConfigFromJson = (path: string): TConfig => {
+export const createConfigFromJson = (path: string): [TConfig, TConfig] => {
     try {
         const file = fs.readFileSync(path);
         const config = JSON.parse(file.toString()) as TConfig;
-        return R.pick(configKeys, config);
+        return [config, R.pick(configKeys, config)];
     } catch (e) {
         console.error('Error while read config file: ', e.message);
-        return {} as TConfig;
+        return [{} as TConfig, {} as TConfig];
     }
 };
 
-export const createConfigFromEnv = (path?: string): TConfig => {
+export const createConfigFromEnv = (path?: string): [TConfig, TConfig] => {
     if (path) {
         dotenv.config({ path: path });
     }
-    return R.pick(configKeys, process.env as TConfig);
+    return [process.env as TConfig, R.pick(configKeys, process.env as TConfig)];
 };
 
 export const validateConfig = (config: TConfig): Error | undefined => {

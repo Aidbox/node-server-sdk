@@ -71,6 +71,7 @@ export type TConfig = {
     readonly APP_PORT: string;
     readonly APP_SECRET: string;
     readonly PGUSER: string;
+    readonly PGPORT: string;
     readonly PGHOST: string;
     readonly PGDATABASE: string;
     readonly PGPASSWORD: string;

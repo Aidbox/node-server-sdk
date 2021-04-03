@@ -1,5 +1,6 @@
 import test from 'ava';
 import sinon from 'sinon';
+import { TConfig } from '../types';
 import { TAgent } from './agent';
 import { createContext } from './context';
 
@@ -11,7 +12,7 @@ test('request()', async (t) => {
     const requestSpy = sinon.spy();
     const agent = ({ request: requestSpy } as unknown) as TAgent;
 
-    const context = createContext(agent, {});
+    const context = createContext(agent, {} as TConfig, {});
     const requestConfig = {};
 
     await context.request(requestConfig);
@@ -25,7 +26,7 @@ test('log()', async (t) => {
     const requestSpy = sinon.spy();
     const agent = ({ request: requestSpy } as unknown) as TAgent;
 
-    const context = createContext(agent, {});
+    const context = createContext(agent, {} as TConfig, {});
     const logData = { message: { foo: 'foo' }, fx: 'fx', type: 'type', v: 'v' };
     const consoleLogStub = sinon.stub(console, 'log');
 
@@ -46,7 +47,7 @@ test('log() handles cyclic objects', async (t) => {
     const requestSpy = sinon.stub().throws(RangeError);
     const agent = ({ request: requestSpy } as unknown) as TAgent;
 
-    const context = createContext(agent, {});
+    const context = createContext(agent, {} as TConfig, {});
     const logData = { message: { foo: 'foo' }, fx: 'fx', type: 'type', v: 'v' };
     sinon.stub(console, 'log');
     const consoleErrorStub = sinon.stub(console, 'error');
@@ -62,7 +63,7 @@ test('psql()', async (t) => {
     const agent = ({ request: requestSpy } as unknown) as TAgent;
     const query = 'SELECT NOW()';
 
-    const context = createContext(agent, {});
+    const context = createContext(agent, {} as TConfig, {});
 
     await context.psql(query);
 
