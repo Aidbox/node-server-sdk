@@ -82,7 +82,7 @@ Firstly, you should create a config object. By default, we use env variables but
 import path from 'path';
 import { createConfigFromEnv } from '@aidbox/node-server-sdk';
 
-const config = createConfigFromEnv(path.resolve('../.env));
+const [initConfig, config] = createConfigFromEnv(path.resolve('../.env));
 ```
 
 (optional) Add your specific context helpers
@@ -115,7 +115,6 @@ const manifest: TRawManifest<TContextHelpers> = {
       method: 'GET',
       path: ['$test-operation'],
       handler: async (context) => {
-        context.greet('Alice'); // your specific context helper
         return { resource: { work: true } };
       },
     },
@@ -137,7 +136,7 @@ Typescript won't let you miss any required config keys. There are additional che
 ```typescript
 import { createApp, startApp } from '@aidbox/node-server-sdk';
 
-const app = createApp<TContextHelpers>(config, manifest, contextHelpers);
+const app = await createApp<TContextHelpers>(initConfig,config, manifest, contextHelpers);
 if (!app) {
   console.error(`Unable to create app. Check config/manifest errors.`);
   process.exit(1);

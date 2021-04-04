@@ -51,6 +51,9 @@ export const createContext = async <T>(agent: TAgent, config: TConfig, contextHe
             }
         };
     } else {
+        if (config.APP_DEBUG === 'true') {
+            console.log('Will be using pg client.');
+        }
         try {
             const pool = new Pool({
                 host: dbConfig.PGHOST,
@@ -59,9 +62,15 @@ export const createContext = async <T>(agent: TAgent, config: TConfig, contextHe
                 port: Number(dbConfig.PGPORT),
                 database: dbConfig.PGDATABASE,
             });
-            const client = await pool.connect();
+
             context.query = async (query: string, params?: any[]) => {
+                context.log({
+                    message: { query, params },
+                    type: 'sql',
+                    fx: 'sql-query',
+                });
                 try {
+                    const client = await pool.connect();
                     const response = await client.query(query, params);
                     client.release();
                     return { query, params, rows: response.rows, rowsCount: response.rowCount };
