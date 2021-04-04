@@ -133,7 +133,7 @@
 					<div class="tsd-signature tsd-kind-icon">TApp&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/lib/app.ts:16</li>
+							<li>Defined in src/lib/app.ts:15</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -152,6 +152,9 @@
 								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> config<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
 							</li>
 							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> context<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tcontext" class="tsd-signature-type">TContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li class="tsd-parameter">
 								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> http<wbr>Server<span class="tsd-signature-symbol">: </span><a href="http.html#tserver" class="tsd-signature-type">TServer</a></h5>
 							</li>
 							<li class="tsd-parameter">
@@ -167,7 +170,7 @@
 					<a name="createapp" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>App</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>App&lt;T&gt;<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="type_definition.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, contextHelpers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>App&lt;T&gt;<span class="tsd-signature-symbol">(</span>initConfig<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a>, config<span class="tsd-signature-symbol">: </span><a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a>, manifest<span class="tsd-signature-symbol">: </span><a href="type_definition.html#trawmanifest" class="tsd-signature-type">TRawManifest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, contextHelpers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -185,6 +188,9 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
+									<h5>initConfig: <a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
+								</li>
+								<li>
 									<h5>config: <a href="type_definition.html#tconfig" class="tsd-signature-type">TConfig</a></h5>
 								</li>
 								<li>
@@ -194,10 +200,7 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> contextHelpers: <span class="tsd-signature-type">T</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>
-							</h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="app.html#tapp" class="tsd-signature-type">TApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -211,7 +214,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/lib/app.ts:53</li>
+									<li>Defined in src/lib/app.ts:59</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
