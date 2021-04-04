@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.14](https://github.com/Aidbox/node-server-sdk/compare/v1.7.13...v1.7.14) (2021-04-04)
+
+
+### Features
+
+* **sql:** add sql context helper ([c56c6e3](https://github.com/Aidbox/node-server-sdk/commit/c56c6e31494b7c1d29cd50ad8150766070afd142))
+* **sql:** new sql helper ([afd2272](https://github.com/Aidbox/node-server-sdk/commit/afd2272cebaddd767c7f94184daf4b404e338e77))
+
 ### [1.7.13](https://github.com/Aidbox/node-server-sdk/compare/v1.7.12...v1.7.13) (2021-04-02)
 
 ### [1.7.12](https://github.com/Aidbox/node-server-sdk/compare/v1.7.11...v1.7.12) (2021-03-31)
