@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.5](https://github.com/Aidbox/node-server-sdk/compare/v1.8.4...v1.8.5) (2021-05-13)
+
+
+### Features
+
+* **manifest:** support upload prefined records and entities from modules ([f20a5fc](https://github.com/Aidbox/node-server-sdk/commit/f20a5fc32f258665e5d6d7ccf85cce93d91305c0))
+
 ### [1.8.4](https://github.com/Aidbox/node-server-sdk/compare/v1.8.3...v1.8.4) (2021-05-13)
 
 
