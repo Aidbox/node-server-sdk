@@ -1,4 +1,4 @@
-import { mergeModuleManifest } from './../src/lib/manifest';
+import { mergeManifests, readModulesManifests } from './../src/lib/manifest';
 import path from 'path';
 import { createApp, startApp, createConfigFromEnv } from '../src';
 import { TRawManifest } from '../src/types';
@@ -10,15 +10,6 @@ export type TContextHelper = {
 const manifest: TRawManifest<TContextHelper> = {
     resources: {
         AccessPolicy: {},
-    },
-    entities: {
-        Foo: {
-            attrs: {
-                tt: {
-                    type: 'string',
-                },
-            },
-        },
     },
     operations: {
         test: {
@@ -75,21 +66,26 @@ const tt: TRawManifest<TContextHelper> = {
     },
 };
 
+
 const main = async () => {
     const [initConfig, config] = createConfigFromEnv(path.resolve('../.env'));
 
-    const mergedManifest = mergeModuleManifest<TContextHelper>(
+    const modulesDir = path.resolve(__dirname, 'modules');
+    const modulesManifests = readModulesManifests(modulesDir);
+
+    const mergedManifest = mergeManifests<TContextHelper>(
         manifest,
         { entities: { Test: { attrs: { test: { type: 'string' } } } } },
         { entities: { Baz: { attrs: { test: { type: 'string' } } } } },
-        tt
+        tt,
+        ...modulesManifests
     );
     const app = await createApp(initConfig, config, mergedManifest);
     if (!app) {
         console.error(`Unable to create app. Check config/manifest errors.`);
         process.exit(1);
     }
-    const test = await app.context.query(`select * from "user" where id = $1`,['admin']);
+    const test = await app.context.query(`select * from "user" where id = $1`, ['admin']);
     console.log(test);
     await startApp(app);
 };

@@ -4,7 +4,10 @@
  * @module Manifest
  */
 
+import fs from 'fs';
+import path from 'path';
 import R from 'ramda';
+import yaml from 'yaml';
 import { TConfig, TPatchedManifest, TRawManifest, TSubscriptionHandlers } from '../types';
 import { TAgent } from './agent';
 
@@ -83,8 +86,36 @@ export const syncManifest = async <T>(agent: TAgent, config: TConfig, manifest: 
     });
 };
 
-export const mergeModuleManifest = <T>(...objects: readonly TRawManifest<T>[]) => {
+export const mergeManifests = <T>(...objects: readonly TRawManifest<T>[]) => {
     return objects.reduce((prev, next) => {
         return R.mergeDeepLeft(prev, next) as TRawManifest<T>;
     }, {} as TRawManifest<T>);
+};
+
+export const readModulesManifests = (modulesRoot: string) => {
+    const moduleNames = fs.readdirSync(modulesRoot);
+    return moduleNames.map((moduleName) => {
+        const modulePath = path.resolve(modulesRoot, moduleName);
+        const moduleEntities = readModuleEntities(modulePath);
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const { manifest: moduleManifest } = require(modulePath);
+        return { ...moduleManifest, entities: moduleEntities };
+    });
+};
+
+const readModuleEntities = (modulePath: string) => {
+    const entitiesPath = path.resolve(modulePath, 'entities');
+    if (!fs.existsSync(entitiesPath)) {
+        return [];
+    }
+    const files = fs.readdirSync(entitiesPath);
+    const entities: Record<string, any> = {};
+    files.forEach((fileName) => {
+        const filePath = path.resolve(entitiesPath, fileName);
+        const text = fs.readFileSync(filePath, 'utf-8');
+        const json = yaml.parse(text);
+        const key = fileName.replace('.yml', '');
+        entities[key] = json;
+    });
+    return entities;
 };
