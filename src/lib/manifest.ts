@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-var-requires */
+
 /**
  * Helpers for work with manifest object
 
@@ -97,9 +99,18 @@ export const readModulesManifests = (modulesRoot: string) => {
     return moduleNames.map((moduleName) => {
         const modulePath = path.resolve(modulesRoot, moduleName);
         const moduleEntities = readModuleEntities(modulePath);
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const { manifest: moduleManifest } = require(modulePath);
-        return { ...moduleManifest, entities: moduleEntities };
+        let moduleManifest;
+        try {
+            const module = require(modulePath);
+            moduleManifest = module.manifest;
+            return { ...moduleManifest, entities: moduleEntities };
+        } catch (e) {
+            console.log(
+                '\x1b[31m%s\x1b[0m',
+                `Detect missing module index file definition by path - ${e.message}.\nOnly .yaml resources file will be applied`
+            );
+            return { entities: moduleEntities };
+        }
     });
 };
 
