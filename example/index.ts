@@ -72,7 +72,6 @@ const main = async () => {
 
     const modulesDir = path.resolve(__dirname, 'modules');
     const modulesManifests = readModulesManifests(modulesDir);
-
     const mergedManifest = mergeManifests<TContextHelper>(
         manifest,
         { entities: { Test: { attrs: { test: { type: 'string' } } } } },

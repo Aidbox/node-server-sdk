@@ -98,35 +98,49 @@ export const readModulesManifests = (modulesRoot: string) => {
     const moduleNames = fs.readdirSync(modulesRoot);
     return moduleNames.map((moduleName) => {
         const modulePath = path.resolve(modulesRoot, moduleName);
-        const moduleEntities = readModuleEntities(modulePath);
+        const [resources, entities] = readModuleResourcesRoot(modulePath);
         let moduleManifest;
         try {
             const module = require(modulePath);
             moduleManifest = module.manifest;
-            return { ...moduleManifest, entities: moduleEntities };
+            return { ...moduleManifest, entities, resources };
         } catch (e) {
             console.log(
                 '\x1b[31m%s\x1b[0m',
                 `Detect missing module index file definition by path - ${e.message}.\nOnly .yaml resources file will be applied`
             );
-            return { entities: moduleEntities };
+            return { entities, resources };
         }
     });
 };
 
-const readModuleEntities = (modulePath: string) => {
-    const entitiesPath = path.resolve(modulePath, 'entities');
-    if (!fs.existsSync(entitiesPath)) {
-        return [];
+const readModuleResourcesRoot = (modulePath: string) => {
+    const resourcesPath = path.resolve(modulePath, 'resources');
+    const entities = readModuleResources(resourcesPath, 'entities');
+    const resources = readModuleResources(resourcesPath, 'resources');
+    return [resources, entities];
+};
+
+const readModuleResources = (modulePath: string, innerPath: string) => {
+    const resourcesPath = path.resolve(modulePath, innerPath);
+    if (!fs.existsSync(resourcesPath)) {
+        return {};
     }
-    const files = fs.readdirSync(entitiesPath);
-    const entities: Record<string, any> = {};
+    const files = fs.readdirSync(resourcesPath);
+    const resources: Record<string, any> = {};
     files.forEach((fileName) => {
-        const filePath = path.resolve(entitiesPath, fileName);
-        const text = fs.readFileSync(filePath, 'utf-8');
-        const json = yaml.parse(text);
-        const key = fileName.replace('.yml', '');
-        entities[key] = json;
+        if (fileName.endsWith('.yml') || fileName.endsWith('.yaml')) {
+            const filePath = path.resolve(resourcesPath, fileName);
+            const text = fs.readFileSync(filePath, 'utf-8');
+            const json = yaml.parse(text);
+            const key = fileName.replace(/\.[^/.]+$/, '');
+            resources[key] = json;
+        } else {
+            console.log(
+                '\x1b[31m%s\x1b[0m',
+                `Invalid file extension for resource file  - ${fileName} in path ${resourcesPath} `
+            );
+        }
     });
-    return entities;
+    return resources;
 };
