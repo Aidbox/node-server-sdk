@@ -1,1 +1,1 @@
-export const manifest = {};
+export const manifest = { resources: { Bar: { rrr: {bar: 'ste'}}}};
