@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.2](https://github.com/Aidbox/node-server-sdk/compare/v1.9.1...v1.9.2) (2021-05-17)
+
+
+### Features
+
+* **manifest:** support deep-merge manifest resources ([cd20aee](https://github.com/Aidbox/node-server-sdk/commit/cd20aee95f79152aebde615ef9b6780d318f5ea8))
+
 ### [1.9.1](https://github.com/Aidbox/node-server-sdk/compare/v1.9.0...v1.9.1) (2021-05-17)
 
 
