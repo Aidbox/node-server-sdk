@@ -84,6 +84,7 @@ const main = async () => {
         console.error(`Unable to create app. Check config/manifest errors.`);
         process.exit(1);
     }
+    console.log(app.context.getAppConfig())
     const test = await app.context.query(`select * from "user" where id = $1`, ['admin']);
     console.log(test);
     await startApp(app);

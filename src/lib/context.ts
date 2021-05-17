@@ -9,7 +9,7 @@ import { AxiosRequestConfig } from 'axios';
 import { Pool } from 'pg';
 import { TConfig, TContext, TLogData } from '../types';
 import { TAgent } from './agent';
-import { getDbConfig } from './config';
+import { getAppConfig, getDbConfig } from './config';
 
 export const createContext = async <T>(agent: TAgent, config: TConfig, contextHelpers: T): Promise<TContext<T>> => {
     const context: Record<string, any> = {};
@@ -93,8 +93,8 @@ export const createContext = async <T>(agent: TAgent, config: TConfig, contextHe
         return response.data[0].result;
     };
 
-    context.getConfig = (): TConfig => {
-        return config;
+    context.getAppConfig = () => {
+        return getAppConfig(config);
     };
 
     return { ...context, ...contextHelpers } as TContext<T>;
