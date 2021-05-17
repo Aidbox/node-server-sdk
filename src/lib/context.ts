@@ -93,5 +93,9 @@ export const createContext = async <T>(agent: TAgent, config: TConfig, contextHe
         return response.data[0].result;
     };
 
+    context.getConfig = (): TConfig => {
+        return config;
+    };
+
     return { ...context, ...contextHelpers } as TContext<T>;
 };
