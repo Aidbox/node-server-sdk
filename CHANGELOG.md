@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/Aidbox/node-server-sdk/compare/v1.8.5...v1.9.0) (2021-05-17)
+
+
+### Features
+
+* **context:** add getCofig ([766aed6](https://github.com/Aidbox/node-server-sdk/commit/766aed6f071dd3e2282e1916cf2c957443ea0110))
+
 ### [1.8.5](https://github.com/Aidbox/node-server-sdk/compare/v1.8.4...v1.8.5) (2021-05-13)
 
 
