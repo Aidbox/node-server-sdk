@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://github.com/Aidbox/node-server-sdk/compare/v1.9.0...v1.9.1) (2021-05-17)
+
+
+### Bug Fixes
+
+* **context:** fix types for getAppConfig ([e71ad92](https://github.com/Aidbox/node-server-sdk/commit/e71ad9238fbe03b85257d69ab16e09a000dbb807))
+
 ## [1.9.0](https://github.com/Aidbox/node-server-sdk/compare/v1.8.5...v1.9.0) (2021-05-17)
 
 
