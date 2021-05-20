@@ -12,6 +12,7 @@ import R from 'ramda';
 import yaml from 'yaml';
 import { TConfig, TPatchedManifest, TRawManifest, TSubscriptionHandlers } from '../types';
 import { TAgent } from './agent';
+import { merge } from './deep-merge';
 
 export const validateManifest = <T>(manifest: TRawManifest<T>): Error | undefined => {
     const { subscriptions = {}, operations = {} } = manifest;
@@ -103,7 +104,7 @@ export const readModulesManifests = (modulesRoot: string) => {
         try {
             const module = require(modulePath);
             moduleManifest = module.manifest;
-            return { ...moduleManifest, entities, resources };
+            return merge({}, moduleManifest, { entities: entities }, { resources: resources });
         } catch (e) {
             console.log(
                 '\x1b[31m%s\x1b[0m',

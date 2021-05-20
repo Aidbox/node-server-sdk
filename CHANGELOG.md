@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.2](https://github.com/Aidbox/node-server-sdk/compare/v1.9.1...v1.9.2) (2021-05-17)
+
+
+### Features
+
+* **manifest:** support deep-merge manifest resources ([cd20aee](https://github.com/Aidbox/node-server-sdk/commit/cd20aee95f79152aebde615ef9b6780d318f5ea8))
+
+### [1.9.1](https://github.com/Aidbox/node-server-sdk/compare/v1.9.0...v1.9.1) (2021-05-17)
+
+
+### Bug Fixes
+
+* **context:** fix types for getAppConfig ([e71ad92](https://github.com/Aidbox/node-server-sdk/commit/e71ad9238fbe03b85257d69ab16e09a000dbb807))
+
+## [1.9.0](https://github.com/Aidbox/node-server-sdk/compare/v1.8.5...v1.9.0) (2021-05-17)
+
+
+### Features
+
+* **context:** add getCofig ([766aed6](https://github.com/Aidbox/node-server-sdk/commit/766aed6f071dd3e2282e1916cf2c957443ea0110))
+
 ### [1.8.5](https://github.com/Aidbox/node-server-sdk/compare/v1.8.4...v1.8.5) (2021-05-13)
 
 

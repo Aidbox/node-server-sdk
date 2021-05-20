@@ -67,3 +67,15 @@ export const getDbConfig = (config: TConfig): Error | TConfig => {
 
     return errors.length ? new Error(`Invalid config.\n${errors.join('\n')}`) : R.pick(pgKeys, config);
 };
+
+export const getAppConfig = (config: TConfig): Partial<TConfig> => {
+    return pick(config, ['APP_DEBUG', 'AIDBOX_URL']);
+};
+
+function pick<T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> {
+    const ret: any = {};
+    for (const key of keys) {
+        ret[key] = obj[key];
+    }
+    return ret;
+}

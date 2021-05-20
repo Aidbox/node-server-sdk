@@ -29,6 +29,7 @@ export type TContext<T = Record<string, never>> = {
     readonly psql: <T>(query: string) => Promise<readonly T[]>;
     readonly log: (data: TLogData) => Promise<any>;
     readonly query: <T = any>(query: string, params?: any[]) => Promise<TQueryResponse<T>>;
+    readonly getAppConfig: () => Partial<TConfig>;
 } & T;
 
 export type TOperationHandler<T = Record<string, never>> = (

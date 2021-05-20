@@ -1,3 +1,4 @@
+import { inspect } from 'util';
 import { mergeManifests, readModulesManifests } from './../src/lib/manifest';
 import path from 'path';
 import { createApp, startApp, createConfigFromEnv } from '../src';
@@ -72,6 +73,7 @@ const main = async () => {
 
     const modulesDir = path.resolve(__dirname, 'modules');
     const modulesManifests = readModulesManifests(modulesDir);
+    console.log(inspect(modulesManifests,false,null,true));
     const mergedManifest = mergeManifests<TContextHelper>(
         manifest,
         { entities: { Test: { attrs: { test: { type: 'string' } } } } },
@@ -84,6 +86,7 @@ const main = async () => {
         console.error(`Unable to create app. Check config/manifest errors.`);
         process.exit(1);
     }
+    console.log(app.context.getAppConfig())
     const test = await app.context.query(`select * from "user" where id = $1`, ['admin']);
     console.log(test);
     await startApp(app);
