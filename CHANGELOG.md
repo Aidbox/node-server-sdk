@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.3](https://github.com/Aidbox/node-server-sdk/compare/v1.9.2...v1.9.3) (2021-05-20)
+
+
+### Features
+
+* **app:** Allow to specify app port ([434c7a4](https://github.com/Aidbox/node-server-sdk/commit/434c7a410b84f88eef475b69890aa3b665e794a8))
+
 ### [1.9.2](https://github.com/Aidbox/node-server-sdk/compare/v1.9.1...v1.9.2) (2021-05-17)
 
 
