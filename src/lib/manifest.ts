@@ -100,18 +100,9 @@ export const readModulesManifests = (modulesRoot: string) => {
     return moduleNames.map((moduleName) => {
         const modulePath = path.resolve(modulesRoot, moduleName);
         const [resources, entities] = readModuleResourcesRoot(modulePath);
-        let moduleManifest;
-        try {
-            const module = require(modulePath);
-            moduleManifest = module.manifest;
-            return merge({}, moduleManifest, { entities: entities }, { resources: resources });
-        } catch (e) {
-            console.log(
-                '\x1b[31m%s\x1b[0m',
-                `Detect missing module index file definition by path - ${e.message}.\nOnly .yaml resources file will be applied`
-            );
-            return { entities, resources };
-        }
+        const module = require(modulePath);
+        const moduleManifest = module.manifest;
+        return merge({}, moduleManifest, { entities: entities }, { resources: resources });
     });
 };
 
