@@ -56,7 +56,7 @@ export const createApp = async <T>(
     };
 };
 
-export const startApp = async <T>(app: TApp<T>) => {
+export const startApp = async <T>(app: TApp<T>, port = 8090) => {
     const { agent, config, patchedManifest, httpServer } = app;
     try {
         await awaitAidbox(agent);
@@ -66,5 +66,5 @@ export const startApp = async <T>(app: TApp<T>) => {
         else console.error(err.response.data);
         process.exit(1);
     }
-    await startServer(httpServer);
+    await startServer(httpServer, port);
 };
