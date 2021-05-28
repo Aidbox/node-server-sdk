@@ -107,6 +107,7 @@ export type TMessage = {
         readonly resource: any;
         readonly headers: Record<string, string>;
         readonly params: Record<string, string>;
+        readonly 'form-params': Record<string, string>;
         readonly 'route-params': Record<string, string>;
         readonly 'oauth/user': Record<string, any>;
         readonly 'oauth/client': Record<string, any>;
