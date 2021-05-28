@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.6](https://github.com/Aidbox/node-server-sdk/compare/v1.9.5...v1.9.6) (2021-05-28)
+
+
+### Features
+
+* **message:** Add 'form-params' ([6c50eb0](https://github.com/Aidbox/node-server-sdk/commit/6c50eb0226dd561be482083a945dd807d9573436))
+
 ### [1.9.5](https://github.com/Aidbox/node-server-sdk/compare/v1.9.4...v1.9.5) (2021-05-20)
 
 ### [1.9.4](https://github.com/Aidbox/node-server-sdk/compare/v1.9.3...v1.9.4) (2021-05-20)
