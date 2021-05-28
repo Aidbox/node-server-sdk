@@ -119,7 +119,7 @@ const validConfig = {
     AIDBOX_CLIENT_SECRET: 'AIDBOX_CLIENT_SECRET',
     APP_ID: 'APP_ID',
     APP_URL: 'APP_URL',
-    APP_PORT: 'APP_PORT',
+    APP_PORT: '8090',
     APP_SECRET: 'APP_SECRET',
     PGUSER: 'PGUSER',
     PGHOST: 'PGHOST',
