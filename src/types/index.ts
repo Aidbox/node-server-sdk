@@ -105,6 +105,7 @@ export type TMessage = {
     readonly type: EOperation;
     readonly request: {
         readonly resource: any;
+        readonly body: string;
         readonly headers: Record<string, string>;
         readonly params: Record<string, string>;
         readonly 'form-params': Record<string, string>;
