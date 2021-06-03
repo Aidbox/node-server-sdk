@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.8](https://github.com/Aidbox/node-server-sdk/compare/v1.9.7...v1.9.8) (2021-06-03)
+
 ### [1.9.7](https://github.com/Aidbox/node-server-sdk/compare/v1.9.6...v1.9.7) (2021-06-02)
 
 ### [1.9.6](https://github.com/Aidbox/node-server-sdk/compare/v1.9.5...v1.9.6) (2021-05-28)
