@@ -1,11 +1,8 @@
+*.log
+.DS_STORE
+.env
 .idea/*
 .nyc_output
 build
-node_modules
-test
-src/**.js
 coverage
-*.log
-yarn.lock
-.env
-.DS_STORE
+node_modules
