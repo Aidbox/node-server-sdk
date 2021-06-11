@@ -34,7 +34,7 @@ export type TContext<T = Record<string, never>> = {
 
 export type TOperationHandler<T = Record<string, never>> = (
     ctx: TContext<T>,
-    msq: TMessage
+    msq: TOperationMessage
 ) => Promise<{
     readonly status?: number;
     readonly resource?: any;
@@ -64,7 +64,10 @@ export type TPatchedManifest<T = Record<string, never>> = TRawManifest<T> & {
 export type TSubscription<T = Record<string, never>> = {
     readonly handler: TSubscriptionHandler<T>;
 };
-export type TSubscriptionHandler<T = Record<string, never>> = (context: TContext<T>, message: TMessage) => any;
+export type TSubscriptionHandler<T = Record<string, never>> = (
+    context: TContext<T>,
+    message: TSubscriptionMessage
+) => any;
 
 export type TSubscriptionHandlers<T = Record<string, never>> = {
     readonly [key: string]: TSubscriptionHandler<T>;
@@ -96,13 +99,13 @@ export enum EAccept {
     JSON = 'application/json',
 }
 
-export enum EOperation {
+export enum EMessageType {
     OPERATION = 'operation',
     SUBSCRIPTION = 'subscription',
 }
 
 export type TMessage = {
-    readonly type: EOperation;
+    readonly type: EMessageType;
     readonly request: {
         readonly resource: any;
         readonly body: string;
@@ -114,13 +117,19 @@ export type TMessage = {
         readonly 'oauth/client': Record<string, any>;
     };
     readonly box: Record<string, string>;
+    readonly handler: string;
+};
 
-    readonly event?: {
+export type TSubscriptionMessage = TMessage & {
+    readonly event: {
         readonly resource: any;
         readonly action: string;
         readonly tx: any;
     };
-    readonly operation?: {
+};
+
+export type TOperationMessage = TMessage & {
+    readonly operation: {
         readonly app: Record<string, string>;
         readonly action: string;
         readonly module: string;
@@ -128,5 +137,4 @@ export type TMessage = {
         readonly id: string;
         readonly w: null;
     };
-    readonly handler?: string;
 };
