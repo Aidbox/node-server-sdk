@@ -71,6 +71,7 @@ jobs:
         with:
           node-version: 14
       - run: npm ci
+      - run: npm run build
       - run: npm run doc
       - name: Publish docs
         uses: JamesIves/github-pages-deploy-action@4.1.0
