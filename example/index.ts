@@ -66,7 +66,6 @@ const tt: TRawManifest<TContextHelper> = {
     },
 };
 
-
 const main = async () => {
     const [initConfig, config] = createConfigFromEnv(path.resolve('../.env'));
 

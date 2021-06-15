@@ -2,9 +2,8 @@
     "name": "@aidbox/node-server-sdk",
     "version": "1.10.0",
     "description": "Node JS SDK for extend Aidbox.io",
-    "main": "build/main/index.js",
-    "typings": "build/main/index.d.ts",
-    "module": "build/module/index.js",
+    "main": "./build/src/index.js",
+    "typings": "./build/src/index.d.ts",
     "repository": "https://github.com/Aidbox/node-server-sdk",
     "license": "MIT",
     "keywords": [
@@ -13,12 +12,10 @@
         "node-server"
     ],
     "scripts": {
-        "dev": "nodemon",
-        "build": "run-p build:*",
-        "build:main": "tsc -p tsconfig.json",
-        "build:module": "tsc -p tsconfig.module.json",
+        "dev": "nodemon -w src -w example ./example/index.ts",
+        "build": "tsc -b src",
         "fix": "run-s fix:*",
-        "fix:prettier": "prettier \"src/**/*.ts\" --write",
+        "fix:prettier": "prettier --write \"src/**/*.ts\" \"example/**/*.ts\"",
         "fix:lint": "eslint src --ext .ts --fix",
         "precommit": "run-s build test:lint test:prettier test:spelling",
         "test": "run-s build test:*",
@@ -51,7 +48,8 @@
         "prepare-release-patch": "run-s reset-hard test cov:check doc:html version-patch doc:publish",
         "prepare-release-minor": "run-s reset-hard test cov:check doc:html version-minor doc:publish",
         "prepare-release-major": "run-s reset-hard test cov:check doc:html version-major doc:publish",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "clean": "rm -rf build"
     },
     "engines": {
         "node": ">=12",
@@ -101,8 +99,7 @@
         "yaml": "^1.10.2"
     },
     "files": [
-        "build/main",
-        "build/module",
+        "build/src",
         "!**/*.spec.*",
         "!**/*.json",
         "CHANGELOG.md",
@@ -114,7 +111,7 @@
         "timeout": "60s",
         "typescript": {
             "rewritePaths": {
-                "src/": "build/main/"
+                "src/": "build/src/"
             }
         },
         "files": [
@@ -137,19 +134,17 @@
         ]
     },
     "nodemonConfig": {
-        "watch": [
-            "index.ts",
-            "src",
-            "example/index.ts"
-        ],
         "ext": "ts",
-        "exec": "ts-node example/index.ts"
+        "exec": "ts-node"
     },
     "eslintConfig": {
         "root": true,
         "parser": "@typescript-eslint/parser",
         "parserOptions": {
-            "project": "./tsconfig.json"
+            "project": [
+                "./src/tsconfig.json",
+                "./example/tsconfig.json"
+            ]
         },
         "env": {
             "es6": true
@@ -186,23 +181,7 @@
                     "allowWholeFile": true
                 }
             ],
-            "eslint-comments/no-unused-disable": "error",
-            "import/order": [
-                "error",
-                {
-                    "newlines-between": "never",
-                    "alphabetize": {
-                        "order": "asc"
-                    }
-                }
-            ],
-            "sort-imports": [
-                "error",
-                {
-                    "ignoreDeclarationSort": true,
-                    "ignoreCase": true
-                }
-            ]
+            "eslint-comments/no-unused-disable": "error"
         }
     }
 }

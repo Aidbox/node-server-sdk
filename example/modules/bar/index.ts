@@ -1,1 +1,1 @@
-export { manifest } from './manifest'
+export { manifest } from './manifest';
