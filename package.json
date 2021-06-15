@@ -2,8 +2,8 @@
     "name": "@aidbox/node-server-sdk",
     "version": "1.10.0",
     "description": "Node JS SDK for extend Aidbox.io",
-    "main": "build/src/index.js",
-    "typings": "build/src/index.d.ts",
+    "main": "./build/src/index.js",
+    "typings": "./build/src/index.d.ts",
     "repository": "https://github.com/Aidbox/node-server-sdk",
     "license": "MIT",
     "keywords": [
@@ -48,7 +48,8 @@
         "prepare-release-patch": "run-s reset-hard test cov:check doc:html version-patch doc:publish",
         "prepare-release-minor": "run-s reset-hard test cov:check doc:html version-minor doc:publish",
         "prepare-release-major": "run-s reset-hard test cov:check doc:html version-major doc:publish",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "clean": "rm -rf build"
     },
     "engines": {
         "node": ">=12",
