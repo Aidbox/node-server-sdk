@@ -39,7 +39,7 @@ export type TOperationHandler<T = Record<string, never>> = (
     readonly status?: number;
     readonly resource?: any;
     readonly headers?: Record<string, string>;
-    readonly body?: string;
+    readonly text?: string;
 }>;
 
 export type TOperation<T = Record<string, never>> = {
@@ -108,7 +108,7 @@ export type TMessage = {
     readonly type: EMessageType;
     readonly request: {
         readonly resource: any;
-        readonly body: string;
+        readonly text: string;
         readonly headers: Record<string, string>;
         readonly params: Record<string, string>;
         readonly 'form-params': Record<string, string>;

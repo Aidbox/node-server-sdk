@@ -47,11 +47,11 @@ export const createDispatch: TDispatch = (config, manifest, context, subscriptio
             const operation = manifest.operations?.[operationId];
             assert.ok(operation, `Operation ${operationId} not found`);
             const { handler } = operation;
-            const { status, headers, resource, body } = await handler(context, opMessage);
+            const { status, headers, resource, text } = await handler(context, opMessage);
             if (opMessage.request.headers.accept === 'text/yaml') {
                 sendResponse(yaml.dump(resource, { noRefs: true }), status, headers);
-            } else if (body) {
-                sendResponse(body, status, headers);
+            } else if (text) {
+                sendResponse(text, status, headers);
             } else {
                 sendResponse(JSON.stringify(resource), status, headers);
             }
