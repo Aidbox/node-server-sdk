@@ -26,7 +26,7 @@ test('log()', async (t) => {
     const requestSpy = sinon.spy();
     const agent = ({ request: requestSpy } as unknown) as TAgent;
 
-    const context = await createContext(agent, {} as TConfig, {});
+    const context = await createContext(agent, { APP_DEBUG: 'true' } as TConfig, {});
     const logData = { message: { foo: 'foo' }, fx: 'fx', type: 'type', v: 'v' };
     const consoleLogStub = sinon.stub(console, 'log');
 
