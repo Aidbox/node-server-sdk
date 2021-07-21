@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.1](https://github.com/Aidbox/node-server-sdk/compare/v1.12.0...v1.12.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* **context:** Log SQL only in debug mode ([f02e01d](https://github.com/Aidbox/node-server-sdk/commit/f02e01d88f0859aa300903e3364332281c5f5989))
+
 ## [1.12.0](https://github.com/Aidbox/node-server-sdk/compare/v1.11.1...v1.12.0) (2021-06-23)
 
 
