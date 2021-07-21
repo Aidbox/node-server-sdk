@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.2](https://github.com/Aidbox/node-server-sdk/compare/v1.12.1...v1.12.2) (2021-07-21)
+
+
+### Bug Fixes
+
+* **context:** Fix tests ([d464ac7](https://github.com/Aidbox/node-server-sdk/commit/d464ac74b521e197cea47531c8184942f8d1e746))
+* **package:** Fix version ([e7102f7](https://github.com/Aidbox/node-server-sdk/commit/e7102f78913432ddb63082ac39e2917004c5184f))
+
 ### [1.12.1](https://github.com/Aidbox/node-server-sdk/compare/v1.12.0...v1.12.1) (2021-07-21)
 
 
