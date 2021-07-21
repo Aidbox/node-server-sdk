@@ -21,7 +21,9 @@ export const createContext = async <T>(agent: TAgent, config: TConfig, contextHe
         });
     };
     context.log = (data: TLogData) => {
-        console.log(inspect(data, false, null, true));
+        if (config.APP_DEBUG === 'true') {
+            console.log(inspect(data, false, null, true));
+        }
         try {
             return agent.request({
                 url: '/$loggy',
@@ -64,13 +66,11 @@ export const createContext = async <T>(agent: TAgent, config: TConfig, contextHe
             });
 
             context.query = async (query: string, params?: any[]) => {
-                if (config.APP_DEBUG === 'true') {
-                    context.log({
-                        message: { query, params },
-                        type: 'sql',
-                        fx: 'sql-query',
-                    });
-                }
+                context.log({
+                    message: { query, params },
+                    type: 'sql',
+                    fx: 'sql-query',
+                });
                 try {
                     const client = await pool.connect();
                     const response = await client.query(query, params);
