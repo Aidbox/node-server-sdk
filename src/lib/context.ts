@@ -64,11 +64,13 @@ export const createContext = async <T>(agent: TAgent, config: TConfig, contextHe
             });
 
             context.query = async (query: string, params?: any[]) => {
-                context.log({
-                    message: { query, params },
-                    type: 'sql',
-                    fx: 'sql-query',
-                });
+                if (config.APP_DEBUG === 'true') {
+                    context.log({
+                        message: { query, params },
+                        type: 'sql',
+                        fx: 'sql-query',
+                    });
+                }
                 try {
                     const client = await pool.connect();
                     const response = await client.query(query, params);
