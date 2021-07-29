@@ -1,15 +1,6 @@
-import dotenv from 'dotenv';
-
-/**
- * By default we export createApp and startApp functions
- *
- * @module Index
- */
-
-dotenv.config();
-
-export * from './lib/app';
-export * from './lib/config';
-export { awaitAidbox } from './lib/agent';
-export * from './types';
-export { mergeManifests, readModulesManifests } from './lib/manifest';
+export * from "./aidbox";
+export * from "./app";
+export * from "./ctx";
+export * from "./errors";
+export * from "./manifest";
+export * from "./message";
