@@ -21,7 +21,7 @@ export type TAppResourceEndpoint = {
 
 export type TAppResourceOperation = {
   method: "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
-  path: string[];
+  path: (string | { name: string })[];
 };
 
 export type TAppResourceSubscription = {

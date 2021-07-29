@@ -8,7 +8,10 @@ export type TOperationMessage<T = any> = {
 
 export type TOperationMessageRequest<T> = {
   resource?: T;
+  "oauth/user": Record<string, any>;
+  "oauth/client": Record<string, any>;
   params: Record<string, string>;
+  "form-params"?: Record<string, string>;
   "route-params": Record<string, string>;
   headers: Record<string, string>;
 };
