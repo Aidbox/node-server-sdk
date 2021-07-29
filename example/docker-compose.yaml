@@ -1,0 +1,24 @@
+version: "3.1"
+services:
+  devbox:
+    image: "${AIDBOX_IMAGE}"
+    depends_on:
+      - "devbox-db"
+    links:
+      - "devbox-db:database"
+    ports:
+      - "${AIDBOX_PORT}:${AIDBOX_PORT}"
+    env_file:
+      - .env
+    environment:
+      PGHOST: database
+  devbox-db:
+    image: "${PGIMAGE}"
+    ports:
+      - "${PGHOSTPORT}:${PGPORT}"
+    volumes:
+      - "./pgdata:/data"
+    environment:
+      POSTGRES_USER: "${PGUSER}"
+      POSTGRES_PASSWORD: "${PGPASSWORD}"
+      POSTGRES_DB: "${PGDATABASE}"
