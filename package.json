@@ -41,11 +41,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oct8cat/aidbox-server-sdk.git"
+    "url": "git+https://github.com/Aidbox/node-server-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/oct8cat/aidbox-server-sdk/issues"
+    "url": "https://github.com/Aidbox/node-server-sdk/issues"
   },
-  "homepage": "https://github.com/oct8cat/aidbox-server-sdk#readme",
+  "homepage": "https://github.com/Aidbox/node-server-sdk#readme",
   "description": ""
 }
