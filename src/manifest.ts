@@ -12,7 +12,10 @@ export type TManifestProps = Partial<
     appId: string;
     appSecret: string;
     appUrl: string;
-  } & Pick<TManifest, "operations" | "subscriptions" | "entities" | "resources">
+  } & Pick<
+    TManifest,
+    "apiVersion" | "operations" | "subscriptions" | "entities" | "resources"
+  >
 >;
 
 export type TManifestOperations = Record<string, TManifestOperation>;
