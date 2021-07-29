@@ -7,8 +7,7 @@
     "watch": "tsc -b -w src",
     "fix": "npm run fix:src && npm run fix:example",
     "fix:src": "find src -name *.ts | xargs prettier -w",
-    "fix:example": "find example/src -name *.ts | xargs prettier -w",
-    "prepublish": "npm run build"
+    "fix:example": "find example/src -name *.ts | xargs prettier -w"
   },
   "keywords": [],
   "author": "",
