@@ -11,7 +11,7 @@ const debug = require("debug")("@aidbox/server-sdk:app");
 export type TApp = Koa<any, TAppCtx>;
 export type TAppCtx = { aidbox: { ctx: TCtx; helpers: any } };
 
-export const createApp = (ctx: TCtx, helpers: any): TApp => {
+export const createApp = (ctx: TCtx, helpers?: any): TApp => {
   const app: TApp = new Koa();
   app.context.aidbox = { ctx, helpers };
 

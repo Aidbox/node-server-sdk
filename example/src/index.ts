@@ -10,7 +10,7 @@ const main = async () => {
   dotenv.config();
   // Init app
   const ctx = createCtx({
-    manifest: { operations, subscriptions, entities, resources },
+    manifest: { operations, subscriptions, entities, resources, apiVersion: 2 },
   });
   const helpers = createHelpers(ctx);
   const app = createApp(ctx, helpers);
