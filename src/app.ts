@@ -4,11 +4,13 @@ import bodyParser from "koa-bodyparser";
 import { TCtx } from "./ctx";
 import { dispatch } from "./dispatch";
 import { TMessage } from "./message";
-import { AidboxError } from "./errors";
+import { parseError } from "./errors";
+import { TManifest } from "./manifest";
 
 const debug = require("debug")("@aidbox/server-sdk:app");
 
 export type TApp = Koa<any, TAppCtx>;
+
 export type TAppCtx = { aidbox: { ctx: TCtx; helpers: any } };
 
 export const createApp = (ctx: TCtx, helpers?: any): TApp => {
@@ -16,7 +18,7 @@ export const createApp = (ctx: TCtx, helpers?: any): TApp => {
   app.context.aidbox = { ctx, helpers };
 
   app.use(bodyParser());
-  app.use(authMiddleware);
+  app.use(authMiddleware(ctx.manifest));
   app.use(dispatchMiddleware);
 
   return app;
@@ -41,24 +43,20 @@ export const startApp = async (app: TApp, port: number): Promise<void> => {
   debug("App started on port %d", port);
 };
 
-const authMiddleware: Middleware<any, TAppCtx> = async (ctx, next) => {
-  const manifest = ctx.aidbox.ctx.manifest;
+const authMiddleware = (manifest: TManifest): Middleware<any, TAppCtx> => {
   const appId = manifest.id;
   const appSecret = manifest.endpoint.secret;
-  const fail = () => {
+  const appToken = Buffer.from(`${appId}:${appSecret}`).toString("base64");
+
+  return async (ctx, next) => {
+    const header = ctx.request.headers.authorization;
+    const token = header && R.last(R.split(" ", header));
+    if (token === appToken) {
+      return next();
+    }
     ctx.status = 401;
     ctx.body = { error: `Authorization failed for app ${appId}` };
   };
-  const authHeader = ctx.request.headers.authorization;
-  if (!authHeader) {
-    return fail();
-  }
-  const authToken = R.last(R.split(" ", authHeader));
-  const expectedToken = Buffer.from(`${appId}:${appSecret}`).toString("base64");
-  if (authToken !== expectedToken) {
-    return fail();
-  }
-  return next();
 };
 
 const dispatchMiddleware: Middleware<any, TAppCtx> = async (ctx) => {
@@ -72,21 +70,8 @@ const dispatchMiddleware: Middleware<any, TAppCtx> = async (ctx) => {
     ctx.body = resource || text;
   } catch (err) {
     console.error(err);
-    if (err instanceof AidboxError) {
-      ctx.status = 422;
-      ctx.body = { error: R.pick(["type", "message", "data"], err) };
-    } else if (err.isAxiosError && err.response) {
-      ctx.status = err.response.data.status;
-      ctx.body = {
-        error: {
-          type: "AxiosError",
-          message: err.message,
-          data: err.response.data.issue,
-        },
-      };
-    } else {
-      ctx.status = 500;
-      ctx.body = { error: { message: err.message } };
-    }
+    const { status, error } = parseError(err);
+    ctx.status = status;
+    ctx.body = { error };
   }
 };

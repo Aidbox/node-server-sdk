@@ -1,5 +1,10 @@
 import assert from "assert";
-import { TManifestOperation, TPatientResource } from "@aidbox/server-sdk";
+import {
+  NotFoundError,
+  TManifestOperation,
+  TPatientResource,
+  ValidationError,
+} from "@aidbox/server-sdk";
 import { THelpers } from "./helpers";
 
 export const test: TManifestOperation<{ active: boolean }, THelpers> = {
@@ -44,5 +49,26 @@ export const test: TManifestOperation<{ active: boolean }, THelpers> = {
     console.log({ patient });
 
     return { resource: patient };
+  },
+};
+
+export const testError: TManifestOperation = {
+  method: "GET",
+  path: ["testError"],
+  handlerFn: async (ctx, req) => {
+    switch (req.params.type) {
+      case "ValidationError":
+        throw new ValidationError("Testing ValidationError");
+      case "NotFoundError":
+        throw new NotFoundError("Something", {
+          foo: "foo",
+          bar: "bar",
+        });
+      case "AxiosError":
+        await ctx.request({ url: "http://xxx" });
+        return {};
+      default:
+        throw new Error("Testing default error");
+    }
   },
 };
