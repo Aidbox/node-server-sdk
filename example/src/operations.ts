@@ -1,16 +1,64 @@
 import assert from "assert";
 import {
   NotFoundError,
-  TManifestOperation,
   TPatientResource,
   ValidationError,
 } from "@aidbox/server-sdk";
-import { THelpers } from "./helpers";
+import { TOperation } from "./helpers";
 
-export const test: TManifestOperation<{ active: boolean }, THelpers> = {
+export const createPatient: TOperation<{
+  // Typing "resource" (POST payload)
+  resource: {
+    name: string;
+    active: boolean;
+  };
+  // Optionally typing query/route params & form payload
+  params: {
+    foo: string;
+  };
+  "form-params": {
+    foo: string;
+  };
+  "route-params": {
+    foo: string;
+  };
+}> = {
   method: "POST",
+  path: ["createPatient"],
+  handlerFn: async (req, { ctx }) => {
+    const {
+      // "resource" contains POST payload
+      resource,
+      // "params", "form-params" & "route-params" are also accessible
+      params,
+      "form-params": formParams,
+      "route-params": routeParams,
+    } = req;
+    assert.ok(resource, new ValidationError("resource required"));
+    const { active, name } = resource;
+
+    assert.ok(
+      typeof active !== "undefined",
+      new ValidationError('"active" required')
+    );
+    assert.ok(name, new ValidationError('"name" required'));
+
+    const { data: patient } = await ctx.request<TPatientResource>({
+      url: "/Patient",
+      method: "POST",
+      data: {
+        active: active,
+        name: [{ text: name }],
+      },
+    });
+    return { resource: patient };
+  },
+};
+
+export const test: TOperation<{ resource: { active: boolean } }> = {
+  method: "GET",
   path: ["test"],
-  handlerFn: async (ctx, req, helpers) => {
+  handlerFn: async (req, { ctx, helpers }) => {
     // Test helpers
     console.log("Testing helpers");
     const { resources: patients, total: patientsTotal } =
@@ -37,25 +85,14 @@ export const test: TManifestOperation<{ active: boolean }, THelpers> = {
     );
     console.log({ rowCount, rows });
 
-    // Test request
-    console.log("Testing request");
-    const patientInput = req.resource;
-    assert.ok(patientInput);
-    const { data: patient } = await ctx.request({
-      url: "/Patient",
-      method: "POST",
-      data: { active: patientInput.active },
-    });
-    console.log({ patient });
-
-    return { resource: patient };
+    return { status: 200 };
   },
 };
 
-export const testError: TManifestOperation = {
+export const testError: TOperation<{ params: { type: string } }> = {
   method: "GET",
   path: ["testError"],
-  handlerFn: async (ctx, req) => {
+  handlerFn: async (req, { ctx }) => {
     switch (req.params.type) {
       case "ValidationError":
         throw new ValidationError("Testing ValidationError");

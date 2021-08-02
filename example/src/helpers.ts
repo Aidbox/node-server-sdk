@@ -1,4 +1,10 @@
-import { TCtx, TResource } from "@aidbox/server-sdk";
+import {
+  TCtx,
+  TManifestOperation,
+  TManifestSubscription,
+  TOperationRequestType,
+  TResource,
+} from "@aidbox/server-sdk";
 
 export type THelpers = {
   findResources<R extends TResource>(
@@ -34,3 +40,13 @@ export const createHelpers = (ctx: TCtx): THelpers => ({
     return resource;
   },
 });
+
+//
+
+export type TOperation<T extends TOperationRequestType = any> =
+  TManifestOperation<T, THelpers>;
+
+export type TSubscription<T extends TResource = any> = TManifestSubscription<
+  T,
+  THelpers
+>;

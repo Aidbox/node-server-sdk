@@ -1,9 +1,10 @@
-import { TManifestSubscription, TPatientResource } from "@aidbox/server-sdk";
+import { TPatientResource } from "@aidbox/server-sdk";
+import { TSubscription } from "./helpers";
 
-export const Patient: TManifestSubscription<TPatientResource> = {
+export const Patient: TSubscription<TPatientResource> = {
   handler: "Patient",
-  handlerFn: async (ctx, msg) => {
-    const { resource: patient, previous } = msg;
+  handlerFn: async (event, { ctx, helpers }) => {
+    const { resource: patient, previous } = event;
     console.log('Handling subscription "Patient"');
     console.log({ patient, previous });
     return { status: 500 };

@@ -3,9 +3,23 @@ import {
   TAppResource,
   TAppResourceOperation,
   TAppResourceSubscription,
+  TResource,
 } from "./aidbox";
-import { TCtx } from "./ctx";
-import { TOperationMessageRequest, TSubscriptionMessageEvent } from "./message";
+import { TDispatchOutput, TDispatchProps } from "./dispatch";
+import {
+  TOperationRequest,
+  TOperationRequestType,
+  TSubscriptionEvent,
+} from "./message";
+
+export type TManifest = Omit<
+  TAppResource,
+  "operations" | "subscriptions" | "resourceType" | "type"
+> &
+  Partial<{
+    operations?: TManifestOperations;
+    subscriptions?: TManifestSubscriptions;
+  }>;
 
 export type TManifestProps = Partial<
   {
@@ -17,45 +31,6 @@ export type TManifestProps = Partial<
     "apiVersion" | "operations" | "subscriptions" | "entities" | "resources"
   >
 >;
-
-export type TManifestOperations = Record<string, TManifestOperation>;
-
-export type TManifestOperation<R = any, H = any> = TAppResourceOperation & {
-  handlerFn: TManifestOperationHandlerFn<R, H>;
-};
-
-export type TManifestOperationHandlerFn<R, H> = (
-  ctx: TCtx,
-  req: TOperationMessageRequest<R>,
-  helpers: H
-) => Promise<TManifestHandlerOutput>;
-
-export type TManifestSubscriptions = Record<string, TManifestSubscription>;
-
-export type TManifestSubscription<T = any> = TAppResourceSubscription & {
-  handlerFn: TManifestSubscriptionHandlerFn<T>;
-};
-
-export type TManifestSubscriptionHandlerFn<T> = (
-  ctx: TCtx,
-  event: TSubscriptionMessageEvent<T>
-) => Promise<TManifestHandlerOutput>;
-
-export type TManifestHandlerOutput = {
-  readonly status?: number;
-  readonly resource?: any;
-  readonly headers?: Record<string, string>;
-  readonly text?: string;
-};
-
-export type TManifest = Omit<
-  TAppResource,
-  "operations" | "subscriptions" | "resourceType" | "type"
-> &
-  Partial<{
-    operations?: TManifestOperations;
-    subscriptions?: TManifestSubscriptions;
-  }>;
 
 export const createManifest = (props: TManifestProps = {}): TManifest => {
   const { appId, appSecret, appUrl, ...manifest } = props;
@@ -74,4 +49,32 @@ export const createManifest = (props: TManifestProps = {}): TManifest => {
     },
     ...manifest,
   };
+};
+
+// Operations
+
+export type TManifestOperations = Record<string, TManifestOperation>;
+
+export type TManifestOperation<
+  T extends TOperationRequestType = any,
+  U = any
+> = TAppResourceOperation & {
+  handlerFn: (
+    request: TOperationRequest<T>,
+    props: TDispatchProps<U>
+  ) => Promise<TDispatchOutput>;
+};
+
+// Subscriptions
+
+export type TManifestSubscriptions = Record<string, TManifestSubscription>;
+
+export type TManifestSubscription<
+  T extends TResource = any,
+  U = any
+> = TAppResourceSubscription & {
+  handlerFn: (
+    subscriptionEvent: TSubscriptionEvent<T>,
+    props: TDispatchProps<U>
+  ) => Promise<TDispatchOutput>;
 };
