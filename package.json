@@ -1,6 +1,6 @@
 {
   "name": "@aidbox/node-server-sdk",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "main": "build/src/index.js",
   "scripts": {
     "build": "tsc -b src",
