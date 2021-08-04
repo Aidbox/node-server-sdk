@@ -1,6 +1,6 @@
 import assert from "assert";
 import { TCtx } from "./ctx";
-import { TMessage } from "./message";
+import { TMessage, TOperationMessage, TSubscriptionMessage } from "./message";
 
 const debug = require("debug")("@aidbox/server-sdk:dispatch");
 
@@ -20,22 +20,46 @@ export const dispatch = async (
   message: TMessage,
   dispatchProps: TDispatchProps
 ): Promise<TDispatchOutput> => {
-  const ctx = dispatchProps.ctx;
-  if (message.type === "operation") {
-    const operationId = message.operation.id;
-    assert.ok(ctx.manifest.operations, "Manifest has no operations");
-    const operation = ctx.manifest.operations[operationId];
-    debug("Dispatching operation %O", operationId);
-    assert.ok(operation, `Operation ${operationId} not found`);
-    const operationHandlerFn = operation.handlerFn;
-    return operationHandlerFn(message.request, dispatchProps);
-  } else {
-    const subscriptionId = message.handler;
-    assert.ok(ctx.manifest.subscriptions, "Manifest has no subscriptions");
-    const subscription = ctx.manifest.subscriptions[subscriptionId];
-    debug("Dispatching subscription %O", subscriptionId);
-    assert.ok(subscription, `Subscription ${subscriptionId} not found`);
-    const subscriptionHandlerFn = subscription.handlerFn;
-    return subscriptionHandlerFn(message.event, dispatchProps);
+  switch (message.type) {
+    case "operation":
+      return dispatchOperation(
+        message.operation.id,
+        message.request,
+        dispatchProps
+      );
+    case "subscription":
+      return dispatchSubscription(
+        message.handler,
+        message.event,
+        dispatchProps
+      );
+    default:
+      throw new Error("Not implemented");
   }
+};
+
+export const dispatchOperation = (
+  operationId: string,
+  request: TOperationMessage["request"],
+  dispatchProps: TDispatchProps
+) => {
+  debug("Dispatching operation %O", operationId);
+  const operations = dispatchProps.ctx.manifest.operations;
+  assert.ok(operations, "Manifest has no operations");
+  const operation = operations[operationId];
+  assert.ok(operation, `Operation ${operationId} not found`);
+  return operation.handlerFn(request, dispatchProps);
+};
+
+export const dispatchSubscription = (
+  subscriptionId: string,
+  event: TSubscriptionMessage["event"],
+  dispatchProps: TDispatchProps
+) => {
+  debug("Dispatching subscription %O", subscriptionId);
+  const subscriptions = dispatchProps.ctx.manifest.subscriptions;
+  assert.ok(subscriptions, "Manifest has no subscriptions");
+  const subscription = subscriptions[subscriptionId];
+  assert.ok(subscription, `Subscription ${subscriptionId} not found`);
+  return subscription.handlerFn(event, dispatchProps);
 };
