@@ -29,6 +29,6 @@ describe("dispatch", () => {
       { type: "subscription", handler: "xxx", event },
       dispatchProps
     );
-    sinon.assert.calledWith(handlerFnSpy, event, dispatchProps);
+    sinon.assert.calledWith(handlerFnSpy, event, dispatchProps, 1);
   });
 });
