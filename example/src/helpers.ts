@@ -4,7 +4,7 @@ import {
   TManifestSubscription,
   TOperationRequestType,
   TResource,
-} from "@aidbox/server-sdk";
+} from "@aidbox/node-server-sdk";
 
 export type THelpers = {
   findResources<R extends TResource>(

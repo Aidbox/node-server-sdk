@@ -1,4 +1,4 @@
-import { TPatientResource } from "@aidbox/server-sdk";
+import { TPatientResource } from "@aidbox/node-server-sdk";
 import { TSubscription } from "./helpers";
 
 export const Patient: TSubscription<TPatientResource> = {

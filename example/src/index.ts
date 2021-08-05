@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
-import { createCtx, createApp, startApp } from "@aidbox/server-sdk";
-import { createHelpers, THelpers } from "./helpers";
+import { createCtx, createApp, startApp } from "@aidbox/node-server-sdk";
+import { createHelpers } from "./helpers";
 import * as operations from "./operations";
 import * as subscriptions from "./subscriptions";
 import * as entities from "./entities";

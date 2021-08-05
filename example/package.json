@@ -17,7 +17,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@aidbox/server-sdk": "file:../",
+    "@aidbox/node-server-sdk": "file:../",
     "dotenv": "^10.0.0"
   }
 }

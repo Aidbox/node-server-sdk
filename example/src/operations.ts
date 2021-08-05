@@ -3,7 +3,7 @@ import {
   NotFoundError,
   TPatientResource,
   ValidationError,
-} from "@aidbox/server-sdk";
+} from "@aidbox/node-server-sdk";
 import { TOperation } from "./helpers";
 
 export const createPatient: TOperation<{
