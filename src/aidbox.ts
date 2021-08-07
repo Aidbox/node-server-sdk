@@ -34,4 +34,5 @@ export type TAppResourceEntity = {
 
 export type TPatientResource = TResource<{
   active: boolean;
+  name: { text: string }[];
 }>;

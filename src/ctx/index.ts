@@ -1,4 +1,5 @@
 import R from "ramda";
+import { createApi, TApi } from "../api";
 import { createClient, TClient, TClientProps } from "../client";
 import { createManifest, TManifest, TManifestProps } from "../manifest";
 import { createPg, TPg, TPgProps } from "../pg";
@@ -19,6 +20,7 @@ export type TCtx = {
   log: TLogFn;
   query: TQueryFn;
   request: TRequestFn;
+  api: TApi;
 };
 
 export const createCtx = (props: TCtxProps = {}): TCtx => {
@@ -31,6 +33,7 @@ export const createCtx = (props: TCtxProps = {}): TCtx => {
   const log = createLog(client);
   const request = createRequest(client);
   const query = createQuery(pg, log);
+  const api = createApi(client);
 
   return {
     manifest,
@@ -39,6 +42,7 @@ export const createCtx = (props: TCtxProps = {}): TCtx => {
     log,
     request,
     query,
+    api,
   };
 };
 

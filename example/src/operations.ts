@@ -43,13 +43,9 @@ export const createPatient: TOperation<{
     );
     assert.ok(name, new ValidationError('"name" required'));
 
-    const { data: patient } = await ctx.request<TPatientResource>({
-      url: "/Patient",
-      method: "POST",
-      data: {
-        active: active,
-        name: [{ text: name }],
-      },
+    const patient = await ctx.api.createResource<TPatientResource>("Patient", {
+      active: active,
+      name: [{ text: name }],
     });
     return { resource: patient };
   },
@@ -107,5 +103,21 @@ export const testError: TOperation<{ params: { type: string } }> = {
       default:
         throw new Error("Testing default error");
     }
+  },
+};
+
+export const testApi: TOperation<{ params: { type: string } }> = {
+  method: "GET",
+  path: ["testApi"],
+  handlerFn: async (req, { ctx }) => {
+    const { resources: patients } =
+      await ctx.api.findResources<TPatientResource>("Patient");
+
+    const patient = !patients.length
+      ? null
+      : await ctx.api.getResource<TPatientResource>("Patient", patients[0].id);
+
+    console.log({ patients, patient });
+    return { resource: { patients, patient } };
   },
 };

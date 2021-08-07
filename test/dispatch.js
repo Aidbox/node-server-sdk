@@ -1,6 +1,10 @@
 const { dispatch } = require("..");
 const sinon = require("sinon");
 
+beforeEach(() => {
+  sinon.restore();
+});
+
 describe("dispatch", () => {
   it("Passes request & dispatchProps to operation handler", async () => {
     const handlerFnSpy = sinon.spy();
