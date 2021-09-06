@@ -4,7 +4,7 @@ import { TLogFn } from "./log";
 
 export type TQueryFn = <T>(
   query: string,
-  params?: string[]
+  params?: Array<any>
 ) => Promise<TQueryResult<T>>;
 
 export type TQueryResult<T> = QueryResult<T>;

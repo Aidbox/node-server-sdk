@@ -3,3 +3,4 @@ build
 example/pgdata
 .husky
 .idea
+.env
