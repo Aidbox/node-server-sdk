@@ -32,11 +32,25 @@ export const startApp = async (app: TApp, port: number): Promise<void> => {
     entities: describe(manifest.entities),
     resources: describe(manifest.resources),
   });
-  await ctx.request({
-    url: "/App",
-    method: "PUT",
-    data: { ...manifest, type: "app", resourceType: "App" },
-  });
+  await ctx
+    .request({
+      url: '/App',
+      method: 'PUT',
+      data: { ...manifest, type: 'app', resourceType: 'App' },
+    })
+    .then((response) => {
+      debug('Manifest is updated');
+    })
+    .catch((error) => {
+      if (error.response?.data) {
+        debug(
+          'Manifest sync failed: %s\n%O',
+          error.response.status,
+          JSON.stringify(error.response.data)
+        );
+      }
+      throw error;
+    });
   await new Promise<void>((resolve) => app.listen(port, resolve));
   debug("App started on port %d", port);
 };
