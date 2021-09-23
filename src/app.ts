@@ -6,6 +6,7 @@ import { TMessage } from "./message";
 import { parseError } from "./errors";
 import { TManifest } from "./manifest";
 import { TCtx } from "./ctx";
+import { Server } from "http";
 
 const debug = require("debug")("@aidbox/server-sdk:app");
 
@@ -22,7 +23,7 @@ export const createApp = (dispatchProps: TDispatchProps) => {
   return app;
 };
 
-export const startApp = async (app: TApp, port: number): Promise<void> => {
+export const startApp = async (app: TApp, port: number): Promise<Server> => {
   const ctx = app.context.ctx;
   const manifest = ctx.manifest;
   const describe = (obj: Record<string, any> = {}) => Object.keys(obj);
@@ -51,8 +52,13 @@ export const startApp = async (app: TApp, port: number): Promise<void> => {
       }
       throw error;
     });
-  await new Promise<void>((resolve) => app.listen(port, resolve));
-  debug("App started on port %d", port);
+
+  return await new Promise<Server>((resolve) => {
+    const server = app.listen(port, () => {
+      debug("App started on port %d", port);
+      resolve(server);
+    });
+  });
 };
 
 const authMiddleware = (manifest: TManifest): Middleware => {
