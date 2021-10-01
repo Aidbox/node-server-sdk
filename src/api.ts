@@ -1,8 +1,12 @@
-import { TClient } from "./client";
+import { TClient } from './client';
 
 export type TApi = {
   createResource<T>(resourceType: string, data: Partial<T>): Promise<T>;
-  patchResource<T>(resourceType: string, resourceId: string, data: Partial<T>): Promise<T>;
+  patchResource<T>(
+    resourceType: string,
+    resourceId: string,
+    data: Partial<T>
+  ): Promise<T>;
   getResource<T>(resourceType: string, resourceId: string): Promise<T>;
   findResources<T>(
     resourceType: string,
@@ -14,15 +18,15 @@ export const createApi = (client: TClient): TApi => ({
   createResource: async (resourceType, data) => {
     const { data: resource } = await client.request({
       url: `/${resourceType}`,
-      method: "POST",
+      method: 'POST',
       data,
     });
     return resource;
   },
-  patchResource: async (resourceType, resourceId,  data) => {
+  patchResource: async (resourceType, resourceId, data) => {
     const { data: resource } = await client.request({
       url: `/${resourceType}/${resourceId}`,
-      method: "PATCH",
+      method: 'PATCH',
       data,
     });
     return resource;
@@ -40,6 +44,6 @@ export const createApi = (client: TClient): TApi => ({
       url: `/${resourceType}`,
       params,
     });
-    return { resources: entry.map((e) => e.resource), total };
+    return { resources: entry?.map((e: any) => e.resource) || [], total };
   },
 });

@@ -1,14 +1,13 @@
-import R from "ramda";
-import Koa, { Middleware } from "koa";
-import bodyParser from "koa-bodyparser";
-import { dispatch, TDispatchProps } from "./dispatch";
-import { TMessage } from "./message";
-import { parseError } from "./errors";
-import { TManifest } from "./manifest";
-import { TCtx } from "./ctx";
-import { Server } from "http";
+import Koa, { Middleware } from 'koa';
+import bodyParser from 'koa-bodyparser';
+import { dispatch, TDispatchProps } from './dispatch';
+import { TMessage } from './message';
+import { parseError } from './errors';
+import { TManifest } from './manifest';
+import { TCtx } from './ctx';
+import { Server } from 'http';
 
-const debug = require("debug")("@aidbox/server-sdk:app");
+const debug = require('debug')('@aidbox/server-sdk:app');
 
 export type TApp = Koa<any, { ctx: TCtx }>;
 
@@ -27,7 +26,7 @@ export const startApp = async (app: TApp, port: number): Promise<Server> => {
   const ctx = app.context.ctx;
   const manifest = ctx.manifest;
   const describe = (obj: Record<string, any> = {}) => Object.keys(obj);
-  debug("Syncing manifest v%s\n%O", manifest.apiVersion, {
+  debug('Syncing manifest v%s\n%O', manifest.apiVersion, {
     operations: describe(manifest.operations),
     subscriptions: describe(manifest.subscriptions),
     entities: describe(manifest.entities),
@@ -39,7 +38,7 @@ export const startApp = async (app: TApp, port: number): Promise<Server> => {
       method: 'PUT',
       data: { ...manifest, type: 'app', resourceType: 'App' },
     })
-    .then((response) => {
+    .then(() => {
       debug('Manifest is updated');
     })
     .catch((error) => {
@@ -55,20 +54,20 @@ export const startApp = async (app: TApp, port: number): Promise<Server> => {
 
   return await new Promise<Server>((resolve) => {
     const server = app.listen(port, () => {
-      debug("App started on port %d", port);
-      resolve(server);
+      debug('App started on port %d', port);
     });
+    resolve(server);
   });
 };
 
 const authMiddleware = (manifest: TManifest): Middleware => {
   const appId = manifest.id;
   const appSecret = manifest.endpoint.secret;
-  const appToken = Buffer.from(`${appId}:${appSecret}`).toString("base64");
+  const appToken = Buffer.from(`${appId}:${appSecret}`).toString('base64');
 
   return async (ctx, next) => {
     const header = ctx.request.headers.authorization;
-    const token = header && R.last(R.split(" ", header));
+    const token = header && header?.split(' ')?.[1];
     if (token === appToken) {
       return next();
     }
@@ -82,8 +81,15 @@ const dispatchMiddleware =
   async (ctx) => {
     const message = ctx.request.body as TMessage;
     try {
-      const { resource, text } = await dispatch(message, dispatchProps);
+      const { resource, text, status, headers } = await dispatch(
+        message,
+        dispatchProps
+      );
       ctx.body = resource || text;
+      ctx.status = status || 200;
+      if (typeof headers === 'object' && Object.keys(headers).length) {
+        ctx.set(headers);
+      }
     } catch (err) {
       console.error(err);
       const { status, error } = parseError(err);
