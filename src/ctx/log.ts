@@ -1,16 +1,7 @@
-import { TClient } from "../client";
-
-export type TLogFn = (data: TLogData) => Promise<void>;
-
-export type TLogData = {
-  message: Record<string, any>;
-  type?: string;
-  v?: string;
-  fx?: string;
-};
+import { Client, LogHandler } from '../types';
 
 export const createLog =
-  (client: TClient): TLogFn =>
+  (client: Client): LogHandler =>
   (data) => {
-    return client.request({ url: `/$loggy`, method: "POST", data });
+    client.request({ url: `/$loggy`, method: "POST", data }).catch(e => console.error("Log message not send"));
   };

@@ -1,25 +1,18 @@
 import assert from "assert";
-import { TCtx } from "./ctx";
-import { TMessage, TOperationMessage, TSubscriptionMessage } from "./message";
+import {
+  DispatchOutput,
+  DispatchProps,
+  Message,
+  OperationMessage,
+  SubscriptionMessage,
+} from "./types";
 
-const debug = require("debug")("@aidbox/server-sdk:dispatch");
-
-export type TDispatchProps<H = any> = {
-  ctx: TCtx;
-  helpers: H;
-};
-
-export type TDispatchOutput = {
-  readonly status?: number;
-  readonly resource?: any;
-  readonly headers?: Record<string, string>;
-  readonly text?: string;
-};
+const debug = require("debug")("@aidbox/node-app:dispatch");
 
 export const dispatch = async (
-  message: TMessage,
-  dispatchProps: TDispatchProps
-): Promise<TDispatchOutput> => {
+  message: Message,
+  dispatchProps: DispatchProps
+): Promise<DispatchOutput> => {
   switch (message.type) {
     case "operation":
       return dispatchOperation(
@@ -40,8 +33,8 @@ export const dispatch = async (
 
 export const dispatchOperation = (
   operationId: string,
-  request: TOperationMessage["request"],
-  dispatchProps: TDispatchProps
+  request: OperationMessage["request"],
+  dispatchProps: DispatchProps
 ) => {
   debug("Dispatching operation %O", operationId);
   const operations = dispatchProps.ctx.manifest.operations;
@@ -53,8 +46,8 @@ export const dispatchOperation = (
 
 export const dispatchSubscription = (
   subscriptionId: string,
-  event: TSubscriptionMessage["event"],
-  dispatchProps: TDispatchProps
+  event: SubscriptionMessage["event"],
+  dispatchProps: DispatchProps
 ) => {
   debug("Dispatching subscription %O", subscriptionId);
   const subscriptions = dispatchProps.ctx.manifest.subscriptions;

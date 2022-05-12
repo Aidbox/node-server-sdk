@@ -10,6 +10,9 @@
     "fix:example": "find example/src -name *.ts | xargs prettier -w",
     "test": "mocha"
   },
+  "engines": {
+    "node": ">=16"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,8 +20,8 @@
     "@types/debug": "^4.1.6",
     "@types/koa": "^2.13.4",
     "@types/koa-bodyparser": "^4.3.2",
+    "@types/koa-router": "^7.4.4",
     "@types/node": "^16.10.2",
-    "@types/pg": "^8.6.1",
     "@types/ramda": "^0.27.44",
     "@types/superagent": "^4.1.12",
     "mocha": "^9.0.3",
@@ -29,13 +32,14 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "@cloudnative/health": "^2.1.2",
     "axios": "^0.21.1",
     "debug": "^4.3.2",
-    "koa": "^2.13.1",
-    "koa-bodyparser": "^4.3.0",
-    "pg": "^8.7.1",
-    "ramda": "^0.27.1",
-    "superagent": "^6.1.0"
+    "dotenv": "^16.0.1",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "4.3.0",
+    "koa-router": "^10.1.1",
+    "remeda": "0.0.32"
   },
   "directories": {
     "example": "example"

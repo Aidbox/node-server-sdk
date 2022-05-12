@@ -1,9 +1,8 @@
-import { TClient, TClientRequest, TClientRequestProps } from "../client";
+import { Client, ClientRequestProps, RequestHandler } from '../types';
 
-export type TRequestFn = TClientRequest;
 
 export const createRequest =
-  (client: TClient): TRequestFn =>
-  (props: TClientRequestProps) => {
+  (client: Client): RequestHandler =>
+  (props: ClientRequestProps) => {
     return client.request(props);
   };

@@ -1,30 +1,16 @@
-import assert from "assert";
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios from "axios";
+import { BaseConfig, Client, ClientProps } from "./types";
 
-export type TClientProps = {
-  aidboxUrl?: string;
-  aidboxClientId?: string;
-  aidboxClientSecret?: string;
-};
-
-export type TClient = AxiosInstance;
-
-export type TClientRequest = TClient["request"];
-
-export type TClientRequestProps = AxiosRequestConfig;
-
-export const createClient = (props: TClientProps = {}): TClient => {
-  const { aidboxClientId, aidboxClientSecret, aidboxUrl } = props;
-
-  assert.ok(aidboxClientId, "aidboxClientId required");
-  assert.ok(aidboxClientSecret, "aidboxClientSecret required");
-  assert.ok(aidboxUrl, "aidboxUrl required");
-
+export const createClient = ({
+  url,
+  client,
+  secret,
+}: BaseConfig["aidbox"]): Client => {
   return axios.create({
-    baseURL: aidboxUrl,
+    baseURL: url,
     auth: {
-      username: aidboxClientId,
-      password: aidboxClientSecret,
+      username: client,
+      password: secret,
     },
   });
 };

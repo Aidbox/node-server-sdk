@@ -1,20 +1,7 @@
-import { TClient } from './client';
+import { Api, Client } from './types';
 
-export type TApi = {
-  createResource<T>(resourceType: string, data: Partial<T>): Promise<T>;
-  patchResource<T>(
-    resourceType: string,
-    resourceId: string,
-    data: Partial<T>
-  ): Promise<T>;
-  getResource<T>(resourceType: string, resourceId: string): Promise<T>;
-  findResources<T>(
-    resourceType: string,
-    params?: any
-  ): Promise<{ resources: T[]; total: number }>;
-};
 
-export const createApi = (client: TClient): TApi => ({
+export const createApi = (client: Client): Api => ({
   createResource: async (resourceType, data) => {
     const { data: resource } = await client.request({
       url: `/${resourceType}`,
@@ -28,6 +15,13 @@ export const createApi = (client: TClient): TApi => ({
       url: `/${resourceType}/${resourceId}`,
       method: 'PATCH',
       data,
+    });
+    return resource;
+  },
+  deleteResource: async (resourceType, resourceId) => {
+    const { data: resource } = await client.request({
+      url: `/${resourceType}/${resourceId}`,
+      method: "DELETE"
     });
     return resource;
   },
@@ -47,3 +41,46 @@ export const createApi = (client: TClient): TApi => ({
     return { resources: entry?.map((e: any) => e.resource) || [], total };
   },
 });
+
+
+export const createFHIRApi = (client: Client): Api => ({
+  createResource: async (resourceType, data) => {
+    const { data: resource } = await client.request({
+      url: `/fhir/${resourceType}`,
+      method: 'POST',
+      data,
+    });
+    return resource;
+  },
+  patchResource: async (resourceType, resourceId, data) => {
+    const { data: resource } = await client.request({
+      url: `/fhir/${resourceType}/${resourceId}`,
+      method: 'PATCH',
+      data,
+    });
+    return resource;
+  },
+  deleteResource: async (resourceType, resourceId) => {
+    const { data: resource } = await client.request({
+      url: `/fhir/${resourceType}/${resourceId}`,
+      method: "DELETE"
+    });
+    return resource;
+  },
+  getResource: async (resourceType, resourceId) => {
+    const { data: resource } = await client.request({
+      url: `/fhir/${resourceType}/${resourceId}`,
+    });
+    return resource;
+  },
+  findResources: async (resourceType, params) => {
+    const {
+      data: { entry, total },
+    } = await client.request<{ entry: { resource: any }[]; total: number }>({
+      url: `/fhir/${resourceType}`,
+      params,
+    });
+    return { resources: entry?.map((e: any) => e.resource) || [], total };
+  },
+});
+
