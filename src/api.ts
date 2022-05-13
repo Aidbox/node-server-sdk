@@ -1,11 +1,10 @@
-import { Api, Client } from './types';
-
+import { Api, Client } from "./types";
 
 export const createApi = (client: Client): Api => ({
   createResource: async (resourceType, data) => {
     const { data: resource } = await client.request({
       url: `/${resourceType}`,
-      method: 'POST',
+      method: "POST",
       data,
     });
     return resource;
@@ -13,7 +12,7 @@ export const createApi = (client: Client): Api => ({
   patchResource: async (resourceType, resourceId, data) => {
     const { data: resource } = await client.request({
       url: `/${resourceType}/${resourceId}`,
-      method: 'PATCH',
+      method: "PATCH",
       data,
     });
     return resource;
@@ -21,7 +20,7 @@ export const createApi = (client: Client): Api => ({
   deleteResource: async (resourceType, resourceId) => {
     const { data: resource } = await client.request({
       url: `/${resourceType}/${resourceId}`,
-      method: "DELETE"
+      method: "DELETE",
     });
     return resource;
   },
@@ -38,16 +37,26 @@ export const createApi = (client: Client): Api => ({
       url: `/${resourceType}`,
       params,
     });
-    return { resources: entry?.map((e: any) => e.resource) || [], total };
+    return { resources: entry?.map((e) => e.resource) || [], total };
+  },
+  createBundle: async (type, data) => {
+    const { data: result } = await client.request({
+      method: "POST",
+      url: "/",
+      data: {
+        type,
+        entry: data,
+      },
+    });
+    return result;
   },
 });
-
 
 export const createFHIRApi = (client: Client): Api => ({
   createResource: async (resourceType, data) => {
     const { data: resource } = await client.request({
       url: `/fhir/${resourceType}`,
-      method: 'POST',
+      method: "POST",
       data,
     });
     return resource;
@@ -55,7 +64,7 @@ export const createFHIRApi = (client: Client): Api => ({
   patchResource: async (resourceType, resourceId, data) => {
     const { data: resource } = await client.request({
       url: `/fhir/${resourceType}/${resourceId}`,
-      method: 'PATCH',
+      method: "PATCH",
       data,
     });
     return resource;
@@ -63,7 +72,7 @@ export const createFHIRApi = (client: Client): Api => ({
   deleteResource: async (resourceType, resourceId) => {
     const { data: resource } = await client.request({
       url: `/fhir/${resourceType}/${resourceId}`,
-      method: "DELETE"
+      method: "DELETE",
     });
     return resource;
   },
@@ -80,7 +89,17 @@ export const createFHIRApi = (client: Client): Api => ({
       url: `/fhir/${resourceType}`,
       params,
     });
-    return { resources: entry?.map((e: any) => e.resource) || [], total };
+    return { resources: entry?.map((e) => e.resource) || [], total };
+  },
+  createBundle: async (type, data) => {
+    const { data: result } = await client.request({
+      method: "POST",
+      url: "/fhir/",
+      data: {
+        type,
+        entry: data,
+      },
+    });
+    return result;
   },
 });
-

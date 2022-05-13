@@ -164,6 +164,25 @@ export type Ctx = {
   psql: <T = any>(query: string) => Promise<T[]>;
 };
 
+export type Bundle = {
+  resourceType: "Bundle";
+  type: "batch" | "transaction" | "collection";
+  entry: Array<{
+    request: {
+      method: "PUT" | "POST" | "PATCH" | "DELETE";
+      url: string;
+    };
+    resource: Partial<Resource>;
+  }>;
+};
+
+export type BundleResponse = {
+  id: string;
+  type: "batch-response" | "transaction-response";
+  resourceType: "Bundle";
+  resource: Array<any>;
+};
+
 export type Api = {
   createResource<T>(resourceType: string, data: Partial<T>): Promise<T>;
   patchResource<T>(
@@ -177,6 +196,10 @@ export type Api = {
     resourceType: string,
     params?: any
   ): Promise<{ resources: T[]; total: number }>;
+  createBundle: (
+    type: Bundle["type"],
+    data: Bundle["entry"]
+  ) => Promise<BundleResponse>;
 };
 
 export type RequestHandler = ClientRequest;

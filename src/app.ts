@@ -5,6 +5,7 @@ import { parseError } from "./errors";
 import { Server } from "http";
 import {
   App,
+  BaseConfig,
   BundledApp,
   Ctx,
   DispatchProps,
@@ -24,14 +25,17 @@ import * as http from "http";
 
 const debug = require("debug")("@aidbox/node-app:app");
 
-export const createApp = (dispatchProps: DispatchProps): BundledApp => {
+export const createApp = (
+  dispatchProps: DispatchProps,
+  config: BaseConfig
+): BundledApp => {
   const app: App = new Koa();
   const server = http.createServer(app.callback());
 
   app.context.ctx = dispatchProps.ctx;
   const router = new Router();
 
-  app.use(bodyParser({ jsonLimit: "25mb" }));
+  app.use(bodyParser({ jsonLimit: config.app.maxBodySize }));
 
   const healthcheck = new HealthChecker();
 

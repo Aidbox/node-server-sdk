@@ -1,34 +1,28 @@
 {
   "name": "@aidbox/node-server-sdk",
-  "version": "2.0.19",
-  "main": "build/src/index.js",
+  "version": "2.1.1",
+  "main": "build/index.js",
   "scripts": {
-    "build": "tsc -b src",
-    "watch": "tsc -b -w src",
+    "build": "tsc",
     "fix": "npm run fix:src && npm run fix:example",
     "fix:src": "find src -name *.ts | xargs prettier -w",
-    "fix:example": "find example/src -name *.ts | xargs prettier -w",
-    "test": "mocha"
+    "fix:example": "find example/src -name *.ts | xargs prettier -w"
   },
   "engines": {
     "node": ">=16"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/debug": "^4.1.6",
     "@types/koa": "^2.13.4",
     "@types/koa-bodyparser": "^4.3.2",
     "@types/koa-router": "^7.4.4",
     "@types/node": "^16.10.2",
-    "@types/ramda": "^0.27.44",
-    "@types/superagent": "^4.1.12",
-    "mocha": "^9.0.3",
     "prettier": "^2.3.2",
-    "sinon": "^11.1.2",
-    "source-map-support": "^0.5.19",
     "supertest": "^6.1.4",
+    "tslib": "^2.4.0",
     "typescript": "^4.3.5"
   },
   "dependencies": {
@@ -38,14 +32,13 @@
     "dotenv": "^16.0.1",
     "koa": "^2.13.4",
     "koa-bodyparser": "4.3.0",
-    "koa-router": "^10.1.1",
-    "remeda": "0.0.32"
+    "koa-router": "^10.1.1"
   },
   "directories": {
     "example": "example"
   },
   "files": [
-    "build/src"
+    "build"
   ],
   "repository": {
     "type": "git",
@@ -55,10 +48,5 @@
     "url": "https://github.com/Aidbox/node-server-sdk/issues"
   },
   "homepage": "https://github.com/Aidbox/node-server-sdk#readme",
-  "description": "",
-  "mocha": {
-    "require": [
-      "source-map-support/register"
-    ]
-  }
+  "description": ""
 }

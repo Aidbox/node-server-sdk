@@ -19,3 +19,7 @@ or
 ```npm
 yarn add @aidbox/node-server-sdk
 ```
+
+
+## Example
+Please check [example](./example) folder.

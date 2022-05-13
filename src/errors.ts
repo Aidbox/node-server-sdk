@@ -1,5 +1,4 @@
 import { AxiosError } from "axios";
-import R from "ramda";
 
 export abstract class AidboxError extends Error {
   type?: string;
@@ -26,7 +25,7 @@ export const isAxiosError = (err: Error): err is AxiosError => {
   return (err as AxiosError).isAxiosError;
 };
 
-export type TParsedError = {
+export type ParsedError = {
   status: number;
   error: {
     message: string;
@@ -35,11 +34,15 @@ export type TParsedError = {
   };
 };
 
-export const parseError = (err: Error): TParsedError => {
+export const parseError = (err: Error): ParsedError => {
   if (isAidboxError(err)) {
     return {
       status: 422,
-      error: R.pick(["type", "message", "data"], err),
+      error: {
+        type: err?.type,
+        message: err?.message,
+        data: err?.data,
+      },
     };
   }
   if (isAxiosError(err)) {

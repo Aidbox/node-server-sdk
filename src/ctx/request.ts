@@ -1,5 +1,4 @@
-import { Client, ClientRequestProps, RequestHandler } from '../types';
-
+import { Client, ClientRequestProps, RequestHandler } from "../types";
 
 export const createRequest =
   (client: Client): RequestHandler =>
