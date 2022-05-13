@@ -4,20 +4,20 @@
   "description": "",
   "main": "build/src/index.js",
   "scripts": {
-    "build": "tsc -b src",
-    "watch": "tsc -b -w src",
-    "start": "DEBUG=@aidbox/server-sdk:* nodemon -r source-map-support/register ."
+    "dev": "DEBUG=@aidbox/node-app:*  nodemon"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.12",
-    "source-map-support": "^0.5.19",
-    "typescript": "^4.3.5"
+    "nodemon": "2.0.16",
+    "typescript": "4.6.4",
+    "ts-node": "^10.7.0",
+    "@types/node": "16.11.7",
+    "tslib": "^2.4.0"
   },
   "dependencies": {
-    "@aidbox/node-server-sdk": "file:../",
-    "dotenv": "^10.0.0"
+    "@aidbox/node-server-sdk": "2.1.1",
+    "dotenv": "16.0.1"
   }
 }

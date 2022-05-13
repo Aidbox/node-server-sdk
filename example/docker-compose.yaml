@@ -22,3 +22,14 @@ services:
       POSTGRES_USER: "${PGUSER}"
       POSTGRES_PASSWORD: "${PGPASSWORD}"
       POSTGRES_DB: "${PGDATABASE}"
+  app:
+    build: .
+    volumes:
+      - .:/usr/src/app
+      - ./node_modules:/usr/src/app/node_modules
+    container_name: app
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${APP_PORT}:${APP_PORT}"

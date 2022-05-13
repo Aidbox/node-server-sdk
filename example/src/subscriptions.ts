@@ -1,7 +1,6 @@
-import { TPatientResource } from "@aidbox/node-server-sdk";
 import { TSubscription } from "./helpers";
 
-export const Patient: TSubscription<TPatientResource> = {
+export const Patient: TSubscription<any> = {
   handler: "Patient",
   handlerFn: async (event, { ctx, helpers }) => {
     const { resource: patient, previous } = event;

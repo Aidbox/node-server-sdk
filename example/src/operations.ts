@@ -1,9 +1,5 @@
-import assert from "assert";
-import {
-  NotFoundError,
-  TPatientResource,
-  ValidationError,
-} from "@aidbox/node-server-sdk";
+import * as assert from "assert";
+import { NotFoundError, ValidationError } from "@aidbox/node-server-sdk";
 import { TOperation } from "./helpers";
 
 export const createPatient: TOperation<{
@@ -43,7 +39,7 @@ export const createPatient: TOperation<{
     );
     assert.ok(name, new ValidationError('"name" required'));
 
-    const patient = await ctx.api.createResource<TPatientResource>("Patient", {
+    const patient = await ctx.api.createResource<any>("Patient", {
       active: active,
       name: [{ text: name }],
     });
@@ -58,7 +54,7 @@ export const test: TOperation<{ resource: { active: boolean } }> = {
     // Test helpers
     console.log("Testing helpers");
     const { resources: patients, total: patientsTotal } =
-      await helpers.findResources<TPatientResource>("Patient", {
+      await helpers.findResources<any>("Patient", {
         _sort: "-createdAt",
         _count: 3,
       });
@@ -72,14 +68,6 @@ export const test: TOperation<{ resource: { active: boolean } }> = {
       fx: "testOperation",
       type: "backend-test",
     });
-
-    // Test query
-    console.log("Testing query");
-    const { rowCount, rows } = await ctx.query(
-      "SELECT * FROM patient WHERE id=$1",
-      ["d60c37ec-e5c3-4ac0-9c1c-e5239e601a08"]
-    );
-    console.log({ rowCount, rows });
 
     return { status: 200 };
   },
@@ -110,14 +98,50 @@ export const testApi: TOperation<{ params: { type: string } }> = {
   method: "GET",
   path: ["testApi"],
   handlerFn: async (req, { ctx }) => {
-    const { resources: patients } =
-      await ctx.api.findResources<TPatientResource>("Patient");
+    const { resources: patients } = await ctx.api.findResources<any>("Patient");
 
     const patient = !patients.length
       ? null
-      : await ctx.api.getResource<TPatientResource>("Patient", patients[0].id);
+      : await ctx.api.getResource<any>("Patient", patients[0].id);
 
     console.log({ patients, patient });
     return { resource: { patients, patient } };
+  },
+};
+
+export const testPsql: TOperation = {
+  method: "GET",
+  path: ["test-psql"],
+  handlerFn: async (req, { ctx }) => {
+    const result = await ctx.psql("select * from attribute limit 1");
+    return { resource: result };
+  },
+};
+
+export const testSql: TOperation = {
+  method: "GET",
+  path: ["test-sql"],
+  handlerFn: async (req, { ctx }) => {
+    const result = await ctx.sql(
+      "select * from attribute where resource->>'module' = ? limit 1",
+      ["fhir-4.0.0"]
+    );
+    console.log(result);
+    return { resource: result };
+  },
+};
+
+export const testBundle: TOperation = {
+  method: "GET",
+  path: ["test-bundle"],
+  handlerFn: async (req, { ctx }) => {
+    const result = await ctx.api.createBundle("batch", [
+      {
+        request: { method: "POST", url: "/Patient" },
+        resource: { resourceType: "Patient" },
+      },
+    ]);
+    console.log(result);
+    return { resource: result };
   },
 };
