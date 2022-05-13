@@ -1,4 +1,4 @@
-![Build & Test](https://github.com/aidbox/node-server-sdk/actions/workflows/chore.yml/badge.svg?branch=v2)
+[![Build & Test](https://github.com/Aidbox/node-server-sdk/actions/workflows/chore.yml/badge.svg)](https://github.com/Aidbox/node-server-sdk/actions/workflows/chore.yml)
 
 ## Requirements
 
