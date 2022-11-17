@@ -1,12 +1,15 @@
 {
   "name": "@aidbox/node-server-sdk",
-  "version": "2.1.1",
+  "version": "3.0.0-alpha",
   "main": "build/index.js",
   "scripts": {
     "build": "tsc",
     "fix": "npm run fix:src && npm run fix:example",
     "fix:src": "find src -name *.ts | xargs prettier -w",
-    "fix:example": "find example/src -name *.ts | xargs prettier -w"
+    "fix:example": "find example/src -name *.ts | xargs prettier -w",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
   },
   "engines": {
     "node": ">=16"
@@ -15,6 +18,9 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "vitepress": "^1.0.0-alpha.29",
+    "vue": "^3.2.45",
+    "@algolia/client-search": "^4.14.2",
     "@types/debug": "^4.1.6",
     "@types/koa": "^2.13.4",
     "@types/koa-bodyparser": "^4.3.2",
