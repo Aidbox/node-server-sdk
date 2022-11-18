@@ -2,11 +2,11 @@ export default {
   title: 'Aidbox NodeJS SDK',
   description: 'NodeJS SDK for build App on top of Aidbox',
   base: '/node-server-sdk/',
-  editLink: {
-    pattern: 'https://github.com/Aidbox/node-server-sdk/edit/main/docs/:path',
-    text: 'Edit this page on GitHub',
-  },
   themeConfig: {
+    editLink: {
+      pattern: 'https://github.com/Aidbox/node-server-sdk/edit/main/docs/:path',
+      text: 'Edit this page on GitHub',
+    },
     sidebar: [
       {
         text: 'Guide',
@@ -20,6 +20,7 @@ export default {
         items: [
           {text: 'Manifest', link: '/usage/manifest'},
           {text: 'Operation', link: '/usage/operation'},
+          {text: 'Healthcheck', link: '/usage/healthcheck'},
         ]
       }
     ],
