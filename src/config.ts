@@ -6,8 +6,6 @@ import {
 } from "./types";
 import * as dotenv from "dotenv";
 
-const debug = require("debug")("@aidbox/node-app:config");
-
 const baseConfig: ConfigSchema = {
   app: {
     id: {
@@ -33,8 +31,8 @@ const baseConfig: ConfigSchema = {
     },
     maxBodySize: {
       env: "APP_MAX_BODY_SIZE",
-      type: "string",
-      default: "20mb",
+      type: "number",
+      default: 20971520,
     },
     callbackURL: {
       env: "APP_CALLBACK_URL",
@@ -61,14 +59,17 @@ const baseConfig: ConfigSchema = {
   },
 };
 
-export const createConfig = (envFilePath?: string): BaseConfig => {
+export const createConfig = <T = BaseConfig>({
+  envFilePath,
+  customConfigSchema,
+}: {
+  customConfigSchema?: ConfigSchema;
+  envFilePath?: string;
+} = {}): T => {
   dotenv.config(envFilePath ? { path: envFilePath } : {});
   const errors: Array<[string, string]> = [];
 
-  const prepareConfig = (
-    schema: ConfigSchema,
-    envs: ProcessEnv
-  ): BaseConfig => {
+  const prepareConfig = (schema: ConfigSchema, envs: ProcessEnv): T => {
     return Object.keys(schema).reduce((c, cur) => {
       if ("env" in schema[cur]) {
         const item = schema[cur] as ConfigSchemaProps;
@@ -78,9 +79,7 @@ export const createConfig = (envFilePath?: string): BaseConfig => {
         if (item.required && !value) {
           errors.push([item.env, "Missed with type " + item.type]);
           return c;
-        }
-
-        if (value && item.type === "number") {
+        } else if (value && item.type === "number") {
           value = parseInt(value);
           if (isNaN(value)) {
             errors.push([
@@ -89,8 +88,7 @@ export const createConfig = (envFilePath?: string): BaseConfig => {
             ]);
             return c;
           }
-        }
-        if (item.stripSlashes && typeof value === "string") {
+        } else if (item.stripSlashes && value) {
           value = value.endsWith("/") ? value.slice(0, -1) : value;
         }
         return { ...c, [cur]: value || item.default };
@@ -100,13 +98,16 @@ export const createConfig = (envFilePath?: string): BaseConfig => {
           [cur]: prepareConfig(schema[cur] as ConfigSchema, envs),
         };
       }
-    }, {} as BaseConfig);
+    }, {} as T);
   };
-  const config = prepareConfig(baseConfig, process.env);
+  const config = prepareConfig(
+    { ...baseConfig, ...customConfigSchema },
+    process.env
+  );
 
   if (errors.length) {
     errors.forEach((error) => {
-      debug("Environment variable %s - %s", error[0], error[1]);
+      console.error("Environment variable %s - %s", error[0], error[1]);
     });
     process.exit(1);
   }

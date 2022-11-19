@@ -4,6 +4,7 @@ import { Server } from "http";
 
 export type OperationMessage<T = any> = {
   type: "operation";
+  // @ts-ignore
   request: OperationRequest<T>;
   operation: {
     id: string;
@@ -203,11 +204,6 @@ export type Api = {
 };
 
 export type RequestHandler = ClientRequest;
-export type App = Koa<any, { ctx: Ctx }>;
-export type BundledApp = {
-  app: App;
-  server: Server;
-};
 
 export type LogHandler = (data: LogData) => void;
 
@@ -234,18 +230,13 @@ export interface ConfigSchema {
   [key: string]: ConfigSchema | ConfigSchemaProps;
 }
 
-export interface CreateConfigOptions {
-  envFilePath?: string;
-  envs: ProcessEnv;
-}
-
-export interface BaseConfig {
+export type BaseConfig = {
   app: {
     id: string;
     secret: string;
     port: number;
     url: string;
-    maxBodySize: string;
+    maxBodySize: number;
     callbackURL: string;
   };
   aidbox: {
@@ -253,4 +244,4 @@ export interface BaseConfig {
     client: string;
     secret: string;
   };
-}
+};

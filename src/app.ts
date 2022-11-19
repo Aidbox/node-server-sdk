@@ -1,66 +1,109 @@
-import Koa, { Middleware } from "koa";
-import bodyParser from "koa-bodyparser";
+import Fastify, { type FastifyInstance } from "fastify";
 import { dispatch } from "./dispatch";
 import { parseError } from "./errors";
-import { Server } from "http";
-import {
-  App,
-  BaseConfig,
-  BundledApp,
-  Ctx,
-  DispatchProps,
-  Manifest,
-  Message,
-} from "./types";
-import * as os from "os";
-import {
-  HealthEndpoint,
-  ReadinessEndpoint,
-  LivenessEndpoint,
-} from "./healthcheck";
-import Router from "koa-router";
-import { HealthChecker } from "@cloudnative/health";
-import { shutdownMiddleware } from "./graceful-shutdown";
-import * as http from "http";
+import { BaseConfig, Ctx, Message } from "./types";
+import GracefulServer from "@gquittet/graceful-server";
+import YAML from "yaml";
+import fastifyHealthcheck from "fastify-custom-healthcheck";
 
-const debug = require("debug")("@aidbox/node-app:app");
+type CreateAppOptions<T, H> = {
+  config: T;
+  loggerEnabled?: boolean;
+  ctx: Ctx;
+  helpers?: H;
+};
 
-export const createApp = (
-  dispatchProps: DispatchProps,
-  config: BaseConfig
-): BundledApp => {
-  const app: App = new Koa();
-  const server = http.createServer(app.callback());
+export const createApp = async <T extends BaseConfig, H = {}>({
+  ctx,
+  helpers,
+  config,
+  loggerEnabled = true,
+}: CreateAppOptions<T, H>): Promise<FastifyInstance> => {
+  const app = Fastify({
+    bodyLimit: config.app.maxBodySize,
+    logger: loggerEnabled,
+  });
 
-  app.context.ctx = dispatchProps.ctx;
-  const router = new Router();
+  await app.register(fastifyHealthcheck);
 
-  app.use(bodyParser({ jsonLimit: config.app.maxBodySize }));
+  app.route({
+    method: "POST",
+    url: "/aidbox",
+    preHandler: (request, reply, done) => {
+      if (!request.headers.authorization) {
+        reply.statusCode = 401;
+        return reply.send({
+          error: { message: `Authorization header missing` },
+        });
+      }
+      const appId = config.app.id;
+      const appSecret = config.app.secret;
+      const appToken = Buffer.from(`${appId}:${appSecret}`).toString("base64");
+      const header = request.headers.authorization;
+      const token = header && header?.split(" ")?.[1];
+      if (token === appToken) {
+        return done();
+      }
+      reply.statusCode = 401;
+      reply.send({
+        error: { message: `Authorization failed for app [${appId}]` },
+      });
+    },
+    handler: (request, reply) => {
+      const targetContent =
+        (request.body as Record<string, any>)?.request?.headers["accept"] ??
+        "application/json";
+      return dispatch(request.body as Message, { ctx, helpers })
+        .then(({ resource, text, status, headers }) => {
+          reply.statusCode = status || 200;
+          if (typeof headers === "object" && Object.keys(headers).length) {
+            reply.headers(headers);
+          }
+          if (text) {
+            reply.header("content-type", "text/plain");
+            return reply.send(text);
+          }
+          switch (targetContent) {
+            case "text/yaml":
+              reply.header("content-type", "text/yaml");
+              return reply.send(YAML.stringify(resource));
+            default:
+              return reply.send(resource);
+          }
+        })
+        .catch((err) => {
+          const { status, error } = parseError(err as Error);
+          reply.statusCode = status;
+          return reply.send({ error });
+        });
+    },
+  });
 
-  const healthcheck = new HealthChecker();
-
-  app.use(shutdownMiddleware(server));
-  router.get("/live", LivenessEndpoint(healthcheck));
-  router.get("/ready", ReadinessEndpoint(healthcheck));
-  router.get("/health", HealthEndpoint(healthcheck));
-  router.post(
-    "/aidbox",
-    authMiddleware(dispatchProps.ctx.manifest),
-    dispatchMiddleware(dispatchProps)
-  );
-
-  app.use(router.routes());
-  return { app, server };
+  return app;
 };
 
 export const startApp = async (
-  { app, server }: BundledApp,
-  port: number
-): Promise<Server> => {
-  const ctx = app.context.ctx;
-  const manifest = ctx.manifest;
+  app: FastifyInstance,
+  { app: { port } }: BaseConfig,
+  ctx: Ctx
+) => {
+  const gracefulServer = GracefulServer(app.server);
+
+  gracefulServer.on(GracefulServer.READY, () => {
+    console.log("Server is ready");
+  });
+
+  gracefulServer.on(GracefulServer.SHUTTING_DOWN, () => {
+    console.log("Server is shutting down");
+  });
+
+  gracefulServer.on(GracefulServer.SHUTDOWN, (error) => {
+    console.log("Server is down because of", error.message);
+  });
+
+  const { manifest } = ctx;
   const describe = (obj: Record<string, any> = {}) => Object.keys(obj);
-  debug("Syncing manifest v%s\n%O", manifest.apiVersion, {
+  console.log("Syncing manifest v%s\n%O", manifest.apiVersion, {
     operations: describe(manifest.operations),
     subscriptions: describe(manifest.subscriptions),
     entities: describe(manifest.entities),
@@ -73,11 +116,11 @@ export const startApp = async (
       data: { ...manifest, type: "app", resourceType: "App" },
     })
     .then(() => {
-      debug("Manifest has been updated");
+      app.log.info("Manifest has been updated");
     })
     .catch((error: any) => {
       if (error.response?.data) {
-        debug(
+        app.log.error(
           "Manifest sync failed: %s\n%O",
           error.response.status,
           JSON.stringify(error.response.data)
@@ -86,47 +129,11 @@ export const startApp = async (
       throw error;
     });
 
-  return await new Promise<Server>((resolve) => {
-    server.listen(port, () => {
-      debug("App started on port %d", port);
-    });
-    resolve(server);
+  app.listen({ port, host: "0.0.0.0" }, function (err) {
+    if (err) {
+      app.log.error(err);
+      process.exit(1);
+    }
+    gracefulServer.setReady();
   });
 };
-
-const authMiddleware = (manifest: Manifest): Middleware => {
-  const appId = manifest.id;
-  const appSecret = manifest.endpoint.secret;
-  const appToken = Buffer.from(`${appId}:${appSecret}`).toString("base64");
-
-  return async (ctx, next) => {
-    const header = ctx.request.headers.authorization;
-    const token = header && header?.split(" ")?.[1];
-    if (token === appToken) {
-      return next();
-    }
-    ctx.status = 401;
-    ctx.body = { error: `Authorization failed for app ${appId}` };
-  };
-};
-
-const dispatchMiddleware =
-  (dispatchProps: DispatchProps): Middleware =>
-  async (ctx) => {
-    const message = ctx.request.body as Message;
-    try {
-      const { resource, text, status, headers } = await dispatch(
-        message,
-        dispatchProps
-      );
-      ctx.body = resource || text;
-      ctx.status = status || 200;
-      if (typeof headers === "object" && Object.keys(headers).length) {
-        ctx.set(headers);
-      }
-    } catch (err) {
-      const { status, error } = parseError(err as Error);
-      ctx.status = status;
-      ctx.body = { error };
-    }
-  };

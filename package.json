@@ -18,8 +18,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "vitepress": "^1.0.0-alpha.29",
-    "vue": "^3.2.45",
     "@algolia/client-search": "^4.14.2",
     "@types/debug": "^4.1.6",
     "@types/koa": "^2.13.4",
@@ -29,16 +27,22 @@
     "prettier": "^2.3.2",
     "supertest": "^6.1.4",
     "tslib": "^2.4.0",
-    "typescript": "^4.3.5"
+    "typescript": "4.8.4",
+    "vitepress": "^1.0.0-alpha.29",
+    "vue": "^3.2.45"
   },
   "dependencies": {
     "@cloudnative/health": "^2.1.2",
+    "@gquittet/graceful-server": "^4.0.3",
     "axios": "^0.21.1",
-    "debug": "^4.3.2",
+    "debug": "^4.3.4",
     "dotenv": "^16.0.1",
+    "fastify": "^4.10.0",
+    "fastify-custom-healthcheck": "^3.1.0",
     "koa": "^2.13.4",
     "koa-bodyparser": "4.3.0",
-    "koa-router": "^10.1.1"
+    "koa-router": "^10.1.1",
+    "yaml": "^2.1.3"
   },
   "directories": {
     "example": "example"
