@@ -1,1 +1,0 @@
-import{_ as s,c as n,o as a,d as l}from"./app.09453e8f.js";const i=JSON.parse('{"title":"Healthcheck","description":"","frontmatter":{},"headers":[],"relativePath":"usage/healthcheck.md"}'),o={name:"usage/healthcheck.md"},p=l("",8),t=[p];function e(c,r,D,F,y,C){return a(),n("div",null,t)}const d=s(o,[["render",e]]);export{i as __pageData,d as default};
