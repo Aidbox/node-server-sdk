@@ -4,6 +4,7 @@ import { dispatch } from "./dispatch";
 import { parseError } from "./errors";
 import { Server } from "http";
 import {
+  AidboxNodeSDK,
   App,
   BaseConfig,
   BundledApp,
@@ -11,6 +12,7 @@ import {
   DispatchProps,
   Manifest,
   Message,
+  ResourceTypeMap,
 } from "./types";
 import * as os from "os";
 import {
@@ -25,10 +27,10 @@ import * as http from "http";
 
 const debug = require("debug")("@aidbox/node-app:app");
 
-export const createApp = (
-  dispatchProps: DispatchProps,
-  config: BaseConfig
-): BundledApp => {
+export const createApp: AidboxNodeSDK["createApp"] = (
+  dispatchProps,
+  config
+) => {
   const app: App = new Koa();
   const server = http.createServer(app.callback());
 
@@ -53,10 +55,10 @@ export const createApp = (
   return { app, server };
 };
 
-export const startApp = async (
-  { app, server }: BundledApp,
+export const startApp: AidboxNodeSDK["startApp"] = async (
+  { app, server },
   port: number
-): Promise<Server> => {
+) => {
   const ctx = app.context.ctx;
   const manifest = ctx.manifest;
   const describe = (obj: Record<string, any> = {}) => Object.keys(obj);
@@ -94,7 +96,9 @@ export const startApp = async (
   });
 };
 
-const authMiddleware = (manifest: Manifest): Middleware => {
+const authMiddleware = <TResourceTypeMap extends ResourceTypeMap>(
+  manifest: Manifest<TResourceTypeMap>
+): Middleware => {
   const appId = manifest.id;
   const appSecret = manifest.endpoint.secret;
   const appToken = Buffer.from(`${appId}:${appSecret}`).toString("base64");
@@ -111,7 +115,9 @@ const authMiddleware = (manifest: Manifest): Middleware => {
 };
 
 const dispatchMiddleware =
-  (dispatchProps: DispatchProps): Middleware =>
+  <TResourceTypeMap extends ResourceTypeMap>(
+    dispatchProps: DispatchProps<TResourceTypeMap>
+  ): Middleware =>
   async (ctx) => {
     const message = ctx.request.body as Message;
     try {
@@ -130,3 +136,10 @@ const dispatchMiddleware =
       ctx.body = { error };
     }
   };
+
+export const createOperation: AidboxNodeSDK["createOperation"] = (operation) =>
+  operation;
+
+export const createSubscription: AidboxNodeSDK["createSubscription"] = (
+  subscription
+) => subscription;

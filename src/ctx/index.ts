@@ -3,12 +3,21 @@ import { createClient } from "../client";
 import { createManifest } from "../manifest";
 import { createLog } from "./log";
 import { createRequest } from "./request";
-import { Client, ClientProps, Ctx, CtxProps, ManifestProps } from "../types";
+import {
+  AidboxNodeSDK,
+  Client,
+  ClientProps,
+  Ctx,
+  CtxProps,
+  ManifestProps,
+  ResourceType,
+  ResourceTypeMap,
+} from "../types";
 
-export const createCtx = ({
+export const createCtx: AidboxNodeSDK["createCtx"] = ({
   config,
   manifest: initManifest,
-}: CtxProps): Ctx => {
+}) => {
   const manifest = createManifest(initManifest, config);
   const client = createClient(config.aidbox);
   const log = createLog(client);

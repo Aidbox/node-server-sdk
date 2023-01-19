@@ -2,7 +2,7 @@ import { AxiosInstance, AxiosRequestConfig } from "axios";
 import Koa from "koa";
 import { Server } from "http";
 
-export type OperationMessage<T = any> = {
+export type OperationMessage<T extends OperationRequestType = any> = {
   type: "operation";
   request: OperationRequest<T>;
   operation: {
@@ -17,13 +17,15 @@ export type OperationRequestType = {
   "route-params"?: Record<string, any>;
 };
 
-export type OperationRequest<T extends OperationRequestType> = {
-  resource?: T["resource"];
+export type OperationRequest<
+  TOperationRequestType extends OperationRequestType
+> = {
+  resource?: TOperationRequestType["resource"];
   "oauth/user": Record<string, any>;
   "oauth/client": Record<string, any>;
-  params: T["params"];
-  "form-params"?: T["form-params"];
-  "route-params": T["route-params"];
+  params: TOperationRequestType["params"];
+  "form-params"?: TOperationRequestType["form-params"];
+  "route-params": TOperationRequestType["route-params"];
   headers: Record<string, string>;
 };
 
@@ -86,51 +88,68 @@ export type AppResourceEntity = {
   attrs: Record<string, any>;
 };
 
-export type Manifest = Omit<
+export type Manifest<
+  TResourceTypeMap extends ResourceTypeMap = ResourceTypeMap,
+  THelpers extends Helpers = {}
+> = Omit<
   AppResource,
   "operations" | "subscriptions" | "resourceType" | "type"
 > &
   Partial<{
-    operations?: ManifestOperations;
-    subscriptions?: ManifestSubscriptions;
+    operations?: ManifestOperations<TResourceTypeMap, THelpers>;
+    subscriptions?: ManifestSubscriptions<TResourceTypeMap, THelpers>;
   }>;
 
-export type ManifestProps = Partial<
+export type ManifestProps<
+  TResourceTypeMap extends ResourceTypeMap = ResourceTypeMap,
+  THelpers extends Helpers = {}
+> = Partial<
   Pick<
-    Manifest,
+    Manifest<TResourceTypeMap, THelpers>,
     "apiVersion" | "operations" | "subscriptions" | "entities" | "resources"
   >
 >;
 
-export type ManifestOperations = Record<string, ManifestOperation>;
+export type ManifestOperations<
+  TResourceTypeMap extends ResourceTypeMap,
+  THelpers extends Helpers
+> = Record<string, ManifestOperation<TResourceTypeMap, THelpers>>;
 
 export type ManifestOperation<
-  T extends OperationRequestType = any,
-  U = any
+  TResourceTypeMap extends ResourceTypeMap,
+  THelpers extends Helpers = {},
+  TOperationRequestType extends OperationRequestType = any
 > = AppResourceOperation & {
   handlerFn: (
-    request: OperationRequest<T>,
-    props: DispatchProps<U>
+    request: OperationRequest<TOperationRequestType>,
+    props: DispatchProps<TResourceTypeMap, THelpers>
   ) => Promise<DispatchOutput>;
 };
 
 // Subscriptions
 
-export type ManifestSubscriptions = Record<string, ManifestSubscription>;
+export type ManifestSubscriptions<
+  TResourceTypeMap extends ResourceTypeMap,
+  THelpers extends Helpers
+> = Record<string, ManifestSubscription<TResourceTypeMap, THelpers>>;
 
 export type ManifestSubscription<
-  T extends Resource = any,
-  U = any
+  TResourceTypeMap extends ResourceTypeMap = ResourceTypeMap,
+  THelpers extends Helpers = {},
+  TResource extends Resource = any
 > = AppResourceSubscription & {
   handlerFn: (
-    subscriptionEvent: SubscriptionEvent<T>,
-    props: DispatchProps<U>
+    subscriptionEvent: SubscriptionEvent<TResource>,
+    props: DispatchProps<TResourceTypeMap, THelpers>
   ) => Promise<DispatchOutput>;
 };
 
-export type DispatchProps<H = any> = {
-  ctx: Ctx;
-  helpers: H;
+export type DispatchProps<
+  TResourceTypeMap extends ResourceTypeMap = ResourceTypeMap,
+  THelpers extends Helpers = {}
+> = {
+  ctx: Ctx<TResourceTypeMap, THelpers>;
+  helpers: THelpers;
 };
 
 export type DispatchOutput = {
@@ -140,18 +159,33 @@ export type DispatchOutput = {
   readonly text?: string;
 };
 
-export type CtxProps = {
+export type CtxProps<
+  TResourceTypeMap extends ResourceTypeMap,
+  THelpers extends Helpers = {}
+> = {
   config: BaseConfig;
-  manifest: ManifestProps;
+  manifest: ManifestProps<TResourceTypeMap, THelpers>;
 };
 
-export type Ctx = {
+export type ResourceTypeMap = Record<string, any>;
+export type ResourceType<
+  TResourceTypeMap extends ResourceTypeMap = ResourceTypeMap
+> = keyof TResourceTypeMap;
+export type ResourceByType<
+  TResourceTypeMap extends ResourceTypeMap,
+  TResourceType extends ResourceType<TResourceTypeMap>
+> = TResourceTypeMap[TResourceType];
+
+export type Ctx<
+  TResourceTypeMap extends ResourceTypeMap,
+  THelpers extends Helpers = {}
+> = {
   client: Client;
-  manifest: Manifest;
+  manifest: Manifest<TResourceTypeMap, THelpers>;
   log: LogHandler;
   request: RequestHandler;
-  api: Api;
-  fhirApi: Api;
+  api: Api<TResourceTypeMap>;
+  fhirApi: Api<TResourceTypeMap>;
   sql: <T = any>(
     query: string,
     params?: (string | number)[]
@@ -183,19 +217,31 @@ export type BundleResponse = {
   resource: Array<any>;
 };
 
-export type Api = {
-  createResource<T>(resourceType: string, data: Partial<T>): Promise<T>;
-  patchResource<T>(
-    resourceType: string,
+export type Api<TResourceTypeMap extends ResourceTypeMap = ResourceTypeMap> = {
+  createResource<TResourceType extends ResourceType<TResourceTypeMap>>(
+    resourceType: TResourceType,
+    data: Partial<ResourceByType<TResourceTypeMap, TResourceType>>
+  ): Promise<ResourceByType<TResourceTypeMap, TResourceType>>;
+  patchResource<TResourceType extends ResourceType<TResourceTypeMap>>(
+    resourceType: TResourceType,
     resourceId: string,
-    data: Partial<T>
-  ): Promise<T>;
-  deleteResource<T>(resourceType: string, resourceId: string): Promise<T>;
-  getResource<T>(resourceType: string, resourceId: string): Promise<T>;
-  findResources<T>(
-    resourceType: string,
+    data: Partial<ResourceByType<TResourceTypeMap, TResourceType>>
+  ): Promise<ResourceByType<TResourceTypeMap, TResourceType>>;
+  deleteResource<TResourceType extends ResourceType<TResourceTypeMap>>(
+    resourceType: TResourceType,
+    resourceId: string
+  ): Promise<ResourceByType<TResourceTypeMap, TResourceType>>;
+  getResource<TResourceType extends ResourceType<TResourceTypeMap>>(
+    resourceType: TResourceType,
+    resourceId: string
+  ): Promise<ResourceByType<TResourceTypeMap, TResourceType>>;
+  findResources<TResourceType extends ResourceType<TResourceTypeMap>>(
+    resourceType: TResourceType,
     params?: any
-  ): Promise<{ resources: T[]; total: number }>;
+  ): Promise<{
+    resources: Array<ResourceByType<TResourceTypeMap, TResourceType>>;
+    total: number;
+  }>;
   createBundle: (
     type: Bundle["type"],
     data: Bundle["entry"]
@@ -203,9 +249,12 @@ export type Api = {
 };
 
 export type RequestHandler = ClientRequest;
-export type App = Koa<any, { ctx: Ctx }>;
-export type BundledApp = {
-  app: App;
+export type App<
+  TResourceTypeMap extends ResourceTypeMap = ResourceTypeMap,
+  THelpers extends Helpers = {}
+> = Koa<any, { ctx: Ctx<TResourceTypeMap, THelpers> }>;
+export type BundledApp<TResourceTypeMap extends ResourceTypeMap> = {
+  app: App<TResourceTypeMap>;
   server: Server;
 };
 
@@ -254,3 +303,32 @@ export interface BaseConfig {
     secret: string;
   };
 }
+
+export type Helpers = Record<string, Function>;
+
+export type AidboxNodeSDK<
+  TResourceTypeMap extends ResourceTypeMap = ResourceTypeMap,
+  THelpers extends Helpers = {}
+> = {
+  createCtx: (
+    props: CtxProps<TResourceTypeMap, THelpers>
+  ) => Ctx<TResourceTypeMap, THelpers>;
+  createApp: (
+    dispatchProps: DispatchProps<TResourceTypeMap, THelpers>,
+    config: BaseConfig
+  ) => BundledApp<TResourceTypeMap>;
+  startApp: (
+    { app, server }: BundledApp<TResourceTypeMap>,
+    port: number
+  ) => Promise<Server>;
+  createOperation: <TOperationRequestType extends OperationRequestType = any>(
+    operation: ManifestOperation<
+      TResourceTypeMap,
+      THelpers,
+      TOperationRequestType
+    >
+  ) => ManifestOperation<TResourceTypeMap, THelpers, TOperationRequestType>;
+  createSubscription: <TResource extends Resource = any>(
+    subscription: ManifestSubscription<TResourceTypeMap, THelpers, TResource>
+  ) => ManifestSubscription<TResourceTypeMap, THelpers, TResource>;
+};
