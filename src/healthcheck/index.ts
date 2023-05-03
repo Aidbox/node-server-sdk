@@ -1,4 +1,5 @@
-import { HealthChecker, State } from "@cloudnative/health";
+import { HealthChecker, State } from "./health-checker";
+import { PingCheck } from "./ping-check";
 import { Context } from "koa";
 
 enum StateCode {
@@ -115,3 +116,5 @@ export const ReadinessEndpoint = (
       });
   };
 };
+
+export { HealthChecker, PingCheck };

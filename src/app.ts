@@ -7,21 +7,19 @@ import {
   App,
   BaseConfig,
   BundledApp,
-  Ctx,
   DispatchProps,
   Manifest,
   Message,
 } from "./types";
-import * as os from "os";
-import {
-  HealthEndpoint,
-  ReadinessEndpoint,
-  LivenessEndpoint,
-} from "./healthcheck";
 import Router from "koa-router";
-import { HealthChecker } from "@cloudnative/health";
-import { shutdownMiddleware } from "./graceful-shutdown";
 import * as http from "http";
+import GracefulServer from "@gquittet/graceful-server";
+import {
+  HealthChecker,
+  HealthEndpoint,
+  LivenessEndpoint,
+  ReadinessEndpoint,
+} from "./healthcheck";
 
 const debug = require("debug")("@aidbox/node-app:app");
 
@@ -39,7 +37,6 @@ export const createApp = (
 
   const healthcheck = new HealthChecker();
 
-  app.use(shutdownMiddleware(server));
   router.get("/live", LivenessEndpoint(healthcheck));
   router.get("/ready", ReadinessEndpoint(healthcheck));
   router.get("/health", HealthEndpoint(healthcheck));
@@ -48,15 +45,29 @@ export const createApp = (
     authMiddleware(dispatchProps.ctx.manifest),
     dispatchMiddleware(dispatchProps)
   );
-
-  app.use(router.routes());
-  return { app, server };
+  return { app, server, router };
 };
 
 export const startApp = async (
-  { app, server }: BundledApp,
+  { app, server, router }: BundledApp,
   port: number
 ): Promise<Server> => {
+  const gracefulServer = GracefulServer(server);
+
+  gracefulServer.on(GracefulServer.READY, () => {
+    console.log("Server is ready");
+  });
+
+  gracefulServer.on(GracefulServer.SHUTTING_DOWN, () => {
+    console.log("Server is shutting down");
+  });
+
+  gracefulServer.on(GracefulServer.SHUTDOWN, (error) => {
+    console.log("Server is down because of", error.message);
+  });
+
+  app.use(router.routes());
+
   const ctx = app.context.ctx;
   const manifest = ctx.manifest;
   const describe = (obj: Record<string, any> = {}) => Object.keys(obj);
@@ -90,6 +101,7 @@ export const startApp = async (
     server.listen(port, () => {
       debug("App started on port %d", port);
     });
+    gracefulServer.setReady();
     resolve(server);
   });
 };

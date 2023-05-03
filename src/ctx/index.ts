@@ -3,7 +3,7 @@ import { createClient } from "../client";
 import { createManifest } from "../manifest";
 import { createLog } from "./log";
 import { createRequest } from "./request";
-import { Client, ClientProps, Ctx, CtxProps, ManifestProps } from "../types";
+import { Ctx, CtxProps } from "../types";
 
 export const createCtx = ({
   config,

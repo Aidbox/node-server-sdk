@@ -1,8 +1,9 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import Koa from "koa";
 import { Server } from "http";
+import Router from "koa-router";
 
-export type OperationMessage<T = any> = {
+export type OperationMessage<T extends OperationRequestType = any> = {
   type: "operation";
   request: OperationRequest<T>;
   operation: {
@@ -25,6 +26,7 @@ export type OperationRequest<T extends OperationRequestType> = {
   "form-params"?: T["form-params"];
   "route-params": T["route-params"];
   headers: Record<string, string>;
+  body: string | null;
 };
 
 export type SubscriptionMessage<T = any> = {
@@ -207,6 +209,7 @@ export type App = Koa<any, { ctx: Ctx }>;
 export type BundledApp = {
   app: App;
   server: Server;
+  router: Router;
 };
 
 export type LogHandler = (data: LogData) => void;
@@ -232,11 +235,6 @@ export interface ConfigSchemaProps {
 
 export interface ConfigSchema {
   [key: string]: ConfigSchema | ConfigSchemaProps;
-}
-
-export interface CreateConfigOptions {
-  envFilePath?: string;
-  envs: ProcessEnv;
 }
 
 export interface BaseConfig {

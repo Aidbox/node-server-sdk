@@ -30,7 +30,7 @@ export type ParsedError = {
   error: {
     message: string;
     type?: string;
-    data?: Record<string, any>;
+    data?: any;
   };
 };
 
