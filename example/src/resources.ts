@@ -1,8 +1,5 @@
-export const Patient: Record<string, any> = {
-  first: {
-    foo: "first",
-  },
-  second: {
-    foo: "second",
-  },
+export const patient: Record<string, any> = {
+  first:{
+    name: "first"
+  }
 };
