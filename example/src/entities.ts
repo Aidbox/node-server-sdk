@@ -1,7 +1,7 @@
-export const Patient = {
+export const patient = {
   attrs: {
-    foo: {
+    name: {
       type: "string",
-    },
+    }
   },
 };

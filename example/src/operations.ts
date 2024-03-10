@@ -5,18 +5,7 @@ import { TOperation } from "./helpers";
 export const createPatient: TOperation<{
   // Typing "resource" (POST payload)
   resource: {
-    name: string;
-    active: boolean;
-  };
-  // Optionally typing query/route params & form payload
-  params: {
-    foo: string;
-  };
-  "form-params": {
-    foo: string;
-  };
-  "route-params": {
-    foo: string;
+    name : string
   };
 }> = {
   method: "POST",
@@ -24,24 +13,13 @@ export const createPatient: TOperation<{
   handlerFn: async (req, { ctx }) => {
     const {
       // "resource" contains POST payload
-      resource,
-      // "params", "form-params" & "route-params" are also accessible
-      params,
-      "form-params": formParams,
-      "route-params": routeParams,
+      resource
     } = req;
     assert.ok(resource, new ValidationError("resource required"));
-    const { active, name } = resource;
-
-    assert.ok(
-      typeof active !== "undefined",
-      new ValidationError('"active" required')
-    );
-    assert.ok(name, new ValidationError('"name" required'));
+    const { name } = resource;
 
     const patient = await ctx.api.createResource<any>("Patient", {
-      active: active,
-      name: [{ text: name }],
+      name: [{answer : name}]
     });
     return { resource: patient };
   },
@@ -82,7 +60,7 @@ export const testError: TOperation<{ params: { type: string } }> = {
         throw new ValidationError("Testing ValidationError");
       case "NotFoundError":
         throw new NotFoundError("Something", {
-          foo: "foo",
+          name: "name",
           bar: "bar",
         });
       case "AxiosError":
